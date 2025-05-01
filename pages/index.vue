@@ -1,7 +1,7 @@
 <template>
-	<main>
+	<main class="bg-white">
 		<HomeHero />
-		<HomeCategories />
+		<HomeCategoryGrid />
 		<HomeHowItWorks />
 		<HomeCallToAction />
 	</main>

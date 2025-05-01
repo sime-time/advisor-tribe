@@ -1,3 +1,84 @@
+<script setup lang="ts">
+const menuOpen = ref(false);
+</script>
+
 <template>
-	<nav>navbar</nav>
+	<nav class="sticky top-0 z-50 border-b border-solid backdrop-blur-sm bg-white bg-opacity-80 border-b-slate-200">
+		<div
+			class="flex justify-between items-center px-4 py-3 mx-auto w-full max-w-[1400px] max-md:max-w-none"
+		>
+			<NuxtLink
+				to="/"
+				class="flex gap-2 items-center cursor-pointer"
+			>
+				<div
+					class="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer bg-[linear-gradient(to_right,rgb(105,65,198),rgb(59,130,246))]"
+				>
+					<span
+						class="font-bold text-white cursor-pointer outline-white decoration-white"
+					>AT</span>
+				</div>
+				<span class="text-xl font-bold leading-7 cursor-pointer">Advisor Tribe</span>
+			</NuxtLink>
+
+			<div class="flex gap-8 items-center max-sm:hidden">
+				<div class="flex gap-6">
+					<NuxtLink
+						href="/browse"
+						class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
+					>
+						Browse
+					</NuxtLink>
+					<NuxtLink
+						to="/dashboard"
+						class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
+					>
+						My Tribe
+					</NuxtLink>
+				</div>
+				<div class="flex gap-3 items-center">
+					<UButton to="/login" size="lg" variant="outline">
+						Sign in
+					</UButton>
+					<UButton to="/signup" size="lg">
+						Get Started
+					</UButton>
+				</div>
+			</div>
+
+			<button class="md:hidden" @click="() => (menuOpen = !menuOpen)">
+				<div v-if="menuOpen" class="flex items-center">
+					<Icon name="lucide:x" size="1.7rem" />
+				</div>
+				<div v-else class="flex items-center">
+					<Icon name="lucide:menu" size="1.7rem" />
+				</div>
+			</button>
+		</div>
+
+		<div v-if="menuOpen" class="md:hidden p-4 mb-4">
+			<div class="flex flex-col gap-4 font-medium text-lg">
+				<NuxtLink
+					to="/browse"
+					class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
+					@click="() => (menuOpen = false)"
+				>
+					Browse Advisors
+				</NuxtLink>
+				<NuxtLink
+					to="/dashboard"
+					class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
+					@click="() => (menuOpen = false)"
+				>
+					My Tribe
+				</NuxtLink>
+				<UButton variant="outline" size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/signup'); }">
+					Sign in
+				</UButton>
+				<UButton size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/signup'); }">
+					Get Started
+				</UButton>
+			</div>
+		</div>
+	</nav>
 </template>
