@@ -19,4 +19,7 @@ export default defineNuxtConfig({
 			standalone: false,
 		},
 	},
+	ui: {
+		colorMode: false,
+	},
 });

@@ -22,6 +22,7 @@
 				<UButton
 					to="/signup"
 					color="neutral"
+					variant="outline"
 					size="xl"
 				>
 					Get Started for Free
