@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
-const name = ref("");
+const firstName = ref("");
+const lastName = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
+
+const name = computed(() => `${firstName.value.trim()} ${lastName.value.trim()}`);
 
 function handleSubmit() {
 	// Handle form submission logic here
@@ -15,17 +18,12 @@ function handleSubmit() {
 		confirmPassword: confirmPassword.value,
 	});
 }
-
-function handleGoogleSignIn() {
-	// Handle Google sign-in logic here
-	console.log("Google sign-in clicked");
-}
 </script>
 
 <template>
 	<section class="flex justify-center items-center p-4 bg-white min-h-[754px]">
 		<article
-			class="w-full max-w-md bg-white rounded-lg border border-solid border-slate-200 shadow-md"
+			class="w-full max-w-md bg-white rounded-lg border border-solid border-slate-200 shadow-sm"
 		>
 			<header class="flex flex-col px-6 pt-6 text-center">
 				<h3 class="text-2xl font-bold tracking-tight leading-8 text-center">
@@ -40,17 +38,35 @@ function handleGoogleSignIn() {
 				<form @submit.prevent="handleSubmit">
 					<div class="mb-4 flex flex-col gap-2">
 						<label
-							for="name"
+							for="first-name"
 							class="text-sm font-medium leading-4 cursor-default"
 						>
-							Name
+							First Name
 						</label>
 						<UInput
-							v-model="name"
+							v-model="firstName"
 							icon="i-lucide-user"
 							variant="outline"
-							placeholder="Full name"
+							placeholder="john"
 							size="lg"
+							required
+						/>
+					</div>
+
+					<div class="mb-4 flex flex-col gap-2">
+						<label
+							for="last-name"
+							class="text-sm font-medium leading-4 cursor-default"
+						>
+							Last Name
+						</label>
+						<UInput
+							v-model="lastName"
+							icon="i-lucide-user"
+							variant="outline"
+							placeholder="smith"
+							size="lg"
+							required
 						/>
 					</div>
 
@@ -61,12 +77,14 @@ function handleGoogleSignIn() {
 						>
 							Email
 						</label>
+
 						<UInput
 							v-model="email"
 							icon="i-lucide-mail"
 							variant="outline"
 							placeholder="email"
 							size="lg"
+							required
 						/>
 					</div>
 
@@ -84,6 +102,7 @@ function handleGoogleSignIn() {
 							variant="outline"
 							placeholder="password"
 							size="lg"
+							required
 						/>
 					</div>
 
@@ -101,6 +120,7 @@ function handleGoogleSignIn() {
 							variant="outline"
 							placeholder="confirm password"
 							size="lg"
+							required
 						/>
 					</div>
 
@@ -115,11 +135,7 @@ function handleGoogleSignIn() {
 
 				<Divider text="or continue with" class="my-6" />
 
-				<SocialButton
-					icon="google"
-					text="Sign up with Google"
-					@click="handleGoogleSignIn"
-				/>
+				<GoogleButton class="w-full justify-center" />
 			</main>
 
 			<footer class="flex flex-col items-center px-6 pb-6 text-center">

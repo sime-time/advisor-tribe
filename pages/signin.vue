@@ -3,11 +3,6 @@ import { ref } from "vue";
 
 const email = ref("");
 const password = ref("");
-const showPassword = ref(false);
-
-function togglePasswordVisibility() {
-	showPassword.value = !showPassword.value;
-}
 
 function handleSubmit() {
 	// Handle form submission logic here
@@ -16,17 +11,12 @@ function handleSubmit() {
 		password: password.value,
 	});
 }
-
-function handleGoogleSignIn() {
-	// Handle Google sign-in logic here
-	console.log("Google sign-in clicked");
-}
 </script>
 
 <template>
 	<section class="flex justify-center items-center p-4 bg-white min-h-[754px]">
 		<article
-			class="w-full max-w-md bg-white rounded-lg border border-solid border-slate-200 shadow-md"
+			class="w-full max-w-md bg-white rounded-lg border border-solid border-slate-200 shadow-sm"
 		>
 			<header class="flex flex-col px-6 pt-6 text-center">
 				<h3 class="text-2xl font-bold tracking-tight leading-8 text-center">
@@ -46,7 +36,7 @@ function handleGoogleSignIn() {
 						>
 							Email
 						</label>
-						<UInput icon="i-lucide-mail" variant="outline" placeholder="email" size="lg" />
+						<UInput icon="i-lucide-mail" type="email" variant="outline" placeholder="email" size="lg" required />
 					</div>
 
 					<div class="mb-4 flex flex-col gap-2">
@@ -56,7 +46,7 @@ function handleGoogleSignIn() {
 						>
 							Password
 						</label>
-						<UInput icon="i-lucide-lock" type="password" variant="outline" placeholder="password" size="lg" />
+						<UInput icon="i-lucide-lock" type="password" variant="outline" placeholder="password" size="lg" required />
 					</div>
 
 					<UButton
@@ -70,11 +60,7 @@ function handleGoogleSignIn() {
 
 				<Divider text="or continue with" class="my-6" />
 
-				<SocialButton
-					icon="google"
-					text="Sign in with Google"
-					@click="handleGoogleSignIn"
-				/>
+				<GoogleButton class="w-full justify-center" />
 			</main>
 
 			<footer class="flex flex-col items-center px-6 pb-6 text-center">
