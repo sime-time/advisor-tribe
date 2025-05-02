@@ -37,10 +37,10 @@ const menuOpen = ref(false);
 					</NuxtLink>
 				</div>
 				<div class="flex gap-3 items-center">
-					<UButton to="/signin" size="lg" variant="outline">
+					<UButton to="/sign-in" size="lg" variant="outline">
 						Sign in
 					</UButton>
-					<UButton to="/signup" size="lg">
+					<UButton to="/sign-up" size="lg">
 						Get Started
 					</UButton>
 				</div>
@@ -72,10 +72,10 @@ const menuOpen = ref(false);
 				>
 					My Tribe
 				</NuxtLink>
-				<UButton variant="outline" size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/signin'); }">
+				<UButton variant="outline" size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/sign-in'); }">
 					Sign in
 				</UButton>
-				<UButton size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/signup'); }">
+				<UButton size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/sign-up'); }">
 					Get Started
 				</UButton>
 			</div>

@@ -67,7 +67,7 @@ function handleSubmit() {
 				<p class="text-sm leading-5 text-center text-slate-500">
 					<span>Don't have an account? </span>
 					<a
-						href="/signup"
+						href="/sign-up"
 						class="text-sm leading-5 text-center underline cursor-pointer text-slate-500 underline-offset-4"
 					>
 						Sign up

@@ -20,7 +20,7 @@
 				class="flex gap-4 justify-center text-center text-white outline-white decoration-white max-sm:flex-col"
 			>
 				<UButton
-					to="/signup"
+					to="/sign-up"
 					color="neutral"
 					variant="outline"
 					size="xl"
