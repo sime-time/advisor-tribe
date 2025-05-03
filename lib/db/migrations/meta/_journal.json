@@ -15,6 +15,13 @@
       "when": 1746244959564,
       "tag": "0001_seed_categories",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1746278746751,
+      "tag": "0002_bent_newton_destine",
+      "breakpoints": true
     }
   ]
 }
