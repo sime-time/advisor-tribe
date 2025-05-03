@@ -27,11 +27,13 @@ const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const formError = ref("");
+const loading = ref(false);
 
 const toast = useToast();
 
 async function handleSignUp() {
 	formError.value = "";
+	loading.value = true;
 	// make sure the user input is valid before using it to create a new user
 	try {
 		const validSignUp = SignUpForm({
@@ -68,13 +70,16 @@ async function handleSignUp() {
 		});
 	}
 	catch (err) {
-		console.error("Error", err);
+		console.error("Sign Up Error", err);
 		toast.add({
 			title: "Error",
 			description: `${formError.value}`,
 			icon: "i-lucide-triangle-alert",
 			color: "error",
 		});
+	}
+	finally {
+		loading.value = false;
 	}
 }
 </script>
@@ -191,6 +196,8 @@ async function handleSignUp() {
 						type="submit"
 						size="lg"
 						class="w-full justify-center"
+						:loading="loading"
+						:disabled="loading"
 					>
 						Sign up
 					</UButton>

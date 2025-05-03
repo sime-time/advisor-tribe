@@ -15,6 +15,13 @@
       "when": 1746281223763,
       "tag": "0001_seed_categories",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1746293942500,
+      "tag": "0002_seed_advisors",
+      "breakpoints": true
     }
   ]
 }

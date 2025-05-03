@@ -1,15 +1,67 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { type } from "arktype";
+import { authClient } from "~/lib/auth-client";
+
+const SignInForm = type({
+	email: "string.email",
+	password: "string >= 8",
+});
+
+export type SignInForm = typeof SignInForm.infer;
 
 const email = ref("");
 const password = ref("");
+const formError = ref("");
+const loading = ref(false);
 
-function handleSubmit() {
-	// Handle form submission logic here
-	console.log("Form submitted", {
-		email: email.value,
-		password: password.value,
-	});
+const toast = useToast();
+
+async function handleSignIn() {
+	formError.value = "";
+	loading.value = true;
+	// make sure form input is valid before authenticating
+	try {
+		const validSignIn = SignInForm({
+			email: email.value,
+			password: password.value,
+		});
+
+		if (validSignIn instanceof type.errors) {
+			formError.value = validSignIn.summary;
+			throw new Error(validSignIn.summary);
+		}
+
+		await authClient.signIn.email({
+			email: validSignIn.email,
+			password: validSignIn.password,
+		}, {
+			onSuccess: () => {
+				toast.add({
+					title: "Sign in successful",
+					description: "Welcome back!",
+					icon: "i-lucide-check",
+					color: "success",
+				});
+				navigateTo("/dashboard");
+			},
+			onError: (context) => {
+				formError.value = context.error.message;
+				throw new Error(context.error.message);
+			},
+		});
+	}
+	catch (err) {
+		console.error("Sign In Error", err);
+		toast.add({
+			title: "Sign In Error",
+			description: `${formError.value}`,
+			icon: "i-lucide-triangle-alert",
+			color: "error",
+		});
+	}
+	finally {
+		loading.value = false;
+	}
 }
 </script>
 
@@ -28,31 +80,37 @@ function handleSubmit() {
 			</header>
 
 			<main class="p-6">
-				<form @submit.prevent="handleSubmit">
-					<div class="mb-4 flex flex-col gap-2">
+				<form class="flex flex-col gap-4" @submit.prevent="handleSignIn">
+					<div class="flex flex-col gap-2">
 						<label
 							for="email"
 							class="text-sm font-medium leading-4 cursor-default"
 						>
 							Email
 						</label>
-						<UInput icon="i-lucide-mail" type="email" variant="outline" placeholder="Email" size="lg" required />
+						<UInput v-model="email" icon="i-lucide-mail" type="email" variant="outline" placeholder="Email" size="lg" required />
 					</div>
 
-					<div class="mb-4 flex flex-col gap-2">
+					<div class="flex flex-col gap-2">
 						<label
 							for="password"
 							class="text-sm font-medium leading-4 cursor-default"
 						>
 							Password
 						</label>
-						<UInput icon="i-lucide-lock" type="password" variant="outline" placeholder="Password" size="lg" required />
+						<UInput v-model="password" icon="i-lucide-lock" type="password" variant="outline" placeholder="Password" size="lg" required />
 					</div>
+
+					<p v-if="formError" class="text-error text-sm">
+						{{ formError }}
+					</p>
 
 					<UButton
 						type="submit"
 						size="lg"
 						class="w-full justify-center"
+						:loading="loading"
+						:disabled="loading"
 					>
 						Sign in
 					</UButton>
