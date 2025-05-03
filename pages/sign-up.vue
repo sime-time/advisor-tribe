@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { type } from "arktype";
-import { authClient } from "~/lib/auth-client";
+
+const authStore = useAuthStore();
+const toast = useToast();
 
 const SignUpForm = type({
 	firstName: "string > 0",
@@ -27,59 +29,35 @@ const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const formError = ref("");
-const loading = ref(false);
-
-const toast = useToast();
 
 async function handleSignUp() {
 	formError.value = "";
-	loading.value = true;
+
 	// make sure the user input is valid before using it to create a new user
-	try {
-		const validSignUp = SignUpForm({
-			firstName: firstName.value.trim(),
-			lastName: lastName.value.trim(),
-			email: email.value,
-			password: password.value,
-			confirmPassword: confirmPassword.value,
-		});
+	const validSignUp = SignUpForm({
+		firstName: firstName.value.trim(),
+		lastName: lastName.value.trim(),
+		email: email.value,
+		password: password.value,
+		confirmPassword: confirmPassword.value,
+	});
 
-		if (validSignUp instanceof type.errors) {
-			formError.value = validSignUp.summary;
-			throw new Error(validSignUp.summary);
-		}
-
-		await authClient.signUp.email({
-			name: `${validSignUp.firstName} ${validSignUp.lastName}`,
-			email: validSignUp.email,
-			password: validSignUp.password,
-		}, {
-			onSuccess: () => {
-				toast.add({
-					title: "New account created",
-					description: `Welcome, ${validSignUp.firstName}`,
-					icon: "i-lucide-check",
-					color: "success",
-				});
-				navigateTo("/dashboard");
-			},
-			onError: (context) => {
-				formError.value = context.error.message;
-				throw new Error(context.error.message);
-			},
-		});
-	}
-	catch (err) {
-		console.error("Sign Up Error", err);
-		toast.add({
-			title: "Error",
+	if (validSignUp instanceof type.errors) {
+		formError.value = validSignUp.summary;
+		return toast.add({
+			title: "Sign Up Error",
 			description: `${formError.value}`,
 			icon: "i-lucide-triangle-alert",
 			color: "error",
 		});
 	}
-	finally {
-		loading.value = false;
+
+	try {
+		const name = `${validSignUp.firstName} ${validSignUp.lastName}`;
+		await authStore.signUp(name, validSignUp.email, validSignUp.password);
+	}
+	catch (err) {
+		console.error("Auth Error", err);
 	}
 }
 </script>
@@ -196,8 +174,8 @@ async function handleSignUp() {
 						type="submit"
 						size="lg"
 						class="w-full justify-center"
-						:loading="loading"
-						:disabled="loading"
+						:loading="authStore.loading"
+						:disabled="authStore.loading"
 					>
 						Sign up
 					</UButton>

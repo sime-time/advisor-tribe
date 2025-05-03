@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useAuthStore } from "~/stores/auth-store";
+
+const authStore = useAuthStore();
+
 const menuOpen = ref(false);
 </script>
 
@@ -36,7 +40,7 @@ const menuOpen = ref(false);
 						My Tribe
 					</NuxtLink>
 				</div>
-				<div class="flex gap-3 items-center">
+				<div v-if="!authStore.authenticated" class="flex gap-3 items-center">
 					<UButton to="/sign-in" size="lg" variant="outline">
 						Sign in
 					</UButton>
@@ -44,14 +48,19 @@ const menuOpen = ref(false);
 						Get Started
 					</UButton>
 				</div>
+				<div v-else>
+					<UButton size="lg" variant="outline" :loading="authStore.loading" :disabled="authStore.loading" @click="authStore.signOut">
+						Sign Out
+					</UButton>
+				</div>
 			</div>
 
 			<button class="md:hidden" @click="() => (menuOpen = !menuOpen)">
 				<div v-if="menuOpen" class="flex items-center">
-					<Icon name="lucide:x" size="1.7rem" />
+					<UIcon name="lucide:x" size="1.7rem" />
 				</div>
 				<div v-else class="flex items-center">
-					<Icon name="lucide:menu" size="1.7rem" />
+					<UIcon name="lucide:menu" size="1.7rem" />
 				</div>
 			</button>
 		</div>
@@ -72,11 +81,16 @@ const menuOpen = ref(false);
 				>
 					My Tribe
 				</NuxtLink>
-				<UButton variant="outline" size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/sign-in'); }">
-					Sign in
-				</UButton>
-				<UButton size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/sign-up'); }">
-					Get Started
+				<div v-if="!authStore.authenticated" class="flex flex-col gap-4 font-medium text-lg">
+					<UButton variant="outline" size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/sign-in'); }">
+						Sign in
+					</UButton>
+					<UButton size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/sign-up'); }">
+						Get Started
+					</UButton>
+				</div>
+				<UButton v-else size="lg" class="justify-center font-medium text-lg" variant="outline" :loading="authStore.loading" :disabled="authStore.loading" @click="authStore.signOut">
+					Sign Out
 				</UButton>
 			</div>
 		</div>

@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { authClient } from "~/lib/auth-client";
+import { useAuthStore } from "~/stores/auth-store";
 
-const loading = ref(false);
-
-async function handleGoogleSignIn() {
-	loading.value = true;
-	await authClient.signIn.social({
-		provider: "google",
-		callbackURL: "/dashboard",
-	});
-	loading.value = false;
-}
+const authStore = useAuthStore();
 </script>
 
 <template>
-	<UButton color="neutral" variant="outline" class="flex gap-2" size="lg" :loading="loading" :disabled="loading" @click="handleGoogleSignIn">
+	<UButton
+		color="neutral"
+		variant="outline"
+		class="flex gap-2"
+		size="lg"
+		:loading="authStore.loading"
+		:disabled="authStore.loading"
+		@click="authStore.googleSignIn"
+	>
 		<!-- Using a custom SVG for Google since it's a multi-colored icon not in Lucide -->
 		<svg
 			class="size-5"

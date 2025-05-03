@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { type } from "arktype";
-import { authClient } from "~/lib/auth-client";
+
+const toast = useToast();
+const authStore = useAuthStore();
 
 const SignInForm = type({
 	email: "string.email",
@@ -12,55 +14,32 @@ export type SignInForm = typeof SignInForm.infer;
 const email = ref("");
 const password = ref("");
 const formError = ref("");
-const loading = ref(false);
-
-const toast = useToast();
 
 async function handleSignIn() {
 	formError.value = "";
-	loading.value = true;
+
 	// make sure form input is valid before authenticating
-	try {
-		const validSignIn = SignInForm({
-			email: email.value,
-			password: password.value,
-		});
+	const validSignIn = SignInForm({
+		email: email.value,
+		password: password.value,
+	});
 
-		if (validSignIn instanceof type.errors) {
-			formError.value = validSignIn.summary;
-			throw new Error(validSignIn.summary);
-		}
-
-		await authClient.signIn.email({
-			email: validSignIn.email,
-			password: validSignIn.password,
-		}, {
-			onSuccess: () => {
-				toast.add({
-					title: "Sign in successful",
-					description: "Welcome back!",
-					icon: "i-lucide-check",
-					color: "success",
-				});
-				navigateTo("/dashboard");
-			},
-			onError: (context) => {
-				formError.value = context.error.message;
-				throw new Error(context.error.message);
-			},
-		});
-	}
-	catch (err) {
-		console.error("Sign In Error", err);
-		toast.add({
+	if (validSignIn instanceof type.errors) {
+		formError.value = validSignIn.summary;
+		// stop function here if form input is invalid
+		return toast.add({
 			title: "Sign In Error",
 			description: `${formError.value}`,
 			icon: "i-lucide-triangle-alert",
 			color: "error",
 		});
 	}
-	finally {
-		loading.value = false;
+
+	try {
+		await authStore.signIn(validSignIn.email, validSignIn.password);
+	}
+	catch (err) {
+		console.error("Auth Error", err);
 	}
 }
 </script>
@@ -109,8 +88,8 @@ async function handleSignIn() {
 						type="submit"
 						size="lg"
 						class="w-full justify-center"
-						:loading="loading"
-						:disabled="loading"
+						:loading="authStore.loading"
+						:disabled="authStore.loading"
 					>
 						Sign in
 					</UButton>
