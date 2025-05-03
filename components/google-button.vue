@@ -1,12 +1,16 @@
 <script setup lang="ts">
-function handleGoogleSignIn() {
-	// Handle Google sign-in logic here
-	console.log("Google sign-in clicked");
+import { authClient } from "~/lib/auth-client";
+
+async function handleGoogleSignIn() {
+	await authClient.signIn.social({
+		provider: "google",
+		callbackURL: "/dashboard",
+	});
 }
 </script>
 
 <template>
-	<UButton color="neutral" variant="outline" class="flex gap-2" size="lg">
+	<UButton color="neutral" variant="outline" class="flex gap-2" size="lg" @click="handleGoogleSignIn">
 		<!-- Using a custom SVG for Google since it's a multi-colored icon not in Lucide -->
 		<svg
 			class="size-5"

@@ -5,22 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1746244951096,
-      "tag": "0000_black_glorian",
+      "when": 1746281217574,
+      "tag": "0000_open_darkstar",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1746244959564,
+      "when": 1746281223763,
       "tag": "0001_seed_categories",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1746278746751,
-      "tag": "0002_bent_newton_destine",
       "breakpoints": true
     }
   ]
