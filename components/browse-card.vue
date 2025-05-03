@@ -1,13 +1,9 @@
 <template>
 	<UCard class="shadow-sm">
-		<div class="flex justify-between">
+		<div class="flex justify-start">
 			<NuxtLink to="/advisor/#">
 				<UAvatar src="https://randomuser.me/api/portraits/women/23.jpg" size="xl" class="h-[50px] w-fit hover:outline outline-primary-500" />
 			</NuxtLink>
-			<UBadge class="rounded-full font-semibold h-2/3 text-sm" color="neutral" variant="soft">
-				<UIcon name="line-md:star-alt-filled" class="text-primary-500 text-lg" />
-				4.9
-			</UBadge>
 		</div>
 		<div class="my-3 flex flex-col gap-1.5">
 			<NuxtLink to="/advisor/#">
