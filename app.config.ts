@@ -1,5 +1,10 @@
 export default defineAppConfig({
 	ui: {
+		toaster: {
+			defaultVariants: {
+				position: "top-center",
+			},
+		},
 		colors: {
 			primary: "violet",
 			neutral: "slate",

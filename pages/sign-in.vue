@@ -36,7 +36,7 @@ function handleSubmit() {
 						>
 							Email
 						</label>
-						<UInput icon="i-lucide-mail" type="email" variant="outline" placeholder="email" size="lg" required />
+						<UInput icon="i-lucide-mail" type="email" variant="outline" placeholder="Email" size="lg" required />
 					</div>
 
 					<div class="mb-4 flex flex-col gap-2">
@@ -46,7 +46,7 @@ function handleSubmit() {
 						>
 							Password
 						</label>
-						<UInput icon="i-lucide-lock" type="password" variant="outline" placeholder="password" size="lg" required />
+						<UInput icon="i-lucide-lock" type="password" variant="outline" placeholder="Password" size="lg" required />
 					</div>
 
 					<UButton

@@ -1,22 +1,81 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { type } from "arktype";
+import { authClient } from "~/lib/auth-client";
+
+const SignUpForm = type({
+	firstName: "string > 0",
+	lastName: "string > 0",
+	email: "string.email",
+	password: "string >= 8",
+	confirmPassword: "string >= 8",
+}).narrow((data, context) => {
+	if (data.password === data.confirmPassword) {
+		return true;
+	}
+	return context.reject({
+		expected: "identical to password",
+		actual: "", // don't display the actual password
+		path: ["confirmPassword"],
+	});
+});
+
+export type SignUpForm = typeof SignUpForm.infer;
 
 const firstName = ref("");
 const lastName = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
+const formError = ref("");
 
-const name = computed(() => `${firstName.value.trim()} ${lastName.value.trim()}`);
+const toast = useToast();
 
-function handleSubmit() {
-	// Handle form submission logic here
-	console.log("Form submitted", {
-		name: name.value,
-		email: email.value,
-		password: password.value,
-		confirmPassword: confirmPassword.value,
-	});
+async function handleSignUp() {
+	formError.value = "";
+	// make sure the user input is valid before using it to create a new user
+	try {
+		const validSignUp = SignUpForm({
+			firstName: firstName.value.trim(),
+			lastName: lastName.value.trim(),
+			email: email.value,
+			password: password.value,
+			confirmPassword: confirmPassword.value,
+		});
+
+		if (validSignUp instanceof type.errors) {
+			formError.value = validSignUp.summary;
+			throw new Error(validSignUp.summary);
+		}
+
+		await authClient.signUp.email({
+			name: `${validSignUp.firstName} ${validSignUp.lastName}`,
+			email: validSignUp.email,
+			password: validSignUp.password,
+		}, {
+			onSuccess: () => {
+				toast.add({
+					title: "New account created",
+					description: `Welcome, ${validSignUp.firstName}`,
+					icon: "i-lucide-check",
+					color: "success",
+				});
+				navigateTo("/dashboard");
+			},
+			onError: (context) => {
+				formError.value = context.error.message;
+				throw new Error(context.error.message);
+			},
+		});
+	}
+	catch (err) {
+		console.error("Error", err);
+		toast.add({
+			title: "Error",
+			description: `${formError.value}`,
+			icon: "i-lucide-triangle-alert",
+			color: "error",
+		});
+	}
 }
 </script>
 
@@ -35,8 +94,8 @@ function handleSubmit() {
 			</header>
 
 			<main class="p-6">
-				<form @submit.prevent="handleSubmit">
-					<div class="mb-4 flex flex-col gap-2">
+				<form class="flex flex-col gap-4" @submit.prevent="handleSignUp">
+					<div class="flex flex-col gap-2">
 						<label
 							for="first-name"
 							class="text-sm font-medium leading-4 cursor-default"
@@ -47,13 +106,13 @@ function handleSubmit() {
 							v-model="firstName"
 							icon="i-lucide-user"
 							variant="outline"
-							placeholder="john"
+							placeholder="John"
 							size="lg"
 							required
 						/>
 					</div>
 
-					<div class="mb-4 flex flex-col gap-2">
+					<div class="flex flex-col gap-2">
 						<label
 							for="last-name"
 							class="text-sm font-medium leading-4 cursor-default"
@@ -64,13 +123,13 @@ function handleSubmit() {
 							v-model="lastName"
 							icon="i-lucide-user"
 							variant="outline"
-							placeholder="smith"
+							placeholder="Smith"
 							size="lg"
 							required
 						/>
 					</div>
 
-					<div class="mb-4 flex flex-col gap-2">
+					<div class="flex flex-col gap-2">
 						<label
 							for="email"
 							class="text-sm font-medium leading-4 cursor-default"
@@ -82,13 +141,13 @@ function handleSubmit() {
 							v-model="email"
 							icon="i-lucide-mail"
 							variant="outline"
-							placeholder="email"
+							placeholder="Email"
 							size="lg"
 							required
 						/>
 					</div>
 
-					<div class="mb-4 flex flex-col gap-2">
+					<div class="flex flex-col gap-2">
 						<label
 							for="password"
 							class="text-sm font-medium leading-4 cursor-default"
@@ -100,13 +159,13 @@ function handleSubmit() {
 							icon="i-lucide-lock"
 							type="password"
 							variant="outline"
-							placeholder="password"
+							placeholder="Password"
 							size="lg"
 							required
 						/>
 					</div>
 
-					<div class="mb-4 flex flex-col gap-2">
+					<div class="flex flex-col gap-2">
 						<label
 							for="confirmPassword"
 							class="text-sm font-medium leading-4 cursor-default"
@@ -118,11 +177,15 @@ function handleSubmit() {
 							icon="i-lucide-lock"
 							type="password"
 							variant="outline"
-							placeholder="confirm password"
+							placeholder="Confirm password"
 							size="lg"
 							required
 						/>
 					</div>
+
+					<p v-if="formError" class="text-error text-sm">
+						{{ formError }}
+					</p>
 
 					<UButton
 						type="submit"
