@@ -119,7 +119,7 @@ VALUES (
   '2024-02-18 15:20:00'
 );
 
--- ADVISOR TABLE INSERTS (referencing user IDs from 6-17)
+-- ADVISOR TABLE INSERTS (referencing user IDs from 1-12)
 INSERT INTO "advisor" ("title", "bio", "prefix", "city", "state", "country", "user_id", "created_at", "updated_at")
 VALUES (
   'Financial Planner',
@@ -128,7 +128,7 @@ VALUES (
   'New York',
   'New York',
   'United States',
-  6,
+  1,
   '2024-01-05 10:30:00',
   '2024-01-05 10:30:00'
 );
@@ -141,7 +141,7 @@ VALUES (
   'San Francisco',
   'California',
   'United States',
-  7,
+  2,
   '2024-01-10 14:15:00',
   '2024-02-12 09:30:00'
 );
@@ -154,7 +154,7 @@ VALUES (
   'Boston',
   'Massachusetts',
   'United States',
-  8,
+  3,
   '2024-01-15 11:45:00',
   '2024-01-15 11:45:00'
 );
@@ -167,7 +167,7 @@ VALUES (
   'Chicago',
   'Illinois',
   'United States',
-  9,
+  4,
   '2024-01-20 13:20:00',
   '2024-03-05 16:10:00'
 );
@@ -180,7 +180,7 @@ VALUES (
   'Seattle',
   'Washington',
   'United States',
-  10,
+  5,
   '2024-01-25 09:50:00',
   '2024-01-25 09:50:00'
 );
@@ -193,7 +193,7 @@ VALUES (
   'Denver',
   'Colorado',
   'United States',
-  11,
+  6,
   '2024-02-01 15:30:00',
   '2024-02-01 15:30:00'
 );
@@ -206,7 +206,7 @@ VALUES (
   'Austin',
   'Texas',
   'United States',
-  12,
+  7,
   '2024-02-05 11:15:00',
   '2024-03-12 14:25:00'
 );
@@ -219,7 +219,7 @@ VALUES (
   'Portland',
   'Oregon',
   'United States',
-  13,
+  8,
   '2024-02-10 10:45:00',
   '2024-02-10 10:45:00'
 );
@@ -232,7 +232,7 @@ VALUES (
   'Miami',
   'Florida',
   'United States',
-  14,
+  9,
   '2024-02-15 13:40:00',
   '2024-03-20 09:15:00'
 );
@@ -245,7 +245,7 @@ VALUES (
   'Los Angeles',
   'California',
   'United States',
-  15,
+  10,
   '2024-02-20 16:20:00',
   '2024-02-20 16:20:00'
 );
@@ -258,7 +258,7 @@ VALUES (
   'Cambridge',
   'Massachusetts',
   'United States',
-  16,
+  11,
   '2024-02-25 09:30:00',
   '2024-02-25 09:30:00'
 );
@@ -271,7 +271,7 @@ VALUES (
   'Toronto',
   'Ontario',
   'Canada',
-  17,
+  12,
   '2024-03-01 14:10:00',
   '2024-03-01 14:10:00'
 );

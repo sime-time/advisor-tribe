@@ -1,3 +1,10 @@
+<script setup lang="ts">
+// get the advisors from db
+const { data } = await useFetch("/api/advisors", {
+	lazy: true,
+});
+</script>
+
 <template>
 	<main class="min-h-screen flex flex-col">
 		<section class="flex-grow">
@@ -11,9 +18,10 @@
 					</p>
 				</div>
 			</div>
-			<div class="container mx-auto px-4 py-8">
-				<div class="flex flex-col lg:flex-row gap-8">
-					<BrowseGrid />
+
+			<div class="container mx-auto px-4 py-8 border">
+				<div class="flex flex-col md:flex-row gap-8">
+					<pre>{{ JSON.stringify(data, null, 2) }}</pre>
 				</div>
 			</div>
 		</section>

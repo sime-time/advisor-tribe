@@ -1,25 +1,33 @@
+<script setup lang="ts">
+import type { Advisor } from "~/lib/db/schema";
+
+const props = defineProps<{
+	advisor: Advisor;
+}>();
+</script>
+
 <template>
 	<UCard class="shadow-sm">
 		<div class="flex justify-start">
-			<NuxtLink to="/advisor/#">
+			<NuxtLink to="#">
 				<UAvatar src="https://randomuser.me/api/portraits/women/23.jpg" size="xl" class="h-[50px] w-fit hover:outline outline-primary-500" />
 			</NuxtLink>
 		</div>
 		<div class="my-3 flex flex-col gap-1.5">
-			<NuxtLink to="/advisor/#">
+			<NuxtLink to="#">
 				<h2 class="font-semibold text-xl">
-					Dr. Sarah Chen
+					{{ props.advisor.userId }}
 				</h2>
 			</NuxtLink>
 			<p class="text-neutral-600/90 text-md">
-				Biotech Executive & Researcher
+				{{ props.advisor.title }}
 			</p>
 			<p class="text-neutral-600/90 text-sm flex items-center gap-1">
 				<UIcon name="lucide:map-pin" />
-				San Francisco, California
+				{{ `${props.advisor.city}, ${props.advisor.state}` }}
 			</p>
 			<p class="text-sm mb-4 line-clamp-2">
-				20+ years in pharmaceutical research and biotech leadership. Passionate about mentoring young scientists and career transitions.
+				{{ props.advisor.bio }}
 			</p>
 			<div class="flex gap-2">
 				<UBadge color="neutral" variant="soft" class="rounded-full font-bold">

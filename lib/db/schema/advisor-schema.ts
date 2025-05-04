@@ -27,3 +27,6 @@ export const advisorCategory = pgTable("advisor_category", {
 	createdAt: timestamp("created_at").defaultNow().notNull(),
 	updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+
+// export tables as types
+export type Advisor = typeof advisor.$inferSelect;

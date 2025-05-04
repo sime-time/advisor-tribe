@@ -80,7 +80,7 @@ const currentYear = new Date().getFullYear();
 						</li>
 						<li class="list-item mt-2 text-left">
 							<NuxtLink
-								to="/pricing"
+								to="#"
 								class="text-left text-gray-600 cursor-pointer decoration-gray-600 outline-gray-600"
 							>
 								Pricing
@@ -98,7 +98,7 @@ const currentYear = new Date().getFullYear();
 					<ul>
 						<li class="list-item text-left">
 							<NuxtLink
-								to="/become-advisor"
+								to="#"
 								class="text-left text-gray-600 cursor-pointer decoration-gray-600 outline-gray-600"
 							>
 								Join as Advisor
@@ -106,7 +106,7 @@ const currentYear = new Date().getFullYear();
 						</li>
 						<li class="list-item mt-2 text-left">
 							<NuxtLink
-								to="/advisor-resources"
+								to="#"
 								class="text-left text-gray-600 cursor-pointer decoration-gray-600 outline-gray-600"
 							>
 								Resources
@@ -114,7 +114,7 @@ const currentYear = new Date().getFullYear();
 						</li>
 						<li class="list-item mt-2 text-left">
 							<NuxtLink
-								to="/advisor-faq"
+								to="#"
 								class="text-left text-gray-600 cursor-pointer decoration-gray-600 outline-gray-600"
 							>
 								FAQs
@@ -132,7 +132,7 @@ const currentYear = new Date().getFullYear();
 					<ul>
 						<li class="list-item text-left">
 							<NuxtLink
-								to="/about"
+								to="/#"
 								class="text-left text-gray-600 cursor-pointer decoration-gray-600 outline-gray-600"
 							>
 								About Us
@@ -140,7 +140,7 @@ const currentYear = new Date().getFullYear();
 						</li>
 						<li class="list-item mt-2 text-left">
 							<NuxtLink
-								to="/contact"
+								to="/#"
 								class="text-left text-gray-600 cursor-pointer decoration-gray-600 outline-gray-600"
 							>
 								Contact
@@ -148,7 +148,7 @@ const currentYear = new Date().getFullYear();
 						</li>
 						<li class="list-item mt-2 text-left">
 							<NuxtLink
-								to="/privacy"
+								to="/#"
 								class="text-left text-gray-600 cursor-pointer decoration-gray-600 outline-gray-600"
 							>
 								Privacy Policy
@@ -156,7 +156,7 @@ const currentYear = new Date().getFullYear();
 						</li>
 						<li class="list-item mt-2 text-left">
 							<NuxtLink
-								to="/terms"
+								to="/#"
 								class="text-left text-gray-600 cursor-pointer decoration-gray-600 outline-gray-600"
 							>
 								Terms of Service
