@@ -10,6 +10,7 @@ const SignUpForm = type({
 	email: "string.email",
 	password: "string >= 8",
 	confirmPassword: "string >= 8",
+
 }).narrow((data, context) => {
 	if (data.password === data.confirmPassword) {
 		return true;

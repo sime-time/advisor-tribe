@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Advisor } from "~/lib/db/schema";
+import type { AdvisorUser } from "~/lib/db/queries/types";
 
 const props = defineProps<{
-	advisor: Advisor;
+	advisor: AdvisorUser;
 }>();
 </script>
 
@@ -10,35 +10,31 @@ const props = defineProps<{
 	<UCard class="shadow-sm">
 		<div class="flex justify-start">
 			<NuxtLink to="#">
-				<UAvatar src="https://randomuser.me/api/portraits/women/23.jpg" size="xl" class="h-[50px] w-fit hover:outline outline-primary-500" />
+				<UAvatar :src="advisor.image || ''" size="xl" class="h-[50px] w-fit hover:outline outline-primary-500" />
 			</NuxtLink>
 		</div>
 		<div class="my-3 flex flex-col gap-1.5">
 			<NuxtLink to="#">
 				<h2 class="font-semibold text-xl">
-					{{ props.advisor.userId }}
+					{{ props.advisor.name }}
 				</h2>
 			</NuxtLink>
 			<p class="text-neutral-600/90 text-md">
-				{{ props.advisor.title }}
+				{{ advisor.title }}
 			</p>
 			<p class="text-neutral-600/90 text-sm flex items-center gap-1">
 				<UIcon name="lucide:map-pin" />
-				{{ `${props.advisor.city}, ${props.advisor.state}` }}
+				{{ `${advisor.city}, ${advisor.state}` }}
 			</p>
 			<p class="text-sm mb-4 line-clamp-2">
-				{{ props.advisor.bio }}
+				{{ advisor.bio }}
 			</p>
-			<div class="flex gap-2">
-				<UBadge color="neutral" variant="soft" class="rounded-full font-bold">
-					Science
-				</UBadge>
-				<UBadge color="neutral" variant="soft" class="rounded-full font-bold">
-					Technology
-				</UBadge>
-				<UBadge color="neutral" variant="soft" class="rounded-full font-bold">
-					Career
-				</UBadge>
+			<div class="flex flex-row gap-2 flex-wrap">
+				<div v-for="category in advisor.categories" :key="category.id">
+					<UBadge color="neutral" variant="soft" class="rounded-full font-bold">
+						{{ category.categoryName }}
+					</UBadge>
+				</div>
 			</div>
 		</div>
 		<UButton icon="i-lucide-plus" size="lg" class="w-full justify-center mt-3">

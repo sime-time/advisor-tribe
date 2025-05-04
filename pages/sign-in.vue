@@ -26,7 +26,7 @@ async function handleSignIn() {
 
 	if (validSignIn instanceof type.errors) {
 		formError.value = validSignIn.summary;
-		// stop function here if form input is invalid
+		// if form input is invalid stop the function here
 		return toast.add({
 			title: "Sign In Error",
 			description: `${formError.value}`,

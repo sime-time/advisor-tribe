@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // get the advisors from db
-const { data } = await useFetch("/api/advisors", {
+const { data: advisors } = await useFetch("/api/advisors", {
 	lazy: true,
 });
 </script>
@@ -19,9 +19,9 @@ const { data } = await useFetch("/api/advisors", {
 				</div>
 			</div>
 
-			<div class="container mx-auto px-4 py-8 border">
+			<div v-if="advisors" class="container mx-auto px-4 py-8">
 				<div class="flex flex-col md:flex-row gap-8">
-					<pre>{{ JSON.stringify(data, null, 2) }}</pre>
+					<BrowseAdvisorGrid :advisors="advisors" />
 				</div>
 			</div>
 		</section>

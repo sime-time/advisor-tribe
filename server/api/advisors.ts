@@ -1,5 +1,8 @@
-import { getAdvisors } from "~/lib/db/queries/get-advisors";
+import type { AdvisorUser } from "~/lib/db/queries/types";
+import { getAdvisorsWithCategories } from "~/lib/db/queries/get-users";
 
 export default defineEventHandler(async () => {
-	return await getAdvisors(6);
+	await new Promise(resolve => setTimeout(resolve, 2000));
+	const advisors: AdvisorUser[] = await getAdvisorsWithCategories();
+	return advisors;
 });

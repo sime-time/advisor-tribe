@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import type { Advisor } from "~/lib/db/schema";
+import type { AdvisorUser } from "~/lib/db/queries/types";
 
 const props = defineProps<{
-	advisors: Advisor[];
+	advisors: AdvisorUser[];
 }>();
 </script>
 
 <template>
-	<div v-for="advisor in props.advisors" :key="advisor.id" class="grid grid-cols-3 gap-7">
-		<BrowseCard :advisor="advisor" />
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+		<div v-for="advisor in props.advisors" :key="advisor.id">
+			<BrowseAdvisorCard :advisor="advisor" />
+		</div>
 	</div>
 </template>
