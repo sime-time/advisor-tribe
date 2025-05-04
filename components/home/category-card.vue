@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Category } from "./types";
-import { defineProps } from "vue";
 
 const props = defineProps<{
 	category: Category;
@@ -24,7 +23,7 @@ const props = defineProps<{
 				<h3
 					class="mb-1 font-medium text-center cursor-pointer max-sm:text-sm max-sm:leading-5"
 				>
-					{{ category.name }}
+					{{ props.category.name }}
 				</h3>
 			</div>
 		</div>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ProcessStep } from "./types";
-import { defineProps } from "vue";
 
 const props = defineProps<{
 	step: ProcessStep;

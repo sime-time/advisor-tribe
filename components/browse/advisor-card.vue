@@ -10,12 +10,12 @@ const props = defineProps<{
 	<UCard class="shadow-sm">
 		<div class="flex justify-start">
 			<NuxtLink to="#">
-				<UAvatar :src="advisor.image || ''" size="xl" class="h-[50px] w-fit hover:outline outline-primary-500" />
+				<UAvatar :src="advisor.image || ''" size="xl" class="h-[50px] w-fit " />
 			</NuxtLink>
 		</div>
 		<div class="my-3 flex flex-col gap-1.5">
 			<NuxtLink to="#">
-				<h2 class="font-semibold text-xl">
+				<h2 class="font-semibold text-xl hover:text-primary-700 transition-colors ease-linear">
 					{{ props.advisor.name }}
 				</h2>
 			</NuxtLink>
@@ -37,8 +37,9 @@ const props = defineProps<{
 				</div>
 			</div>
 		</div>
-		<UButton icon="i-lucide-plus" size="lg" class="w-full justify-center mt-3">
-			Invite to My Tribe
+		<UButton size="lg" class="w-full justify-center mt-3">
+			<UIcon name="i-lucide-circle-user" class="text-lg" />
+			View Profile
 		</UButton>
 	</UCard>
 </template>
