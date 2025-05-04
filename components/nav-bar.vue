@@ -25,21 +25,13 @@ const menuOpen = ref(false);
 				<span class="text-xl font-bold leading-7 cursor-pointer">Advisor Tribe</span>
 			</NuxtLink>
 
-			<div class="flex gap-8 items-center max-sm:hidden">
-				<div class="flex gap-6">
-					<NuxtLink
-						href="/browse"
-						class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
-					>
-						Browse
-					</NuxtLink>
-					<NuxtLink
-						to="/dashboard"
-						class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
-					>
-						My Tribe
-					</NuxtLink>
-				</div>
+			<div class="flex gap-6 items-center max-sm:hidden">
+				<NuxtLink
+					to="/browse"
+					class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
+				>
+					Browse
+				</NuxtLink>
 				<div v-if="!authStore.authenticated" class="flex gap-3 items-center">
 					<UButton to="/sign-in" size="lg" variant="outline">
 						Sign in
@@ -48,7 +40,13 @@ const menuOpen = ref(false);
 						Get Started
 					</UButton>
 				</div>
-				<div v-else>
+				<div v-else class="flex gap-6 items-center">
+					<NuxtLink
+						to="/dashboard"
+						class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
+					>
+						My Tribe
+					</NuxtLink>
 					<UButton size="lg" variant="outline" :loading="authStore.loading" :disabled="authStore.loading" @click="authStore.signOut">
 						Sign Out
 					</UButton>
@@ -74,13 +72,7 @@ const menuOpen = ref(false);
 				>
 					Browse Advisors
 				</NuxtLink>
-				<NuxtLink
-					to="/dashboard"
-					class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
-					@click="() => (menuOpen = false)"
-				>
-					My Tribe
-				</NuxtLink>
+
 				<div v-if="!authStore.authenticated" class="flex flex-col gap-4 font-medium text-lg">
 					<UButton variant="outline" size="xl" class="justify-center" @click="() => { menuOpen = false; navigateTo('/sign-in'); }">
 						Sign in
@@ -89,9 +81,26 @@ const menuOpen = ref(false);
 						Get Started
 					</UButton>
 				</div>
-				<UButton v-else size="lg" class="justify-center font-medium text-lg" variant="outline" :loading="authStore.loading" :disabled="authStore.loading" @click="authStore.signOut">
-					Sign Out
-				</UButton>
+
+				<div v-else class="flex flex-col gap-4 font-medium text-lg">
+					<NuxtLink
+						to="/dashboard"
+						class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
+						@click="() => (menuOpen = false)"
+					>
+						My Tribe
+					</NuxtLink>
+					<UButton
+						size="lg"
+						class="justify-center font-medium text-lg"
+						variant="outline"
+						:loading="authStore.loading"
+						:disabled="authStore.loading"
+						@click="authStore.signOut"
+					>
+						Sign Out
+					</UButton>
+				</div>
 			</div>
 		</div>
 	</nav>
