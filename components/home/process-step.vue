@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ProcessStep } from "./types";
 
-const props = defineProps<{
+defineProps<{
 	step: ProcessStep;
 }>();
 </script>

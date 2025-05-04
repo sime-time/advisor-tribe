@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { AdvisorUser } from "~/lib/db/queries/types";
+import type { AdvisorUser } from "~/db/queries/types";
 
-const props = defineProps<{
+defineProps<{
 	advisor: AdvisorUser;
 }>();
 </script>
@@ -16,7 +16,7 @@ const props = defineProps<{
 		<div class="my-3 flex flex-col gap-1.5">
 			<NuxtLink to="#">
 				<h2 class="font-semibold text-xl hover:text-primary-700 transition-colors ease-linear">
-					{{ props.advisor.name }}
+					{{ advisor.name }}
 				</h2>
 			</NuxtLink>
 			<p class="text-neutral-600/90 text-md">

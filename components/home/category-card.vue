@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Category } from "./types";
 
-const props = defineProps<{
+defineProps<{
 	category: Category;
 }>();
 </script>
@@ -23,7 +23,7 @@ const props = defineProps<{
 				<h3
 					class="mb-1 font-medium text-center cursor-pointer max-sm:text-sm max-sm:leading-5"
 				>
-					{{ props.category.name }}
+					{{ category.name }}
 				</h3>
 			</div>
 		</div>
