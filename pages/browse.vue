@@ -21,7 +21,7 @@ const { data: advisors } = await useFetch("/api/advisors", {
 
 			<div v-if="advisors" class="container mx-auto px-4 py-8">
 				<div class="flex flex-col md:flex-row gap-8">
-					<BrowseAdvisorGrid :advisors="advisors" />
+					<AdvisorBrowseGrid :advisors="advisors" />
 				</div>
 			</div>
 		</section>

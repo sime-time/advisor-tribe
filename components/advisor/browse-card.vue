@@ -9,12 +9,12 @@ defineProps<{
 <template>
 	<UCard class="shadow-sm">
 		<div class="flex justify-start">
-			<NuxtLink to="#">
-				<UAvatar :src="advisor.image || ''" size="xl" class="h-[50px] w-fit " />
+			<NuxtLink :to="`/advisor/${advisor.id}`">
+				<UAvatar :src="advisor.image || ''" size="xl" class="h-[6rem] w-fit " />
 			</NuxtLink>
 		</div>
 		<div class="my-3 flex flex-col gap-1.5">
-			<NuxtLink to="#">
+			<NuxtLink :to="`/advisor/${advisor.id}`">
 				<h2 class="font-semibold text-xl hover:text-primary-700 transition-colors ease-linear">
 					{{ advisor.name }}
 				</h2>
@@ -37,7 +37,7 @@ defineProps<{
 				</div>
 			</div>
 		</div>
-		<UButton size="lg" class="w-full justify-center mt-3">
+		<UButton :to="`/advisor/${advisor.id}`" size="lg" class="w-full justify-center mt-3">
 			<UIcon name="i-lucide-circle-user" class="text-lg" />
 			View Profile
 		</UButton>

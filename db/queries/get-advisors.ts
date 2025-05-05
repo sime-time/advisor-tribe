@@ -22,6 +22,29 @@ export async function getAdvisorUsers() {
 		.innerJoin(user, eq(user.id, advisor.userId));
 }
 
+// make a separate function for returning single advisors
+export async function getSingleAdvisor(advisorId: number) {
+	const result = await db.select({
+		id: advisor.id,
+		userId: user.id,
+		name: user.name,
+		email: user.email,
+		image: user.image,
+		prefix: advisor.prefix,
+		title: advisor.title,
+		bio: advisor.bio,
+		city: advisor.city,
+		state: advisor.state,
+		country: advisor.country,
+	})
+		.from(advisor)
+		.where(eq(advisor.id, advisorId))
+		.innerJoin(user, eq(user.id, advisor.userId))
+		.limit(1);
+
+	return result; // this will return an array to feed into other functions
+}
+
 export async function getAdvisorCategories() {
 	return await db.select({
 		id: advisorCategory.id,
@@ -36,8 +59,14 @@ export async function getAdvisorCategories() {
 
 // combine advisors with corresponding categories
 // using map functions instead of multiple sql left joins
-export async function getAdvisorsWithCategories() {
-	const advisorUsers = await getAdvisorUsers();
+export async function getAdvisorsWithCategories(advisorId?: number) {
+	let advisorUsers;
+	if (advisorId) {
+		advisorUsers = await getSingleAdvisor(advisorId);
+	}
+	else {
+		advisorUsers = await getAdvisorUsers();
+	}
 	const categories = await getAdvisorCategories();
 
 	const result = advisorUsers.map((advisor) => {
