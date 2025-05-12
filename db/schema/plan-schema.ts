@@ -11,15 +11,15 @@ export const plan = pgTable("plan", {
 	updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const planFrequency = pgTable("plan_frequency", {
+export const planPricing = pgTable("plan_pricing", {
 	id: serial("id").primaryKey(),
 	planId: integer("plan_id").notNull().references(() => plan.id),
-	type: text("type").notNull(),
-	price: integer("price").notNull(),
-}, table => [check("price_check", sql`${table.price} >= 0`)]);
+	frequency: text("frequency").notNull(),
+	amount: integer("amount").notNull(),
+}, table => [check("price_check", sql`${table.amount} >= 0`)]);
 
 export const planFeature = pgTable("plan_feature", {
 	id: serial("id").primaryKey(),
-	planId: integer("plan_id").notNull().references(() => advisor.id),
+	planId: integer("plan_id").notNull().references(() => plan.id),
 	text: text("text").notNull(),
 });

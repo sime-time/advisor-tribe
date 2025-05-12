@@ -24,9 +24,8 @@ export interface AdvisorUser {
 export interface AdvisorPlan {
 	title: string;
 	features: string[];
-	price: {
-		month: number;
-		year?: number;
-		quarter?: number;
-	};
+  billing: {
+    frequency: string;
+    price: string;
+  }[];
 }

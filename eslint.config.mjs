@@ -13,6 +13,7 @@ export default withNuxt(antfu({
 	},
 }, {
 	rules: {
+		"no-console": false,
 		"ts/no-redeclare": "off",
 		"unicorn/filename-case": ["error", {
 			cases: {

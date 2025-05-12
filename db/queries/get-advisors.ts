@@ -4,7 +4,7 @@ import db from "../index";
 import { advisor, advisorCategory, category, user } from "../schema/index";
 
 // return advisor data with user details
-export async function getAdvisorUsers() {
+export async function getAllAdvisors() {
 	return await db.select({
 		id: advisor.id,
 		userId: user.id,
@@ -70,7 +70,7 @@ export async function getFullAdvisorData(advisorId?: number) {
 		advisorUsers = await getSingleAdvisor(advisorId);
 	}
 	else {
-		advisorUsers = await getAdvisorUsers();
+		advisorUsers = await getAllAdvisors();
 	}
 
 	const categories = await getAdvisorCategories();
