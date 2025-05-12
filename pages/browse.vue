@@ -24,6 +24,14 @@ const { data: advisors } = await useFetch("/api/advisors", {
 					<AdvisorBrowseGrid :advisors="advisors" />
 				</div>
 			</div>
+
+			<div v-else class="container mx-auto px-4 py-8">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+					<div v-for="i in 6" :key="i">
+						<USkeleton class="w-full h-96 rounded-xl" />
+					</div>
+				</div>
+			</div>
 		</section>
 	</main>
 </template>
