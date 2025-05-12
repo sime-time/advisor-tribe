@@ -13,12 +13,13 @@ export default withNuxt(antfu({
 	},
 }, {
 	rules: {
-		"no-console": false,
+		"no-console": 0,
 		"ts/no-redeclare": "off",
 		"unicorn/filename-case": ["error", {
 			cases: {
 				kebabCase: true,
 				snakeCase: true,
+				camelCase: true,
 			},
 			ignore: ["README.md"],
 		}],

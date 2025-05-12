@@ -26,14 +26,14 @@ defineProps<{
 				</ul>
 			</div>
 
-			<div class="flex flex-wrap gap-4 ">
-				<UBadge class="font-semibold text-base" variant="soft" size="lg">
-					${{ plan.price.month }} / Month
-				</UBadge>
-				<UBadge v-if="plan.price.year" class="font-semibold text-base" variant="soft" size="lg">
-					${{ plan.price.year }} / Year
-				</UBadge>
+			<div class="flex flex-wrap gap-4">
+				<div v-for="(bill, index) in plan.billing" :key="index">
+					<UBadge class="font-semibold text-base" variant="soft" size="lg">
+						{{ bill.price }} / {{ bill.frequency }}
+					</UBadge>
+				</div>
 			</div>
+
 			<UButton size="xl" class="w-full justify-center">
 				Select
 			</UButton>

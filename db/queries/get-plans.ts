@@ -5,13 +5,13 @@ import { plan, planFeature, planPricing } from "../schema/index";
 
 // helper function to convert integer prices (lowest monetary unit) into readable strings
 function formatPrice(amount: number) {
-  const price = amount / 100;
-  const formatted = price.toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-  // take out the last ".00" if there are no cents
-  return formatted.endsWith(".00") ? formatted.slice(0, -3) : formatted;
+	const price = amount / 100;
+	const formatted = price.toLocaleString("en-US", {
+		style: "currency",
+		currency: "USD",
+	});
+	// take out the last ".00" if there are no cents
+	return formatted.endsWith(".00") ? formatted.slice(0, -3) : formatted;
 }
 
 export async function getAdvisorPlans(advisorId: number) {
@@ -19,30 +19,29 @@ export async function getAdvisorPlans(advisorId: number) {
 	if (!plans) {
 		return null;
 	}
-  // for each plan, get the list of features and pricing
-  // use Promise.all to wait for all async operations to complete
-  const result = await Promise.all(plans.map(async (plan) => {
-    const features = await getPlanFeatures(plan.id);
-    const featureList: string[] = features.map((feat) => feat.text);
+	// for each plan, get the list of features and pricing
+	// use Promise.all to wait for all async operations to complete
+	const result = await Promise.all(plans.map(async (plan) => {
+		const features = await getPlanFeatures(plan.id);
+		const featureList: string[] = features.map(feat => feat.text);
 
-    const prices = await getPlanPricing(plan.id);
-    const billing = prices.map((price) => {
-      return {
-        frequency: price.frequency,
-        price: formatPrice(price.amount),
-      }
-    });
+		const prices = await getPlanPricing(plan.id);
+		const billing = prices.map((price) => {
+			return {
+				frequency: price.frequency,
+				price: formatPrice(price.amount),
+			};
+		});
 
-    // then create an AdvisorPlan object
-    return {
-      title: plan.title,
-      features: featureList,
-      billing,
-    } as AdvisorPlan;
-  }));
+		// then create an AdvisorPlan object
+		return {
+			title: plan.title,
+			features: featureList,
+			billing,
+		} as AdvisorPlan;
+	}));
 
-  console.log("Result:",result)
-  // return a list of AdvisorPlans
+	// return a list of AdvisorPlans
 	return result;
 }
 

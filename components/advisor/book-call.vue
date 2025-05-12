@@ -6,7 +6,7 @@
 			</h2>
 		</template>
 		<div class="flex flex-col gap-5">
-			<p class="text-lg">
+			<p class="text-base">
 				Schedule a 1-on-1 live video consultation and get specific advice.
 			</p>
 			<UBadge class="font-semibold text-base w-fit" variant="soft" size="lg">
