@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import db from "../index";
 import { advisor, advisorCategory, category, user } from "../schema/index";
 
-// advisor data with user details
+// return advisor data with user details
 export async function getAdvisorUsers() {
 	return await db.select({
 		id: advisor.id,
@@ -22,7 +22,8 @@ export async function getAdvisorUsers() {
 		.innerJoin(user, eq(user.id, advisor.userId));
 }
 
-// make a separate function for returning single advisors
+// follow single-responsibility principle:
+// make a separate function to return 1 single advisor
 export async function getSingleAdvisor(advisorId: number) {
 	const result = await db.select({
 		id: advisor.id,
@@ -45,7 +46,8 @@ export async function getSingleAdvisor(advisorId: number) {
 	return result; // this will return an array to feed into other functions
 }
 
-export async function getAdvisorCategories() {
+// helper function
+async function getAdvisorCategories() {
 	return await db.select({
 		id: advisorCategory.id,
 		advisorId: advisorCategory.advisorId,
@@ -57,23 +59,27 @@ export async function getAdvisorCategories() {
 		.leftJoin(category, eq(category.id, advisorCategory.categoryId));
 }
 
-// combine advisors with corresponding categories
-// using map functions instead of multiple sql left joins
-export async function getAdvisorsWithCategories(advisorId?: number) {
+// combine advisors with their corresponding categories
+// use map functions instead of multiple sql left joins (easier to read)
+export async function getFullAdvisorData(advisorId?: number) {
 	let advisorUsers;
+
+	// getting a single advisor with return an array with one item
+	// this makes the map function work consistently
 	if (advisorId) {
 		advisorUsers = await getSingleAdvisor(advisorId);
 	}
 	else {
 		advisorUsers = await getAdvisorUsers();
 	}
+
 	const categories = await getAdvisorCategories();
 
 	const result = advisorUsers.map((advisor) => {
 		// find all categories belonging to this advisor
 		const thisAdvisorsCategories = categories.filter(category => category.advisorId === advisor.id);
 
-		// return a new object that includes each advisor plus list of categories
+		// return AdvisorUser object that includes the advisor plus their list of categories
 		return {
 			...advisor,
 			categories: thisAdvisorsCategories as AdvisorCategory[],

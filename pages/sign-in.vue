@@ -95,7 +95,7 @@ async function handleSignIn() {
 					</UButton>
 				</form>
 
-				<Divider text="or continue with" class="my-6" />
+				<USeparator label="or continue with" class="my-6" />
 
 				<GoogleButton class="w-full justify-center" />
 			</main>

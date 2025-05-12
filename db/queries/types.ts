@@ -20,3 +20,13 @@ export interface AdvisorUser {
 	country: string;
 	categories: AdvisorCategory[];
 }
+
+export interface AdvisorPlan {
+	title: string;
+	features: string[];
+	price: {
+		month: number;
+		year?: number;
+		quarter?: number;
+	};
+}

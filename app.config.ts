@@ -1,13 +1,18 @@
 export default defineAppConfig({
 	ui: {
+		colors: {
+			primary: "violet",
+			neutral: "slate",
+		},
 		toaster: {
 			defaultVariants: {
 				position: "top-center",
 			},
 		},
-		colors: {
-			primary: "violet",
-			neutral: "slate",
+		separator: {
+			slots: {
+				label: "text-neutral-500/50",
+			},
 		},
 		button: {
 			base: "cursor-pointer",

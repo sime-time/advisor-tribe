@@ -9,7 +9,7 @@ const showFullBio = ref(false);
 </script>
 
 <template>
-	<UCard>
+	<UCard class="h-fit">
 		<div class="flex flex-col md:flex-row gap-6">
 			<UCard variant="soft" class="flex-1 flex flex-col h-fit">
 				<UAvatar :src="advisor.image || ''" size="xl" class="w-[14rem] h-fit mb-5 flex justify-self-center" />
@@ -37,7 +37,7 @@ const showFullBio = ref(false);
 				</div>
 				<div class="flex flex-row gap-2 flex-wrap">
 					<div v-for="category in advisor.categories" :key="category.id">
-						<UBadge color="neutral" variant="soft" size="lg" class="rounded-full font-bold">
+						<UBadge color="neutral" variant="soft" size="lg" class="rounded-full font-semibold">
 							{{ category.categoryName }}
 						</UBadge>
 					</div>

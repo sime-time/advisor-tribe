@@ -24,6 +24,7 @@
 					color="neutral"
 					variant="outline"
 					size="xl"
+					class="flex justify-center"
 				>
 					Get Started for Free
 				</UButton>

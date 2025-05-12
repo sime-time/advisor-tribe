@@ -18,7 +18,7 @@ const { data: advisor } = await useFetch(`/api/advisors/${advisorId}`);
 	<main>
 		<div class="container flex flex-col md:flex-row mx-auto gap-7 md:py-8">
 			<AdvisorProfileCard :advisor="advisor" class="flex-3" />
-			<UCard class="flex-2" />
+			<AdvisorOffers class="flex-2" />
 		</div>
 	</main>
 </template>

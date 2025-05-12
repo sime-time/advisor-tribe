@@ -67,6 +67,13 @@ const menuOpen = ref(false);
 			<div v-if="menuOpen" class="overflow-hidden md:hidden p-4 mb-4">
 				<div class="flex flex-col gap-4 font-medium text-lg">
 					<NuxtLink
+						to="/"
+						class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
+						@click="() => (menuOpen = false)"
+					>
+						Home
+					</NuxtLink>
+					<NuxtLink
 						to="/browse"
 						class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
 						@click="() => (menuOpen = false)"

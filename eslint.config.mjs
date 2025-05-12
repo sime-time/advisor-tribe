@@ -15,7 +15,10 @@ export default withNuxt(antfu({
 	rules: {
 		"ts/no-redeclare": "off",
 		"unicorn/filename-case": ["error", {
-			case: "kebabCase",
+			cases: {
+				kebabCase: true,
+				snakeCase: true,
+			},
 			ignore: ["README.md"],
 		}],
 	},
