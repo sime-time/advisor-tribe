@@ -9,4 +9,13 @@ export default defineEventHandler(async (event) => {
 			await sendRedirect(event, "/", 302);
 		}
 	}
+
+	if (event.path.startsWith("/onboarding")) {
+		const session = await auth.api.getSession({
+			headers: event.headers,
+		});
+		if (!session) {
+			await sendRedirect(event, "/sign-up", 302);
+		}
+	}
 });

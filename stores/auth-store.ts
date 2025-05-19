@@ -71,7 +71,7 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 					icon: "i-lucide-check",
 					color: "success",
 				});
-				navigateTo("/dashboard");
+				navigateTo("/onboarding");
 			},
 			onError: (context) => {
 				toast.add({

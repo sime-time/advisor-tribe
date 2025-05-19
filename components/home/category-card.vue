@@ -12,7 +12,7 @@ defineProps<{
 		class="cursor-pointer"
 	>
 		<div
-			class="h-full transition-all hover:scale-105 hover:shadow-md cursor-pointer border-gray-200 border rounded-xl"
+			class="h-full transition-all hover:scale-105 hover:shadow-md cursor-pointer border-gray-200 border rounded-xl bg-white"
 		>
 			<div class="flex flex-col items-center p-5 text-center cursor-pointer">
 				<div

@@ -1,14 +1,14 @@
 import process from "node:process";
-import { type } from "arktype";
+import { z } from "zod";
 
-const EnvSchema = type({
-	DATABASE_URL: "string",
-	BETTER_AUTH_SECRET: "string",
-	BETTER_AUTH_URL: "string",
-	GOOGLE_CLIENT_ID: "string",
-	GOOGLE_CLIENT_SECRET: "string",
+const EnvSchema = z.object({
+	DATABASE_URL: z.string(),
+	BETTER_AUTH_SECRET: z.string(),
+	BETTER_AUTH_URL: z.string(),
+	GOOGLE_CLIENT_ID: z.string(),
+	GOOGLE_CLIENT_SECRET: z.string(),
 });
 
-export type EnvSchema = typeof EnvSchema.infer;
+export type EnvSchema = z.infer<typeof EnvSchema>;
 
-export default EnvSchema.assert(process.env);
+export default EnvSchema.parse(process.env);

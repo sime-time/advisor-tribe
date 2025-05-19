@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { type } from "arktype";
+import { z } from "zod";
 
 const toast = useToast();
 const authStore = useAuthStore();
 
-const SignInForm = type({
-	email: "string.email",
-	password: "string >= 8",
+const SignInForm = z.object({
+	email: z.string().email(),
+	password: z.string().min(8),
 });
 
-export type SignInForm = typeof SignInForm.infer;
+export type SignInForm = z.infer<typeof SignInForm>;
 
 const email = ref("");
 const password = ref("");
@@ -18,28 +18,29 @@ const formError = ref("");
 async function handleSignIn() {
 	formError.value = "";
 
+	try {
 	// make sure form input is valid before authenticating
-	const validSignIn = SignInForm({
-		email: email.value,
-		password: password.value,
-	});
+		const validSignIn = SignInForm.parse({
+			email: email.value,
+			password: password.value,
+		});
 
-	if (validSignIn instanceof type.errors) {
-		formError.value = validSignIn.summary;
-		// if form input is invalid stop the function here
+		await authStore.signIn(validSignIn.email, validSignIn.password);
+	}
+	catch (err: any) {
+		console.error("Auth Error", err);
+		if (err instanceof z.ZodError) {
+			formError.value = err.errors[0]?.message || "Invalid input";
+		}
+		else {
+			formError.value = err?.message || "An error occurred";
+		}
 		return toast.add({
 			title: "Sign In Error",
 			description: `${formError.value}`,
 			icon: "i-lucide-triangle-alert",
 			color: "error",
 		});
-	}
-
-	try {
-		await authStore.signIn(validSignIn.email, validSignIn.password);
-	}
-	catch (err) {
-		console.error("Auth Error", err);
 	}
 }
 </script>
