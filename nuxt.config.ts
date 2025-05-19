@@ -10,6 +10,7 @@ export default defineNuxtConfig({
 		"@nuxt/eslint",
 		"@nuxt/ui",
 		"@pinia/nuxt",
+		"motion-v/nuxt",
 	],
 	vite: {
 		plugins: [tailwindcss()],
