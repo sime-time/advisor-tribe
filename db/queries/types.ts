@@ -29,3 +29,14 @@ export interface AdvisorPlan {
 		price: string;
 	}[];
 }
+
+export interface NewAdvisor {
+	userId: number;
+	prefix?: string;
+	title: string;
+	bio: string;
+	city: string;
+	state: string;
+	country: string;
+	postalCode: string;
+}

@@ -63,6 +63,8 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 			name,
 			email,
 			password,
+			// this image is for testing purposes only
+			image: "https://xsgames.co/randomusers/avatar.php?g=male",
 		}, {
 			onSuccess: () => {
 				toast.add({

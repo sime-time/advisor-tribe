@@ -5,21 +5,19 @@ import { z } from "zod";
 const authClient = createAuthClient();
 const session = await authClient.getSession();
 const sessionUserId = computed(() => session.data?.user.id);
-const sessionUserName = computed(() => session.data?.user.name);
 
-const OnboardingForm = z.object({
-	userId: z.number(),
-	city: z.string().min(2).optional(),
-	state: z.string().min(2).optional(),
-	country: z.string().min(2).optional(),
-	title: z.string().min(1).optional(),
-	bio: z.string().min(10).optional(),
+const OnboardSchema = z.object({
+	title: z.string().min(2, "A career title is required"),
+	bio: z.string().min(10, "Provide more information in your bio"),
+	city: z.string().min(2, "You need to input your city"),
+	state: z.string().min(2, "You need to input a state"),
+	country: z.string().min(2, "You need to input your country"),
+	postalCode: z.string().min(4, "You must provide your postal code"),
 });
 
-type OnboardingForm = z.infer<typeof OnboardingForm>;
+type OnboardSchema = z.infer<typeof OnboardSchema>;
 
-const form = reactive({
-	userId: sessionUserId,
+const onboardForm = reactive({
 	title: "",
 	bio: "",
 	city: "",
@@ -33,23 +31,55 @@ const isUploading = ref(false);
 const router = useRouter();
 const toast = useToast();
 
-async function handleSubmit() {
+async function onSubmit() {
 	formError.value = "";
+	isUploading.value = true;
 	try {
-		const validForm = OnboardingForm.parse(form);
+		const validForm = OnboardSchema.parse(onboardForm);
 
-		await router.push("/advisor/availability");
+		// loop through the entries in the validForm to make a FormData object
+		// this FormData will be sent to the api for creating a new advisor
+		const formData = new FormData();
+		Object.entries(validForm).forEach(([key, value]) => {
+			formData.append(key, value);
+		});
+		// also need to send the current user's id to create the advisor
+		formData.append("userId", `${sessionUserId.value}`);
+
+		// send FormData payload to api endpoint
+		const result = await $fetch("/api/advisors/create", {
+			method: "POST",
+			body: formData,
+		});
+
+		if (result?.error) {
+			throw new Error("Failed to create new advisor");
+		}
+
+		toast.add({
+			title: "You are now an advisor!",
+			color: "success",
+		});
+
+		return await router.push("/advisor/available");
 	}
-	catch (err) {
+	catch (err: any) {
 		console.error("Onboarding Error", err);
-		formError.value = "Invalid Input";
-
+		if (err instanceof z.ZodError) {
+			formError.value = err.errors[0]?.message || "Invalid input";
+		}
+		else {
+			formError.value = err?.message || "An error occurred";
+		}
 		return toast.add({
 			title: "Failed to create advisor profile",
 			description: `${formError.value}`,
 			icon: "i-lucide-triangle-alert",
 			color: "error",
 		});
+	}
+	finally {
+		isUploading.value = false;
 	}
 }
 </script>
@@ -62,80 +92,82 @@ async function handleSubmit() {
 					Create Your Advisor Profile
 				</h1>
 				<p class="mt-1.5 text-sm leading-5 text-slate-500">
-					Tell us more about yourself, {{ sessionUserName }}
+					Tell us more about yourself
 				</p>
 			</header>
 
 			<main class="pt-6">
-				<form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
-					<div class="flex flex-col gap-2">
-						<label class="text-sm font-medium leading-4">Career Title</label>
+				<UForm :schema="OnboardSchema" :state="onboardForm" class="flex flex-col gap-4" @submit.prevent="onSubmit">
+					<UFormField label="Career Title" name="title">
 						<UInput
-							v-model="form.title"
+							v-model="onboardForm.title"
 							icon="i-lucide-briefcase"
 							variant="outline"
 							placeholder="e.g. Financial Advisor"
+							class="w-full"
 							size="lg"
+							:disabled="isUploading"
 						/>
-					</div>
+					</UFormField>
 
-					<div class="flex flex-col gap-2">
-						<label class="text-sm font-medium leading-4">Bio</label>
+					<UFormField label="Bio" name="bio">
 						<UTextarea
-							v-model="form.bio"
+							v-model="onboardForm.bio"
 							variant="outline"
 							placeholder="Tell us about your experience..."
 							size="lg"
+							class="w-full"
 							:rows="4"
+							:disabled="isUploading"
 						/>
-					</div>
+					</UFormField>
 
-					<div class="flex gap-4">
-						<div class="flex-1">
-							<label class="text-sm font-medium leading-4">City</label>
+					<div class="grid grid-cols-2 gap-4 ">
+						<UFormField label="City" name="city">
 							<UInput
-								v-model="form.city"
+								v-model="onboardForm.city"
 								icon="i-lucide-map-pin"
 								variant="outline"
 								placeholder="City"
+								class="w-full"
 								size="lg"
+								:disabled="isUploading"
 							/>
-						</div>
-						<div class="flex-1">
-							<label class="text-sm font-medium leading-4">State</label>
+						</UFormField>
+						<UFormField label="State" name="state">
 							<UInput
-								v-model="form.state"
+								v-model="onboardForm.state"
 								variant="outline"
 								placeholder="State"
+								class="w-full"
 								size="lg"
+								:disabled="isUploading"
 							/>
-						</div>
+						</UFormField>
 					</div>
-					<div class="flex gap-4">
-						<div class="flex-1">
-							<label class="text-sm font-medium leading-4">Country</label>
+					<div class="grid grid-cols-2 gap-4">
+						<UFormField label="Country" name="country">
 							<UInput
-								v-model="form.country"
+								v-model="onboardForm.country"
 								icon="i-lucide-globe"
 								variant="outline"
 								placeholder="Country"
+								class="w-full"
 								size="lg"
+								:disabled="isUploading"
 							/>
-						</div>
-						<div class="flex-1">
-							<label class="text-sm font-medium leading-4">Postal Code</label>
+						</UFormField>
+						<UFormField label="Postal Code" name="postalCode">
 							<UInput
-								v-model="form.state"
+								v-model="onboardForm.postalCode"
 								variant="outline"
 								placeholder="Postal Code"
+								class="w-full"
 								size="lg"
+								:disabled="isUploading"
 							/>
-						</div>
+						</UFormField>
 					</div>
-
-					<p v-if="formError" class="text-error text-sm">
-						{{ formError }}
-					</p>
 
 					<UButton
 						type="submit"
@@ -146,7 +178,7 @@ async function handleSubmit() {
 					>
 						Continue
 					</UButton>
-				</form>
+				</UForm>
 			</main>
 		</UCard>
 	</main>

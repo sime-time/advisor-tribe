@@ -35,7 +35,7 @@ function handleSubmit() {
 						Set your availability
 					</h1>
 					<p class="mt-1.5 text-sm leading-5 text-neutral-500">
-						Set what days and times users are able to book meetings with you.
+						Set what time and day users are able to book meetings with you.
 					</p>
 				</header>
 			</template>
@@ -65,7 +65,7 @@ function handleSubmit() {
 				<UButton
 					type="submit"
 					size="lg"
-					class="w-full justify-center mt-2"
+					class="w-full justify-center mt-4"
 				>
 					Set Schedule
 				</UButton>
