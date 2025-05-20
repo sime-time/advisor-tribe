@@ -10,7 +10,10 @@ export default defineEventHandler(async (event) => {
 		}
 	}
 
-	if (event.path.startsWith("/onboarding") || event.path.startsWith("/set-availability")) {
+	if (event.path.startsWith("/advisor/onboarding")
+		|| event.path.startsWith("/advisor/onboarding")
+		|| event.path.startsWith("/advisor/availability")
+	) {
 		const session = await auth.api.getSession({
 			headers: event.headers,
 		});
