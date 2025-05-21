@@ -71,6 +71,20 @@
       "when": 1747668058312,
       "tag": "0009_handy_joystick",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1747779026228,
+      "tag": "0010_peaceful_the_captain",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1747780204831,
+      "tag": "0011_familiar_wrecker",
+      "breakpoints": true
     }
   ]
 }

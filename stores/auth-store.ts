@@ -6,12 +6,19 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 	const toast = useToast();
 	const loading = ref(false);
 
+	const session = authClient.useSession();
+
 	const authenticated = computed(() => {
-		const session = authClient.useSession();
 		if (session.value.data) {
 			return true;
 		}
 		return false;
+	});
+
+	const userId = computed(() => {
+		if (session.value.data) {
+			return session.value.data.user.id;
+		}
 	});
 
 	async function googleSignIn() {
@@ -90,6 +97,7 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 	return {
 		loading,
 		authenticated,
+		userId,
 		signUp,
 		signIn,
 		signOut,

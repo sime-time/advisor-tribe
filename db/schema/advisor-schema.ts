@@ -12,7 +12,7 @@ export const advisor = pgTable("advisor", {
 	title: text("title").notNull(),
 	bio: text("bio").notNull(),
 	prefix: text("prefix"),
-	userId: integer("user_id").notNull().references(() => user.id),
+	userId: integer("user_id").unique().notNull().references(() => user.id),
 	city: text("city"),
 	state: text("state"),
 	country: text("country"),
@@ -32,11 +32,13 @@ export const advisorCategory = pgTable("advisor_category", {
 
 export const availability = pgTable("availability", {
 	id: serial("id").primaryKey(),
-	advisor_id: integer("advisor_id").notNull().references(() => advisor.id),
+	advisorId: integer("advisor_id").notNull().references(() => advisor.id),
 	timezone: text("timezone").notNull(),
 	weekDay: text("week_day").notNull(),
 	startTime: integer("start_time").notNull(),
 	endTime: integer("end_time").notNull(),
+	createdAt: timestamp("created_at").defaultNow().notNull(),
+	updatedAt: timestamp("updated_at").defaultNow().notNull(),
 }, table => [
 	check("start_check", sql`${table.startTime} >= 0 AND ${table.startTime} <= 2400`),
 	check("end_check", sql`${table.endTime} >= 0 AND ${table.endTime} <= 2400`),

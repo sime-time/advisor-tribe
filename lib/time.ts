@@ -25,8 +25,32 @@ export const hourStrings = [
 	"11:00 PM",
 ];
 
+// store military time as integers in the database
 export const hourStringToNumber: Map<string, number> = new Map([
 	[hourStrings[0], 0],
+	[hourStrings[1], 100],
+	[hourStrings[2], 200],
+	[hourStrings[3], 300],
+	[hourStrings[4], 400],
+	[hourStrings[5], 500],
+	[hourStrings[6], 600],
+	[hourStrings[7], 700],
+	[hourStrings[8], 800],
+	[hourStrings[9], 900],
+	[hourStrings[10], 1000],
+	[hourStrings[11], 1100],
+	[hourStrings[12], 1200],
+	[hourStrings[13], 1300],
+	[hourStrings[14], 1400],
+	[hourStrings[15], 1500],
+	[hourStrings[16], 1600],
+	[hourStrings[17], 1700],
+	[hourStrings[18], 1800],
+	[hourStrings[19], 1900],
+	[hourStrings[20], 2000],
+	[hourStrings[21], 2100],
+	[hourStrings[22], 2200],
+	[hourStrings[23], 2300],
 ]);
 
 export const timeZones: string[] = [

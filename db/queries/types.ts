@@ -40,3 +40,12 @@ export interface NewAdvisor {
 	country: string;
 	postalCode: string;
 }
+
+export interface DaySchedule {
+	advisorId: number;
+	active: boolean;
+	timezone: string;
+	weekDay: string;
+	startTime: number;
+	endTime: number;
+}

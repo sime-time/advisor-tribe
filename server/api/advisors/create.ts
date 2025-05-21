@@ -1,8 +1,6 @@
-import type { NewAdvisor } from "~/db/queries/types";
 import { z } from "zod";
 import { createAdvisor } from "~/db/queries/create-advisor";
 
-// Define validation schema
 const AdvisorSchema = z.object({
 	userId: z.number(),
 	title: z.string().min(1, "Title is required"),

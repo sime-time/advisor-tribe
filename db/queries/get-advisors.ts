@@ -43,7 +43,19 @@ export async function getSingleAdvisor(advisorId: number) {
 		.innerJoin(user, eq(user.id, advisor.userId))
 		.limit(1);
 
-	return result; // this will return an array to feed into other functions
+	// this will return an ARRAY of 1 item for consistency with other functions
+	return result;
+}
+
+export async function getAdvisorIdFromUserId(userId: number) {
+	const result = await db.select({
+		id: advisor.id,
+	})
+		.from(advisor)
+		.where(eq(advisor.userId, userId))
+		.limit(1);
+
+	return result[0].id;
 }
 
 // helper function

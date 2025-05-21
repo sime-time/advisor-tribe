@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { createAuthClient } from "better-auth/vue";
 import { z } from "zod";
+import { useAuthStore } from "~/stores/auth-store";
 
-const authClient = createAuthClient();
-const session = await authClient.getSession();
-const sessionUserId = computed(() => session.data?.user.id);
+const authStore = useAuthStore(); // for userId
 
 const OnboardSchema = z.object({
 	title: z.string().min(2, "A career title is required"),
@@ -44,7 +42,7 @@ async function onSubmit() {
 			formData.append(key, value);
 		});
 		// also need to send the current user's id to create the advisor
-		formData.append("userId", `${sessionUserId.value}`);
+		formData.append("userId", `${authStore.userId}`);
 
 		// send FormData payload to api endpoint
 		const result = await $fetch("/api/advisors/create", {
@@ -52,9 +50,7 @@ async function onSubmit() {
 			body: formData,
 		});
 
-		if (result?.error) {
-			throw new Error("Failed to create new advisor");
-		}
+		console.log("api result:", result);
 
 		toast.add({
 			title: "You are now an advisor!",
