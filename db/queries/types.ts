@@ -30,6 +30,19 @@ export interface AdvisorPlan {
 	}[];
 }
 
+export interface NewPlan {
+	advisorId: number;
+	title: string;
+	description: string;
+	features: string[];
+	pricing: NewPlanPricing[];
+}
+
+export interface NewPlanPricing {
+	amount: number;
+	frequency: string;
+}
+
 export interface NewAdvisor {
 	userId: number;
 	prefix?: string;

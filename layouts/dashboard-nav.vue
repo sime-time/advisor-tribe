@@ -5,7 +5,6 @@ import { useAuthStore } from "~/stores/auth-store";
 const authStore = useAuthStore();
 const route = useRoute();
 const collapseMenu = ref(false);
-effect(() => console.log("user:", authStore.user));
 
 const items = computed<NavigationMenuItem[]>(() => {
 	const baseItems: NavigationMenuItem[] = [
