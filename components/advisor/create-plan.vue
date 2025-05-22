@@ -3,7 +3,7 @@ const props = defineProps<{
 	userId: string;
 }>();
 
-const { data: advisorId } = await useFetch(`/api/advisors/get-id/${props.userId}`);
+// const { data: advisorId } = await useFetch(`/api/advisors/get-id/${props.userId}`);
 </script>
 
 <template>
