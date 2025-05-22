@@ -9,7 +9,7 @@ const SignUpForm = z.object({
 	lastName: z.string().min(1, "Last name is required"),
 	email: z.string().email("Please insert a valid email address"),
 	password: z.string().min(8, "Password must contain at least 8 characters"),
-	confirmPassword: z.string().min(8),
+	confirmPassword: z.string().min(8, "Password must contain at least 8 characters"),
 }).refine(data => data.password === data.confirmPassword, {
 	message: "Passwords do not match",
 	path: ["confirmPassword"],
@@ -60,7 +60,7 @@ async function handleSignUp() {
 </script>
 
 <template>
-	<section
+	<main
 		class="flex justify-center items-center p-4 bg-white min-h-[754px]"
 	>
 		<article
@@ -77,7 +77,7 @@ async function handleSignUp() {
 				</p>
 			</header>
 
-			<main class="p-6">
+			<section class="p-6">
 				<form
 					class="flex flex-col gap-4"
 					@submit.prevent="handleSignUp"
@@ -188,7 +188,7 @@ async function handleSignUp() {
 				<USeparator label="or continue with" class="my-6" />
 
 				<GoogleButton class="w-full justify-center" />
-			</main>
+			</section>
 
 			<footer class="flex flex-col items-center px-6 pb-6 text-center">
 				<p class="text-sm leading-5 text-center text-slate-500">
@@ -202,5 +202,5 @@ async function handleSignUp() {
 				</p>
 			</footer>
 		</article>
-	</section>
+	</main>
 </template>

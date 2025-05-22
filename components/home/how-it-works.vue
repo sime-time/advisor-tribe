@@ -47,7 +47,7 @@ const steps = ref<ProcessStepType[]>([
 		<div class="px-4 mx-auto w-full max-w-[1400px] max-md:max-w-none">
 			<div class="mx-auto mb-16 max-w-screen-md text-center">
 				<h2 class="mb-3 text-3xl font-bold leading-9 text-center">
-					How Advisor Tribe Works
+					How It Works
 				</h2>
 				<p
 					class="text-lg leading-7 text-center decoration-slate-500 outline-slate-500 text-slate-500"

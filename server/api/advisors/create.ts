@@ -28,7 +28,6 @@ export default defineEventHandler(async (event) => {
 
 		// Create advisor with validated data
 		const data = await createAdvisor(validatedData);
-		console.log("return data", data);
 		return data;
 	}
 	catch (error) {

@@ -48,7 +48,6 @@ async function handleSubmit() {
 
 		// validate the data before sending
 		const validSchedule = WeekSchema.parse(weekSchedule);
-		console.log("valid:", validSchedule);
 
 		// send the validated data to api endpoint
 		await $fetch("/api/advisors/set-availability", {

@@ -11,10 +11,9 @@
 				Ready to Build Your Advisor Tribe?
 			</h2>
 			<p
-				class="mx-auto mb-8 max-w-2xl text-xl leading-7 text-center text-white opacity-90 outline-white decoration-white max-sm:text-lg"
+				class="mx-auto mb-8 max-w-3xl text-xl leading-7 text-center text-white opacity-90 outline-white decoration-white max-sm:text-lg"
 			>
-				Join thousands of professionals who are leveraging collective wisdom to
-				make better decisions and achieve their goals.
+				Bring together mentors, advisors, friends, family, and experts — all in one place.
 			</p>
 			<div
 				class="flex gap-4 justify-center text-center text-white outline-white decoration-white max-sm:flex-col"

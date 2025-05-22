@@ -26,6 +26,7 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 		await authClient.signIn.social({
 			provider: "google",
 			callbackURL: "/dashboard",
+			newUserCallbackURL: "/onboarding",
 		});
 		loading.value = false;
 	}

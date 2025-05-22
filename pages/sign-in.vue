@@ -46,7 +46,7 @@ async function handleSignIn() {
 </script>
 
 <template>
-	<section class="flex justify-center items-center p-4 bg-white min-h-[754px]">
+	<main class="flex justify-center items-center p-4 bg-white min-h-[754px]">
 		<article
 			class="w-full max-w-md bg-white rounded-lg border border-solid border-slate-200 shadow-sm"
 		>
@@ -59,7 +59,7 @@ async function handleSignIn() {
 				</p>
 			</header>
 
-			<main class="p-6">
+			<section class="p-6">
 				<form class="flex flex-col gap-4" @submit.prevent="handleSignIn">
 					<div class="flex flex-col gap-2">
 						<label
@@ -99,7 +99,7 @@ async function handleSignIn() {
 				<USeparator label="or continue with" class="my-6" />
 
 				<GoogleButton class="w-full justify-center" />
-			</main>
+			</section>
 
 			<footer class="flex flex-col items-center px-6 pb-6 text-center">
 				<p class="text-sm leading-5 text-center text-slate-500">
@@ -113,5 +113,5 @@ async function handleSignIn() {
 				</p>
 			</footer>
 		</article>
-	</section>
+	</main>
 </template>
