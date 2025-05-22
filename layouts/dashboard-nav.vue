@@ -33,6 +33,12 @@ const items = computed<NavigationMenuItem[]>(() => {
 				active: route.path === "/dashboard/clients",
 			},
 			{
+				label: "Plans",
+				icon: "i-lucide-briefcase-business",
+				to: "/dashboard/plans",
+				active: route.path === "/dashboard/plans",
+			},
+			{
 				label: "Availability",
 				icon: "i-lucide-calendar",
 				to: "/dashboard/availability",

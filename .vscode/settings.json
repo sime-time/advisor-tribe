@@ -1,5 +1,9 @@
 // antfu/eslint rules //
 {
+	// hide node_modules folder
+	"files.exclude": {
+		"**/node_modules": true
+	},
 	// Disable the default formatter, use eslint instead
 	"editor.formatOnSave": false,
 	// Auto fix
