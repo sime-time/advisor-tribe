@@ -41,7 +41,7 @@ async function handleSubmit() {
 	isUploading.value = true;
 
 	try {
-		const userId = authStore.userId;
+		const userId = authStore.user?.id;
 		if (!userId) {
 			throw new Error("User not logged in");
 		}

@@ -9,6 +9,8 @@ export const auth = betterAuth({
 	}),
 	advanced: {
 		database: {
+			// because we are using serial ints:
+			// don't use better-auth's default id generation
 			generateId: false,
 		},
 	},
@@ -19,6 +21,18 @@ export const auth = betterAuth({
 		google: {
 			clientId: env.GOOGLE_CLIENT_ID,
 			clientSecret: env.GOOGLE_CLIENT_SECRET,
+		},
+	},
+	user: {
+		additionalFields: {
+			role: {
+				type: "string",
+				required: false,
+			},
+			phone: {
+				type: "string",
+				required: false,
+			},
 		},
 	},
 });

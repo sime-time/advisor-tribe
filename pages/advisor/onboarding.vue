@@ -42,7 +42,7 @@ async function onSubmit() {
 			formData.append(key, value);
 		});
 		// also need to send the current user's id to create the advisor
-		formData.append("userId", `${authStore.userId}`);
+		formData.append("userId", `${authStore.user?.id}`);
 
 		// send FormData payload to api endpoint
 		const result = await $fetch("/api/advisors/create", {

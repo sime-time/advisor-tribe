@@ -5,38 +5,64 @@ import { useAuthStore } from "~/stores/auth-store";
 const authStore = useAuthStore();
 const route = useRoute();
 const collapseMenu = ref(false);
+effect(() => console.log("user:", authStore.user));
 
-const items = computed<NavigationMenuItem[]>(() => [
-	{
-		label: "Home",
-		icon: "i-lucide-home",
-		to: "/dashboard",
-		active: route.path === "/dashboard",
-	},
-	{
-		label: "Advisors",
-		icon: "i-lucide-users-round",
-		to: "/dashboard/advisors",
-		active: route.path === "/dashboard/advisors",
-	},
-	{
-		label: "Profile",
-		icon: "i-lucide-circle-user-round",
-		to: "/dashboard/profile",
-		active: route.path === "/dashboard/profile",
-	},
-	{
-		label: "Settings",
-		icon: "i-lucide-settings",
-		to: "/dashboard/settings",
-		active: route.path === "/dashboard/settings",
-	},
-	{
-		label: "Collapse",
-		icon: collapseMenu.value ? "i-lucide-arrow-right" : "i-lucide-arrow-left",
-		onSelect: () => { collapseMenu.value = !collapseMenu.value; },
-	},
-]);
+const items = computed<NavigationMenuItem[]>(() => {
+	const baseItems: NavigationMenuItem[] = [
+		{
+			label: "Home",
+			icon: "i-lucide-home",
+			to: "/dashboard",
+			active: route.path === "/dashboard",
+		},
+		{
+			label: "Advisors",
+			icon: "i-lucide-users-round",
+			to: "/dashboard/advisors",
+			active: route.path === "/dashboard/advisors",
+		},
+	];
+
+	// add additional routes if user is also an advisor
+	if (authStore.user?.role === "advisor") {
+		baseItems.push(
+			{
+				label: "Clients",
+				icon: "i-lucide-contact-round",
+				to: "/dashboard/clients",
+				active: route.path === "/dashboard/clients",
+			},
+			{
+				label: "Availability",
+				icon: "i-lucide-calendar",
+				to: "/dashboard/availability",
+				active: route.path === "/dashboard/availability",
+			},
+		);
+	}
+
+	// routes at the end of sidebar menu
+	baseItems.push(
+		{
+			label: "Profile",
+			icon: "i-lucide-circle-user-round",
+			to: "/dashboard/profile",
+			active: route.path === "/dashboard/profile",
+		},
+		{
+			label: "Settings",
+			icon: "i-lucide-settings",
+			to: "/dashboard/settings",
+			active: route.path === "/dashboard/settings",
+		},
+		{
+			label: "Collapse",
+			icon: collapseMenu.value ? "i-lucide-arrow-right" : "i-lucide-arrow-left",
+			onSelect: () => { collapseMenu.value = !collapseMenu.value; },
+		},
+	);
+	return baseItems;
+});
 </script>
 
 <template>
