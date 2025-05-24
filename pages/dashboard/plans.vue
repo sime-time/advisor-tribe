@@ -8,19 +8,23 @@ definePageMeta({
 const authStore = useAuthStore();
 const advisorId = ref(0);
 const plans = ref();
-watch(
-	// 1. The reactive value to watch (source)
-	() => authStore.user?.id,
-	// 2. The callback function to execute when the value changes (callback)
-	async (userId) => {
-		if (!userId)
-			return;
 
-		const result = await $fetch<number>(`/api/advisors/get-id/${userId}`);
-		advisorId.value = result;
-		plans.value = await $fetch(`/api/plans/${advisorId.value}`);
-	},
-);
+onMounted(() => {
+	watch(
+	// 1. The reactive value to watch (source)
+		() => authStore.user?.id,
+		// 2. The callback function to execute when the value changes (callback)
+		async (userId) => {
+			if (!userId)
+				return;
+
+			const result = await $fetch<number>(`/api/advisors/get-id/${userId}`);
+			advisorId.value = result;
+			plans.value = await $fetch(`/api/plans/${advisorId.value}`);
+		},
+		{ immediate: true },
+	);
+});
 </script>
 
 <template>
@@ -35,7 +39,7 @@ watch(
 				</template>
 			</template>
 		</div>
-		<div v-if="advisorId !== 0" class="max-w-xl">
+		<div v-if="advisorId !== 0" class="max-w-lg">
 			<h2 class="text-3xl font-bold mb-6">
 				Create New Plan
 			</h2>
