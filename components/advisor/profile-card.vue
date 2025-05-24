@@ -12,7 +12,9 @@ const showFullBio = ref(false);
 	<UCard class="h-fit">
 		<div class="flex flex-col md:flex-row gap-6">
 			<UCard variant="soft" class="flex-1 flex flex-col h-fit">
-				<UAvatar :src="advisor.image || ''" size="xl" class="w-[14rem] h-fit mb-5 flex justify-self-center" />
+				<div class="flex justify-center mb-5 ">
+					<UAvatar :src="advisor.image || ''" size="xl" class="w-[14rem] h-fit" />
+				</div>
 				<div class="flex gap-4 w-full">
 					<UButton icon="i-lucide-message-square" size="lg" color="neutral" variant="outline" class="flex-1 justify-center">
 						Message

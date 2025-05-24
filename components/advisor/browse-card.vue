@@ -10,7 +10,9 @@ defineProps<{
 	<UCard class="shadow-sm">
 		<div class="flex justify-start">
 			<NuxtLink :to="`/advisor/${advisor.id}`" class="flex gap-4">
-				<UAvatar :src="advisor.image || ''" size="xl" class="h-[6rem] w-fit " />
+				<div>
+					<UAvatar :src="advisor.image || ''" size="lg" class="h-[6rem] w-fit" />
+				</div>
 				<div class="flex flex-col justify-evenly items-start">
 					<h2 class="font-semibold text-xl hover:text-primary-700 transition-colors ease-linear">
 						{{ advisor.name }}
