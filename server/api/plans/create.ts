@@ -14,20 +14,19 @@ const PlanSchema = z.object({
 type PlanSchema = z.infer<typeof PlanSchema>;
 
 export default defineEventHandler(async (event) => {
-	const formData = await readFormData(event);
-
 	try {
-		// validate form data
-		const validatedData = PlanSchema.parse({
-			advisorId: Number(formData.get("advisorId")),
-			title: formData.get("title"),
-			description: formData.get("description"),
-			features: formData.get("features"),
-			pricing: formData.get("pricing"),
+		// get request body
+		const body = await readBody<PlanSchema>(event);
+
+		// multiply the pricing amount by 100 to fit the data
+		body.pricing = body.pricing.map((price) => {
+			const validAmount = price.amount * 100;
+			return { ...price, amount: validAmount };
 		});
 
 		// create a plan with validated data
-		const data = await createPlan(validatedData);
+		const data = await createPlan(body);
+
 		return data;
 	}
 	catch (error) {

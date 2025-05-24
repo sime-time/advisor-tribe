@@ -33,6 +33,6 @@ export async function createPlan(newPlan: NewPlan) {
 		}
 	}
 	catch (error) {
-		console.error("Plan creation failed:", error);
+		console.error("Plan database insertion failed:", error);
 	}
 }

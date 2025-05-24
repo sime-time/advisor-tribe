@@ -23,8 +23,9 @@ export default defineEventHandler(async (event) => {
 		// get advisor id from user id
 		const advisorId = await getAdvisorIdFromUserId(Number(body.userId));
 
-		// convert start/end times to numbers
+		// must map the request to fit the advisor schedule interface
 		const weekSchedule = body.schedule.map((day) => {
+			// convert start/end times to numbers
 			const militaryStartTime = hourStringToNumber.get(day.start) as number;
 			const militaryEndTime = hourStringToNumber.get(day.end) as number;
 

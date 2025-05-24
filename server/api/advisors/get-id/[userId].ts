@@ -2,7 +2,7 @@ import { getAdvisorIdFromUserId } from "~/db/queries/get-advisors";
 
 export default defineEventHandler(async (event) => {
 	try {
-		const userId = Number.parseInt(event.context.params?.id ?? "");
+		const userId = Number.parseInt(event.context.params?.userId ?? "");
 		if (!userId) {
 			throw new Error("Invalid or missing user id");
 		}
