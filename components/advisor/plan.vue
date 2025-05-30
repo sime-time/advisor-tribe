@@ -12,6 +12,9 @@ defineProps<{
 			<h2 class="font-bold text-xl">
 				{{ plan.title }}
 			</h2>
+			<p class="text-sm text-neutral-500 mt-2">
+				{{ plan.description }}
+			</p>
 		</template>
 		<div class="flex flex-col gap-5">
 			<div class="flex flex-col gap-2">
@@ -34,9 +37,7 @@ defineProps<{
 				</div>
 			</div>
 
-			<UButton size="xl" class="w-full justify-center">
-				Select
-			</UButton>
+			<slot />
 		</div>
 	</UCard>
 </template>

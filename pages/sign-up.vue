@@ -187,7 +187,9 @@ async function handleSignUp() {
 
 				<USeparator label="or continue with" class="my-6" />
 
-				<GoogleButton class="w-full justify-center" />
+				<OauthGoogleButton class="w-full justify-center" />
+				<OauthMicrosoftButton class="w-full justify-center mt-3" />
+				<OauthCalendlyButton class="w-full justify-center mt-3" />
 			</section>
 
 			<footer class="flex flex-col items-center px-6 pb-6 text-center">

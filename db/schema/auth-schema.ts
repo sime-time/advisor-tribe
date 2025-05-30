@@ -8,6 +8,7 @@ export const user = pgTable("user", {
 	image: text("image"),
 	phone: text("phone"),
 	role: text("role"),
+	calendlyId: text("calendly_id"),
 	createdAt: timestamp("created_at").notNull(),
 	updatedAt: timestamp("updated_at").notNull(),
 });

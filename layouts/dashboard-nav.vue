@@ -5,6 +5,13 @@ import { useAuthStore } from "~/stores/auth-store";
 const authStore = useAuthStore();
 const route = useRoute();
 const collapseMenu = ref(false);
+const isAdvisor = computed<boolean>(() => {
+	console.log("role:", authStore.user?.role);
+	if (authStore.user?.role === "advisor") {
+		return true;
+	}
+	return false;
+});
 
 const items = computed<NavigationMenuItem[]>(() => {
 	const baseItems: NavigationMenuItem[] = [
@@ -23,7 +30,7 @@ const items = computed<NavigationMenuItem[]>(() => {
 	];
 
 	// add additional routes if user is also an advisor
-	if (authStore.user?.role === "advisor") {
+	if (isAdvisor.value) {
 		baseItems.push(
 			{
 				label: "Clients",

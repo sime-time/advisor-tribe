@@ -14,6 +14,24 @@ export default defineAppConfig({
 				label: "text-neutral-500/50",
 			},
 		},
+		input: {
+			variants: {
+				size: {
+					lg: {
+						base: "text-base",
+					},
+				},
+			},
+		},
+		textarea: {
+			variants: {
+				size: {
+					lg: {
+						base: "text-base",
+					},
+				},
+			},
+		},
 		button: {
 			base: "cursor-pointer",
 			variants: {

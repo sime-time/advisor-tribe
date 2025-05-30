@@ -36,6 +36,7 @@ export async function getAdvisorPlans(advisorId: number) {
 		// then create an AdvisorPlan object
 		return {
 			title: plan.title,
+			description: plan.description,
 			features: featureList,
 			billing,
 		} as AdvisorPlan;

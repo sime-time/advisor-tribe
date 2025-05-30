@@ -1,0 +1,1 @@
+ALTER TABLE "user" ADD COLUMN "calendly_id" text;

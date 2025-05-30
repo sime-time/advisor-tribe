@@ -1,4 +1,4 @@
-// antfu/eslint rules //
+// antfu/eslint rules
 {
 	// hide node_modules folder
 	"files.exclude": {

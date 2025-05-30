@@ -23,6 +23,7 @@ export interface AdvisorUser {
 
 export interface AdvisorPlan {
 	title: string;
+	description: string;
 	features: string[];
 	billing: {
 		frequency: string;

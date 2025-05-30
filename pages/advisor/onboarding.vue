@@ -45,12 +45,10 @@ async function onSubmit() {
 		formData.append("userId", `${authStore.user?.id}`);
 
 		// send FormData payload to api endpoint
-		const result = await $fetch("/api/advisors/create", {
+		await $fetch("/api/advisors/create", {
 			method: "POST",
 			body: formData,
 		});
-
-		console.log("api result:", result);
 
 		toast.add({
 			title: "You are now an advisor!",
