@@ -7,7 +7,6 @@ const authStore = useAuthStore();
 <template>
 	<UButton
 		color="neutral"
-		variant="outline"
 		class="flex gap-2"
 		size="lg"
 		:loading="authStore.loading"
@@ -15,6 +14,6 @@ const authStore = useAuthStore();
 		@click="authStore.calendlySignIn"
 	>
 		<UIcon name="simple-icons:calendly" />
-		Sign in with Calendly
+		Continue with Calendly
 	</UButton>
 </template>
