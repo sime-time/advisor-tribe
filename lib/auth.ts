@@ -9,13 +9,13 @@ export const auth = betterAuth({
 	}),
 	advanced: {
 		database: {
-			// because we are using serial ints:
-			// don't use better-auth's default id generation
+			// because we are using serial int primary keys:
+			// don't use better-auth's default uuid generation
 			generateId: false,
 		},
 	},
 	emailAndPassword: {
-		enabled: true,
+		enabled: false,
 	},
 	socialProviders: {
 		google: {

@@ -18,15 +18,16 @@
 			<div
 				class="flex gap-4 justify-center text-center text-white outline-white decoration-white max-sm:flex-col"
 			>
-				<UButton
-					to="/sign-up"
-					color="neutral"
-					variant="outline"
-					size="xl"
-					class="flex justify-center"
-				>
-					Get Started for Free
-				</UButton>
+				<OauthSignInModal>
+					<UButton
+						color="neutral"
+						variant="outline"
+						size="xl"
+						class="flex justify-center"
+					>
+						Get Started for Free
+					</UButton>
+				</OauthSignInModal>
 			</div>
 		</div>
 	</section>

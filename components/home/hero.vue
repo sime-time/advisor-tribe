@@ -27,9 +27,11 @@
 					your decisions.
 				</p>
 				<div class="flex gap-4 justify-center text-center">
-					<UButton size="xl" to="/sign-up">
-						Get Started
-					</UButton>
+					<OauthSignInModal>
+						<UButton size="xl">
+							Get Started
+						</UButton>
+					</OauthSignInModal>
 					<UButton size="xl" variant="outline" to="/browse">
 						Find Advisors
 					</UButton>

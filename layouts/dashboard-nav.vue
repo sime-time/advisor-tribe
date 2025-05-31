@@ -4,7 +4,6 @@ import { useAuthStore } from "~/stores/auth-store";
 
 const authStore = useAuthStore();
 const route = useRoute();
-const collapseMenu = ref(false);
 
 const items = computed<NavigationMenuItem[]>(() => [
 	{
@@ -37,11 +36,6 @@ const items = computed<NavigationMenuItem[]>(() => [
 		to: "/dashboard/settings",
 		active: route.path === "/dashboard/settings",
 	},
-	{
-		label: "Collapse",
-		icon: collapseMenu.value ? "i-lucide-arrow-right" : "i-lucide-arrow-left",
-		onSelect: () => { collapseMenu.value = !collapseMenu.value; },
-	},
 ]);
 </script>
 
@@ -62,7 +56,7 @@ const items = computed<NavigationMenuItem[]>(() => [
 				:disabled="authStore.loading"
 				@click="authStore.signOut"
 			>
-				{{ collapseMenu ? "" : "Log out" }}
+				Log out
 			</UButton>
 		</div>
 		<slot />
