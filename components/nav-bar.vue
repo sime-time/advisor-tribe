@@ -65,11 +65,11 @@ const menuOpen = ref(false);
 		</div>
 
 		<motion.div
-			v-show="menuOpen"
+			v-if="menuOpen"
 			:initial="{ height: 0, opacity: 0, transform: 'translateY(-10px)' }"
 			:animate="menuOpen ? { height: 'auto', opacity: 1, transform: 'translateY(0)' } : { height: 0, opacity: 0, transform: 'translateY(-10px)' }"
 			:transition="{ duration: 0.15, ease: 'easeInOut' }"
-			class="will-change-transform"
+			class="absolute top-full left-0 right-0 bg-white border-b border-neutral-200 will-change-transform"
 		>
 			<div class="overflow-hidden md:hidden p-4 mb-4 transform-gpu">
 				<div class="flex flex-col gap-4 font-medium text-lg">
