@@ -8,8 +8,8 @@
 
 		<template #body>
 			<div class="space-y-3">
-				<OauthGoogleButton class="w-full justify-center" />
-				<OauthMicrosoftButton class="w-full justify-center " />
+				<AuthGoogleButton class="w-full justify-center" />
+				<AuthMicrosoftButton class="w-full justify-center " />
 			</div>
 		</template>
 	</UModal>

@@ -34,11 +34,11 @@ const menuOpen = ref(false);
 					Browse
 				</NuxtLink>
 				<div v-if="!authStore.authenticated" class="flex gap-3 items-center">
-					<OauthSignInModal>
+					<AuthSignInModal>
 						<UButton size="lg">
 							Get Started
 						</UButton>
-					</OauthSignInModal>
+					</AuthSignInModal>
 				</div>
 				<div v-else class="flex gap-6 items-center">
 					<NuxtLink
@@ -88,11 +88,11 @@ const menuOpen = ref(false);
 					</NuxtLink>
 
 					<div v-if="!authStore.authenticated" class="flex flex-col gap-4 font-medium text-lg">
-						<OauthSignInModal>
+						<AuthSignInModal>
 							<UButton size="xl" class="justify-center">
 								Get Started
 							</UButton>
-						</OauthSignInModal>
+						</AuthSignInModal>
 					</div>
 
 					<div v-else class="flex flex-col gap-4 font-medium text-lg">

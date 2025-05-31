@@ -14,7 +14,7 @@ const authStore = useAuthStore();
 		:disabled="authStore.loading"
 		@click="authStore.googleSignIn"
 	>
-		<!-- Using a custom SVG for Google since it's a multi-colored icon not in Lucide -->
+		<!-- Using a custom SVG from Google to adhere to google's oauth requirements -->
 		<svg
 			class="size-5"
 			aria-hidden="true"

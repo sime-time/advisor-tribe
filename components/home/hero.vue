@@ -27,11 +27,11 @@
 					your decisions.
 				</p>
 				<div class="flex gap-4 justify-center text-center">
-					<OauthSignInModal>
+					<AuthSignInModal>
 						<UButton size="xl">
 							Get Started
 						</UButton>
-					</OauthSignInModal>
+					</AuthSignInModal>
 					<UButton size="xl" variant="outline" to="/browse">
 						Find Advisors
 					</UButton>

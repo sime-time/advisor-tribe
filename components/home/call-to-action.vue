@@ -18,7 +18,7 @@
 			<div
 				class="flex gap-4 justify-center text-center text-white outline-white decoration-white max-sm:flex-col"
 			>
-				<OauthSignInModal>
+				<AuthSignInModal>
 					<UButton
 						color="neutral"
 						variant="outline"
@@ -27,7 +27,7 @@
 					>
 						Get Started for Free
 					</UButton>
-				</OauthSignInModal>
+				</AuthSignInModal>
 			</div>
 		</div>
 	</section>
