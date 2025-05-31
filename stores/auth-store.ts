@@ -1,11 +1,6 @@
-import { genericOAuthClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/vue";
 
-const authClient = createAuthClient({
-	plugins: [
-		genericOAuthClient(),
-	],
-});
+const authClient = createAuthClient();
 
 export const useAuthStore = defineStore("useAuthStore", () => {
 	const toast = useToast();
@@ -51,18 +46,6 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 			callbackURL: "/dashboard",
 			newUserCallbackURL: "/onboarding",
 		});
-		loading.value = false;
-	}
-
-	async function calendlySignIn() {
-		loading.value = true;
-		const { data, error } = await authClient.signIn.oauth2({
-			providerId: "calendly",
-			callbackURL: "/dashboard",
-			newUserCallbackURL: "/onboarding",
-		});
-		console.log("calendly data", data);
-		console.log("calendly error", error);
 		loading.value = false;
 	}
 
@@ -140,6 +123,5 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 		signOut,
 		googleSignIn,
 		microsoftSignIn,
-		calendlySignIn,
 	};
 });

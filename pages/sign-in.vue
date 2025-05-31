@@ -10,7 +10,8 @@
 				</p>
 			</template>
 
-			<OauthCalendlyButton class="w-full justify-center" />
+			<OauthGoogleButton class="w-full justify-center" />
+			<OauthMicrosoftButton class="w-full justify-center mt-3" />
 
 			<template #footer>
 				<p class="text-sm leading-5 text-center text-slate-500">
