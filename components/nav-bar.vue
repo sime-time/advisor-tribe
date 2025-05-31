@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { motion } from "motion-v";
 import { useAuthStore } from "~/stores/auth-store";
 
 const authStore = useAuthStore();
@@ -63,8 +64,13 @@ const menuOpen = ref(false);
 			</button>
 		</div>
 
-		<Transition name="expand">
-			<div v-if="menuOpen" class="overflow-hidden md:hidden p-4 mb-4">
+		<motion.div
+			v-if="menuOpen"
+			:initial="{ height: 0, opacity: 0 }"
+			:animate="menuOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }"
+			:transition="{ duration: 0.12, ease: 'easeInOut' }"
+		>
+			<div class="overflow-hidden md:hidden p-4 mb-4">
 				<div class="flex flex-col gap-4 font-medium text-lg">
 					<NuxtLink
 						to="/"
@@ -111,26 +117,6 @@ const menuOpen = ref(false);
 					</div>
 				</div>
 			</div>
-		</Transition>
+		</motion.div>
 	</nav>
 </template>
-
-<style scoped>
-.expand-enter-active,
-.expand-leave-active {
-	transition: all 0.2s ease-out;
-	max-height: 300px; /* Adjust this value based on your content height */
-}
-
-.expand-enter-from,
-.expand-leave-to {
-	max-height: 0;
-	opacity: 0;
-}
-
-.expand-enter-to,
-.expand-leave-from {
-	max-height: 300px;
-	opacity: 1;
-}
-</style>

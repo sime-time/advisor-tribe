@@ -44,7 +44,7 @@ export const auth = betterAuth({
 						// the UUID is in the last section of the URI
 						const uuid: string = profile.resource.uri.split("/").pop();
 						return {
-							// drizzle id will still generate the next integer in the database
+							// drizzle will still generate the next serial id in the database
 							// it won't use the uuid string as id
 							id: uuid, // must not be null/undefined, or it won't work
 							calendlyId: uuid,

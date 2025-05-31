@@ -41,6 +41,9 @@ importers:
       nuxt:
         specifier: ^3.17.1
         version: 3.17.1(@netlify/blobs@8.2.0)(@parcel/watcher@2.5.1)(@types/node@22.15.3)(db0@0.3.2(drizzle-orm@0.43.1(@neondatabase/serverless@1.0.0)(@types/pg@8.11.14)(kysely@0.27.6)(pg@8.15.6)))(drizzle-orm@0.43.1(@neondatabase/serverless@1.0.0)(@types/pg@8.11.14)(kysely@0.27.6)(pg@8.15.6))(eslint@9.25.1(jiti@2.4.2))(ioredis@5.6.1)(lightningcss@1.29.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.40.1)(terser@5.39.0)(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1))(yaml@2.7.1)
+      nuxt-calendly:
+        specifier: 0.1.21
+        version: 0.1.21(magicast@0.3.5)
       pg:
         specifier: ^8.15.6
         version: 8.15.6
@@ -4473,6 +4476,9 @@ packages:
 
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
+
+  nuxt-calendly@0.1.21:
+    resolution: {integrity: sha512-2ZJzRJNmfHfR5R+jsXndSXS+jzKSkaHT0CGOr6ez7BtOypnlJWzUKTQCNisKF7JlkfjNd0Gb8LL2YhathZPCtA==}
 
   nuxt@3.17.1:
     resolution: {integrity: sha512-RFUamVkXw86Kn9l3jeHLNnctsNf5Dp5pQY2bal9uZFiq1Wc9VyMdzou70DbMUjDe1yAoUbD6qz65FOEq+abesQ==}
@@ -10933,6 +10939,13 @@ snapshots:
   nth-check@2.1.1:
     dependencies:
       boolbase: 1.0.0
+
+  nuxt-calendly@0.1.21(magicast@0.3.5):
+    dependencies:
+      '@nuxt/kit': 3.17.1(magicast@0.3.5)
+      defu: 6.1.4
+    transitivePeerDependencies:
+      - magicast
 
   nuxt@3.17.1(@netlify/blobs@8.2.0)(@parcel/watcher@2.5.1)(@types/node@22.15.3)(db0@0.3.2(drizzle-orm@0.43.1(@neondatabase/serverless@1.0.0)(@types/pg@8.11.14)(kysely@0.27.6)(pg@8.15.6)))(drizzle-orm@0.43.1(@neondatabase/serverless@1.0.0)(@types/pg@8.11.14)(kysely@0.27.6)(pg@8.15.6))(eslint@9.25.1(jiti@2.4.2))(ioredis@5.6.1)(lightningcss@1.29.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.40.1)(terser@5.39.0)(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.1))(yaml@2.7.1):
     dependencies:

@@ -11,6 +11,7 @@ export default defineNuxtConfig({
 		"@nuxt/ui",
 		"@pinia/nuxt",
 		"motion-v/nuxt",
+		"nuxt-calendly",
 	],
 	vite: {
 		plugins: [tailwindcss()],

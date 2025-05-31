@@ -5,62 +5,38 @@ import { useAuthStore } from "~/stores/auth-store";
 const authStore = useAuthStore();
 const route = useRoute();
 const collapseMenu = ref(false);
-const isAdvisor = computed<boolean>(() => {
-	console.log("role:", authStore.user?.role);
-	if (authStore.user?.role === "advisor") {
-		return true;
-	}
-	return false;
-});
 
 const items = computed<NavigationMenuItem[]>(() => {
 	const baseItems: NavigationMenuItem[] = [
 		{
-			label: "Home",
-			icon: "i-lucide-home",
+			label: "My Tribe",
+			icon: "i-lucide-users-round",
 			to: "/dashboard",
 			active: route.path === "/dashboard",
 		},
 		{
-			label: "Advisors",
-			icon: "i-lucide-users-round",
-			to: "/dashboard/advisors",
-			active: route.path === "/dashboard/advisors",
+			label: "Availability",
+			icon: "i-lucide-calendar",
+			to: "/dashboard/availability",
+			active: route.path === "/dashboard/availability",
 		},
 	];
 
 	// add additional routes if user is also an advisor
-	if (isAdvisor.value) {
+	if (authStore.isAdvisor) {
 		baseItems.push(
-			{
-				label: "Clients",
-				icon: "i-lucide-contact-round",
-				to: "/dashboard/clients",
-				active: route.path === "/dashboard/clients",
-			},
 			{
 				label: "Plans",
 				icon: "i-lucide-briefcase-business",
 				to: "/dashboard/plans",
 				active: route.path === "/dashboard/plans",
 			},
-			{
-				label: "Availability",
-				icon: "i-lucide-calendar",
-				to: "/dashboard/availability",
-				active: route.path === "/dashboard/availability",
-			},
+
 		);
 	}
 
 	// routes at the end of sidebar menu
 	baseItems.push(
-		{
-			label: "Profile",
-			icon: "i-lucide-circle-user-round",
-			to: "/dashboard/profile",
-			active: route.path === "/dashboard/profile",
-		},
 		{
 			label: "Settings",
 			icon: "i-lucide-settings",
