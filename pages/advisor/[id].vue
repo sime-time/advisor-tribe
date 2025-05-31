@@ -14,12 +14,6 @@ else {
 // fetch a single advisor from the id
 const { data: advisor } = await useFetch(`/api/advisors/${advisorId}`);
 const { data: plans } = await useFetch(`/api/plans/${advisorId}`);
-
-async function selectPlan(planId: string) {
-	// add this advisor to user's group
-
-	// make sure advisor's userId and session userId are not the same
-}
 </script>
 
 <template>
