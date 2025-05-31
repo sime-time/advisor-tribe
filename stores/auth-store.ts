@@ -21,14 +21,6 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 		return null;
 	});
 
-	const isAdvisor = computed(() => {
-		if (user.value) {
-			console.log("role:", user.value.role);
-			return user.value.role === "advisor";
-		}
-		return false;
-	});
-
 	async function googleSignIn() {
 		loading.value = true;
 		await authClient.signIn.social({
@@ -117,7 +109,6 @@ export const useAuthStore = defineStore("useAuthStore", () => {
 		loading,
 		authenticated,
 		user,
-		isAdvisor,
 		signUp,
 		signIn,
 		signOut,

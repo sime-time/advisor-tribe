@@ -9,15 +9,15 @@ defineProps<{
 <template>
 	<UCard class="shadow-sm">
 		<div class="flex justify-start">
-			<NuxtLink :to="`/advisor/${advisor.id}`" class="flex gap-4">
+			<NuxtLink :to="`/advisor/${advisor.id}`" class="flex gap-4 items-center">
 				<div>
-					<UAvatar :src="advisor.image || ''" size="lg" class="h-[6rem] w-fit" />
+					<UAvatar :src="advisor.image || ''" size="2xl" />
 				</div>
-				<div class="flex flex-col justify-evenly items-start">
+				<div class="flex flex-col justify-evenly items-start ">
 					<h2 class="font-semibold text-xl hover:text-primary-700 transition-colors ease-linear">
 						{{ advisor.name }}
 					</h2>
-					<p class="text-neutral-600/90 text-md">
+					<p class="text-neutral-600/90 text-md line-clamp-1">
 						{{ advisor.title }}
 					</p>
 					<p class="text-neutral-600/90 text-sm flex items-center gap-1">

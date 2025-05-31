@@ -6,57 +6,53 @@ const authStore = useAuthStore();
 const route = useRoute();
 const collapseMenu = ref(false);
 
-const items = computed<NavigationMenuItem[]>(() => {
-	const baseItems: NavigationMenuItem[] = [
-		{
-			label: "My Tribe",
-			icon: "i-lucide-users-round",
-			to: "/dashboard",
-			active: route.path === "/dashboard",
-		},
-		{
-			label: "Availability",
-			icon: "i-lucide-calendar",
-			to: "/dashboard/availability",
-			active: route.path === "/dashboard/availability",
-		},
-	];
-
-	// add additional routes if user is also an advisor
-	if (authStore.isAdvisor) {
-		baseItems.push(
-			{
-				label: "Plans",
-				icon: "i-lucide-briefcase-business",
-				to: "/dashboard/plans",
-				active: route.path === "/dashboard/plans",
-			},
-
-		);
-	}
-
-	// routes at the end of sidebar menu
-	baseItems.push(
-		{
-			label: "Settings",
-			icon: "i-lucide-settings",
-			to: "/dashboard/settings",
-			active: route.path === "/dashboard/settings",
-		},
-		{
-			label: "Collapse",
-			icon: collapseMenu.value ? "i-lucide-arrow-right" : "i-lucide-arrow-left",
-			onSelect: () => { collapseMenu.value = !collapseMenu.value; },
-		},
-	);
-	return baseItems;
-});
+const items = computed<NavigationMenuItem[]>(() => [
+	{
+		label: "My Tribe",
+		icon: "i-lucide-users-round",
+		to: "/dashboard",
+		active: route.path === "/dashboard",
+	},
+	{
+		label: "Meetings",
+		icon: "i-lucide-calendar",
+		to: "/dashboard/meetings",
+		active: route.path === "/dashboard/meetings",
+	},
+	{
+		label: "Availability",
+		icon: "i-lucide-calendar",
+		to: "/dashboard/availability",
+		active: route.path === "/dashboard/availability",
+	},
+	{
+		label: "Subscriptions",
+		icon: "i-lucide-briefcase-business",
+		to: "/dashboard/subscriptions",
+		active: route.path === "/dashboard/subscriptions",
+	},
+	{
+		label: "Settings",
+		icon: "i-lucide-settings",
+		to: "/dashboard/settings",
+		active: route.path === "/dashboard/settings",
+	},
+	{
+		label: "Collapse",
+		icon: collapseMenu.value ? "i-lucide-arrow-right" : "i-lucide-arrow-left",
+		onSelect: () => { collapseMenu.value = !collapseMenu.value; },
+	},
+]);
 </script>
 
 <template>
-	<div class="flex h-screen">
-		<div class="data-[orientation=vertical]:w-48 flex flex-col justify-between p-2">
-			<UNavigationMenu orientation="vertical" :items="items" :collapsed="collapseMenu" />
+	<div class="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+		<div class="hidden md:block border-r bg-neutral-400/40">
+			<div class="flex h-full max-h-screen flex-col gap-2">
+				<div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+					<NuxtLink to="/" />
+				</div>
+			</div>
 			<UButton
 				icon="i-lucide-log-out"
 				class="w-full justify-center"

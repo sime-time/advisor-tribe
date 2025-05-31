@@ -1,12 +1,3 @@
-<script setup lang="ts">
-function scrollToHowItWorks() {
-	document.getElementById("how-it-works")?.scrollIntoView({
-		behavior: "smooth",
-		block: "start",
-	});
-}
-</script>
-
 <template>
 	<section class="overflow-x-hidden overflow-y-hidden relative">
 		<!-- Background elements -->
@@ -36,11 +27,11 @@ function scrollToHowItWorks() {
 					your decisions.
 				</p>
 				<div class="flex gap-4 justify-center text-center">
-					<UButton size="xl" to="/browse">
-						Find Advisors
+					<UButton size="xl" to="/sign-up">
+						Get Started
 					</UButton>
-					<UButton size="xl" variant="outline" @click="scrollToHowItWorks">
-						How It Works
+					<UButton size="xl" variant="outline" to="/browse">
+						Find Advisors
 					</UButton>
 				</div>
 			</div>

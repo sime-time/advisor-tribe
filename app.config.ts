@@ -14,6 +14,18 @@ export default defineAppConfig({
 				label: "text-neutral-500/50",
 			},
 		},
+		avatar: {
+			variants: {
+				size: {
+					"2xl": {
+						root: "size-20",
+					},
+					"3xl": {
+						root: "size-50",
+					},
+				},
+			},
+		},
 		input: {
 			variants: {
 				size: {
