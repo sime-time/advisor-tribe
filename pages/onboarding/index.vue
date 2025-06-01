@@ -1,4 +1,16 @@
 <script setup lang="ts">
+import { z } from "zod";
+import { useAuthStore } from "~/stores/auth-store";
+
+const authStore = useAuthStore(); // for user's id
+
+const OnboardSchema = z.object({
+	firstName: z.string().min(2, "Your first name is required"),
+	lastName: z.string().min(2, "Your last name is required"),
+	linkName: z.string().min(2, "Provide a user name for your link"),
+});
+type OnboardSchema = z.infer<typeof OnboardSchema>;
+
 const formState = reactive({
 	firstName: "",
 	lastName: "",
@@ -8,6 +20,56 @@ const formState = reactive({
 const name = computed(() => {
 	return `${formState.firstName.trim()} ${formState.lastName.trim()}`;
 });
+
+const formError = ref("");
+const isUploading = ref(false);
+const router = useRouter();
+const toast = useToast();
+
+async function onSubmit() {
+	formError.value = "";
+	isUploading.value = true;
+	try {
+		const validForm = OnboardSchema.parse(formState);
+
+		// this FormData will be sent to the api
+		const formData = new FormData();
+		formData.append("id", `${authStore.user?.id}`);
+		formData.append("name", name.value);
+		formData.append("linkName", validForm.linkName);
+
+		// send FormData payload to api endpoint
+		await $fetch("/api/onboard-user", {
+			method: "POST",
+			body: formData,
+		});
+
+		toast.add({
+			title: "Onboarding complete!",
+			color: "success",
+		});
+
+		return await router.push("/dashboard");
+	}
+	catch (err: any) {
+		console.error("Onboarding Error", err);
+		if (err instanceof z.ZodError) {
+			formError.value = err.errors[0]?.message || "Invalid input";
+		}
+		else {
+			formError.value = err?.message || "An error occurred";
+		}
+		return toast.add({
+			title: "Failed to onboard user",
+			description: `${formError.value}`,
+			icon: "i-lucide-triangle-alert",
+			color: "error",
+		});
+	}
+	finally {
+		isUploading.value = false;
+	}
+}
 </script>
 
 <template>
@@ -22,7 +84,7 @@ const name = computed(() => {
 				</p>
 			</template>
 
-			<UForm class="grid gap-y-5">
+			<UForm :state="formState" :schema="OnboardSchema" class="grid gap-y-5" @submit.prevent="onSubmit">
 				<div class="flex gap-5">
 					<UFormField label="First Name" name="firstName">
 						<UInput v-model="formState.firstName" size="lg" class="w-full" />

@@ -61,3 +61,16 @@ export interface DaySchedule {
 	startTime: number;
 	endTime: number;
 }
+
+export interface UserUpdate {
+	id: number;
+	name?: string;
+	email?: string;
+	emailVerified?: boolean;
+	image?: string | null;
+	role?: string | null;
+	linkName?: string | null;
+	timeZone?: string | null;
+	createdAt?: Date;
+	updatedAt?: Date;
+}

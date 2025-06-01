@@ -10,7 +10,7 @@ const showFullBio = ref(false);
 
 <template>
 	<UCard class="h-fit">
-		<div class="flex flex-col md:flex-row gap-6 items-center">
+		<div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
 			<NuxtImg
 				:src="advisor.image || ''"
 				alt="advisor profile image"
