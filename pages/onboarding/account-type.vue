@@ -2,7 +2,7 @@
 const accountType = ref("user");
 const nextPage = computed(() => {
 	if (accountType.value === "advisor") {
-		return "/advisor/onboarding";
+		return "/onboarding/advisor-info";
 	}
 	return "/dashboard";
 });

@@ -7,7 +7,7 @@
 					<NuxtLink to="/" class="flex items-center gap-2">
 						<img src="/logo.webp" alt="logo" class="size-10" height="100" width="100">
 						<p class="text-xl font-bold">
-							Advisor Tribe
+							Advisor<span class="text-primary-600">Tribe</span>
 						</p>
 					</NuxtLink>
 				</div>

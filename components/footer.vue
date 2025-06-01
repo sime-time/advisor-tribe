@@ -12,7 +12,7 @@ const currentYear = new Date().getFullYear();
 						class="flex gap-2 items-center mb-4 cursor-pointer"
 					>
 						<img src="/logo.webp" alt="logo" height="50" width="50">
-						<span class="text-xl font-bold leading-7 cursor-pointer">Advisor Tribe</span>
+						<span class="text-xl font-bold leading-7">Advisor<span class="text-primary-600">Tribe</span></span>
 					</NuxtLink>
 					<p
 						class="mb-4 max-w-xs text-gray-600 decoration-gray-600 outline-gray-600"

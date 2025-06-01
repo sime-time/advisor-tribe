@@ -13,6 +13,20 @@ export default defineNuxtConfig({
 		"motion-v/nuxt",
 		"nuxt-calendly",
 	],
+	app: {
+		head: {
+			title: "Advisor Tribe",
+			htmlAttrs: {
+				lang: "en",
+			},
+			meta: [
+				{ name: "description", content: "Get expert business advice from a personal board of advisors." },
+			],
+			link: [
+				{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+			],
+		},
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},
