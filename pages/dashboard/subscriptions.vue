@@ -2,7 +2,7 @@
 import { useAuthStore } from "~/stores/auth-store";
 
 definePageMeta({
-	layout: "dashboard-nav",
+	layout: "dashboard-layout",
 });
 
 const authStore = useAuthStore();
