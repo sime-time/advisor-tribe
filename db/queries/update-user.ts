@@ -7,5 +7,7 @@ export async function updateUser(userData: UserUpdate) {
 	return await db.update(user).set({
 		name: userData.name,
 		linkName: userData.linkName,
+		grantId: userData.grantId,
+		grantEmail: userData.grantEmail,
 	}).where(eq(user.id, userData.id));
 }

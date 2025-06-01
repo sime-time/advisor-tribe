@@ -7,7 +7,11 @@ const authStore = useAuthStore(); // for user's id
 const OnboardSchema = z.object({
 	firstName: z.string().min(2, "Your first name is required"),
 	lastName: z.string().min(2, "Your last name is required"),
-	linkName: z.string().min(2, "Provide a user name for your link"),
+	linkName: z
+		.string()
+		.min(3, "Link name must have at least 3 characters")
+		.max(150)
+		.regex(/^[a-z0-9-]+$/i, "Link name can only contain letters, numbers, and - (dash)"),
 });
 type OnboardSchema = z.infer<typeof OnboardSchema>;
 
@@ -73,7 +77,7 @@ async function onSubmit() {
 </script>
 
 <template>
-	<div class="h-screen w-screen flex justify-center items-start px-1">
+	<div class="h-screen flex justify-center items-start px-1">
 		<UCard class="mt-20">
 			<template #header>
 				<h1 class="text-3xl font-bold">
@@ -101,7 +105,13 @@ async function onSubmit() {
 						<UInput v-model="formState.linkName" class="flex-grow" :placeholder="`${formState.firstName}-${formState.lastName}`" />
 					</UButtonGroup>
 				</UFormField>
-				<UButton type="submit" size="lg" class="flex justify-center mt-2">
+				<UButton
+					type="submit"
+					size="lg"
+					:loading="isUploading"
+					:disabled="isUploading"
+					class="flex justify-center mt-2"
+				>
 					Continue
 				</UButton>
 			</UForm>

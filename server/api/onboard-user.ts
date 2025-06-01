@@ -4,7 +4,11 @@ import { updateUser } from "~/db/queries/update-user";
 const UserSchema = z.object({
 	id: z.number(),
 	name: z.string().min(2, "Full name is required"),
-	linkName: z.string().min(1, "Link name is required"),
+	linkName: z
+		.string()
+		.min(3, "Link name must have at least 3 characters")
+		.max(150)
+		.regex(/^[a-z0-9-]+$/i, "Link name can only contain letters, numbers, and -"),
 });
 
 export default defineEventHandler(async (event) => {

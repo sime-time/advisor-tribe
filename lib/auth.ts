@@ -41,6 +41,14 @@ export const auth = betterAuth({
 				type: "string",
 				required: false,
 			},
+			grantId: {
+				type: "string",
+				required: false,
+			},
+			grantEmail: {
+				type: "string",
+				required: false,
+			},
 		},
 	},
 });

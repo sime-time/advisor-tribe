@@ -28,8 +28,8 @@ onMounted(() => {
 </script>
 
 <template>
-	<main class="p-6">
-		<h1 class="text-3xl font-bold">
+	<div>
+		<h1>
 			My Current Plans
 		</h1>
 		<div v-if="plans" class="container grid grid-cols-1 lg:grid-cols-3 mx-auto gap-7 md:py-8">
@@ -39,11 +39,11 @@ onMounted(() => {
 				</template>
 			</template>
 		</div>
-		<div v-if="advisorId !== 0" class="max-w-lg">
-			<h2 class="text-3xl font-bold mb-6">
+		<div v-if="advisorId !== 0" class="w-sm">
+			<h2>
 				Create New Plan
 			</h2>
 			<AdvisorCreatePlan :advisor-id="advisorId" />
 		</div>
-	</main>
+	</div>
 </template>

@@ -9,6 +9,9 @@ const EnvSchema = z.object({
 	GOOGLE_CLIENT_SECRET: z.string(),
 	MICROSOFT_CLIENT_ID: z.string(),
 	MICROSOFT_CLIENT_SECRET: z.string(),
+	NYLAS_API_KEY: z.string(),
+	NYLAS_API_URI: z.string(),
+	NYLAS_CLIENT_ID: z.string(),
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;

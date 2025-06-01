@@ -15,7 +15,6 @@ const showFullBio = ref(false);
 				:src="advisor.image || ''"
 				alt="advisor profile image"
 				width="300"
-				height="300"
 				class="rounded-xl"
 			/>
 

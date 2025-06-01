@@ -9,6 +9,8 @@ export const user = pgTable("user", {
 	role: text("role"),
 	linkName: text("link_name").unique(),
 	timeZone: text("time_zone"),
+	grantId: text("grant_id"),
+	grantEmail: text("grant_email"),
 	createdAt: timestamp("created_at").defaultNow().notNull(),
 	updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

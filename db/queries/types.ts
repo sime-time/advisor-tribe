@@ -71,6 +71,8 @@ export interface UserUpdate {
 	role?: string | null;
 	linkName?: string | null;
 	timeZone?: string | null;
+	grantId?: string | null;
+	grantEmail?: string | null;
 	createdAt?: Date;
 	updatedAt?: Date;
 }
