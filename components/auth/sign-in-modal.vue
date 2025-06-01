@@ -1,7 +1,7 @@
 <template>
 	<UModal
-		title="Advisor Tribe"
-		description="Select which account calendar you want to use."
+		title="AdvisorTribe"
+		description="Select which account's calendar you want to use."
 	>
 		<!-- This slot is where the button should be -->
 		<slot />

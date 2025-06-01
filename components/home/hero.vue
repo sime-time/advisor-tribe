@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { motion } from "motion-v";
+</script>
+
 <template>
 	<section class="overflow-x-hidden overflow-y-hidden relative">
 		<!-- Background elements -->
@@ -13,7 +17,12 @@
 		<div
 			class="px-4 py-28 mx-auto w-full max-w-[1400px] max-md:max-w-none max-sm:py-20"
 		>
-			<div class="mx-auto max-w-screen-md text-center">
+			<motion.div
+				:initial="{ opacity: 0, y: 40 }"
+				:animate="{ opacity: 1, y: 0 }"
+				:transition="{ duration: 0.8, ease: 'easeOut' }"
+				class="mx-auto max-w-screen-md text-center"
+			>
 				<h1
 					class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-violet-600 to-blue-500 bg-clip-text text-transparent"
 				>
@@ -36,7 +45,7 @@
 						Find Advisors
 					</UButton>
 				</div>
-			</div>
+			</motion.div>
 		</div>
 	</section>
 </template>
