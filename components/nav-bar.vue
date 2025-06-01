@@ -101,6 +101,7 @@ const menuOpen = ref(false);
 							size="lg"
 							class="justify-center font-medium text-lg"
 							variant="outline"
+							aria-label="sign out"
 							:loading="authStore.loading"
 							:disabled="authStore.loading"
 							@click="authStore.signOut"
