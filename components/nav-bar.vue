@@ -9,9 +9,7 @@ const menuOpen = ref(false);
 
 <template>
 	<nav class="sticky top-0 z-50 border-b border-solid backdrop-blur-sm bg-white bg-opacity-80 border-b-slate-200">
-		<div
-			class="flex justify-between items-center px-4 py-3 mx-auto w-full max-w-[1400px] max-md:max-w-none"
-		>
+		<div class="flex justify-between items-center px-4 py-3 mx-auto w-full max-w-[1400px] max-md:max-w-none">
 			<NuxtLink
 				to="/"
 				class="flex gap-2 items-center cursor-pointer"
@@ -47,7 +45,8 @@ const menuOpen = ref(false);
 				</div>
 			</div>
 
-			<button class="md:hidden" @click="() => (menuOpen = !menuOpen)">
+			<!-- Toggle Mobile Menu -->
+			<button aria-label="toggle navigation menu" class="md:hidden" @click="() => (menuOpen = !menuOpen)">
 				<div v-if="menuOpen" class="flex items-center">
 					<UIcon name="lucide:x" size="1.7rem" />
 				</div>
@@ -57,6 +56,7 @@ const menuOpen = ref(false);
 			</button>
 		</div>
 
+		<!-- Mobile Menu -->
 		<motion.div
 			v-if="menuOpen"
 			:initial="{ height: 0, opacity: 0, transform: 'translateY(-10px)' }"

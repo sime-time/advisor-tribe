@@ -10,7 +10,9 @@
 				</p>
 			</template>
 
-			<div class="grid gap-y-5" />
+			<div class="grid gap-y-5">
+				ayo
+			</div>
 		</UCard>
 	</div>
 </template>
