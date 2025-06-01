@@ -10,20 +10,15 @@ const showFullBio = ref(false);
 
 <template>
 	<UCard class="h-fit">
-		<div class="flex flex-col md:flex-row gap-6">
-			<UCard variant="soft" class="flex-1 flex flex-col h-fit">
-				<div class="flex justify-center mb-5 ">
-					<UAvatar :src="advisor.image || ''" size="3xl" />
-				</div>
-				<div class="flex gap-4 w-full">
-					<UButton icon="i-lucide-message-square" size="lg" color="neutral" variant="outline" class="flex-1 justify-center">
-						Message
-					</UButton>
-					<UButton icon="i-lucide-calendar" size="lg" color="neutral" class="flex-1 justify-center">
-						Schedule
-					</UButton>
-				</div>
-			</UCard>
+		<div class="flex flex-col md:flex-row gap-6 items-center">
+			<NuxtImg
+				:src="advisor.image || ''"
+				alt="advisor profile image"
+				width="300"
+				height="300"
+				class="rounded-xl"
+			/>
+
 			<div class="container flex-4 flex flex-col gap-5 ">
 				<UBadge color="primary" variant="soft" class="w-fit" size="xl">
 					{{ advisor.title }}

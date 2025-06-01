@@ -9,8 +9,8 @@ export const user = pgTable("user", {
 	role: text("role"),
 	linkName: text("link_name").unique(),
 	timeZone: text("time_zone"),
-	createdAt: timestamp("created_at").notNull(),
-	updatedAt: timestamp("updated_at").notNull(),
+	createdAt: timestamp("created_at").defaultNow().notNull(),
+	updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export const session = pgTable("session", {

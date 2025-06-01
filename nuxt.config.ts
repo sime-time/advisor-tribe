@@ -6,13 +6,7 @@ export default defineNuxtConfig({
 	compatibilityDate: "2024-11-01",
 	devtools: { enabled: true },
 	css: ["~/assets/css/main.css"],
-	modules: [
-		"@nuxt/eslint",
-		"@nuxt/ui",
-		"@pinia/nuxt",
-		"motion-v/nuxt",
-		"nuxt-calendly",
-	],
+	modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/image", "@pinia/nuxt", "motion-v/nuxt"],
 	app: {
 		head: {
 			title: "Advisor Tribe",

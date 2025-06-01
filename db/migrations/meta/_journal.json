@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1748794029472,
+      "tag": "0000_rare_bishop",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1748794062260,
+      "tag": "0001_seed_categories",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1748794073724,
+      "tag": "0002_seed_advisors",
+      "breakpoints": true
+    }
+  ]
+}
