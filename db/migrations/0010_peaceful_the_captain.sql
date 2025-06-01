@@ -1,1 +1,0 @@
-ALTER TABLE "advisor" ADD CONSTRAINT "advisor_user_id_unique" UNIQUE("user_id");

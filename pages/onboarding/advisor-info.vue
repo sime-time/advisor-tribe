@@ -10,7 +10,6 @@ const OnboardSchema = z.object({
 	city: z.string().min(2, "You need to input your city"),
 	state: z.string().min(2, "You need to input a state"),
 	country: z.string().min(2, "You need to input your country"),
-	postalCode: z.string().min(4, "You must provide your postal code"),
 });
 
 type OnboardSchema = z.infer<typeof OnboardSchema>;
@@ -21,7 +20,6 @@ const onboardForm = reactive({
 	city: "",
 	state: "",
 	country: "",
-	postalCode: "",
 });
 
 const formError = ref("");
@@ -146,16 +144,6 @@ async function onSubmit() {
 								icon="i-lucide-globe"
 								variant="outline"
 								placeholder="Country"
-								class="w-full"
-								size="lg"
-								:disabled="isUploading"
-							/>
-						</UFormField>
-						<UFormField label="Postal Code" name="postalCode">
-							<UInput
-								v-model="onboardForm.postalCode"
-								variant="outline"
-								placeholder="Postal Code"
 								class="w-full"
 								size="lg"
 								:disabled="isUploading"

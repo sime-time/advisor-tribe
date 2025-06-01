@@ -7,16 +7,17 @@ import { advisor, advisorCategory, category, user } from "../schema/index";
 export async function getAllAdvisors() {
 	return await db.select({
 		id: advisor.id,
-		userId: user.id,
-		name: user.name,
-		email: user.email,
-		image: user.image,
-		prefix: advisor.prefix,
 		title: advisor.title,
 		bio: advisor.bio,
 		city: advisor.city,
 		state: advisor.state,
 		country: advisor.country,
+		userId: user.id,
+		name: user.name,
+		email: user.email,
+		image: user.image,
+		linkName: user.linkName,
+		timeZone: user.timeZone,
 	})
 		.from(advisor)
 		.innerJoin(user, eq(user.id, advisor.userId));
@@ -27,16 +28,17 @@ export async function getAllAdvisors() {
 export async function getSingleAdvisor(advisorId: number) {
 	const result = await db.select({
 		id: advisor.id,
-		userId: user.id,
-		name: user.name,
-		email: user.email,
-		image: user.image,
-		prefix: advisor.prefix,
 		title: advisor.title,
 		bio: advisor.bio,
 		city: advisor.city,
 		state: advisor.state,
 		country: advisor.country,
+		userId: user.id,
+		name: user.name,
+		email: user.email,
+		image: user.image,
+		linkName: user.linkName,
+		timeZone: user.timeZone,
 	})
 		.from(advisor)
 		.where(eq(advisor.id, advisorId))

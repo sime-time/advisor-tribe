@@ -33,7 +33,11 @@ export const auth = betterAuth({
 				type: "string",
 				required: false,
 			},
-			phone: {
+			linkName: {
+				type: "string",
+				required: false,
+			},
+			timeZone: {
 				type: "string",
 				required: false,
 			},

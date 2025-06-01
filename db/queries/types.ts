@@ -8,17 +8,27 @@ export interface AdvisorCategory {
 
 export interface AdvisorUser {
 	id: number;
+	title: string;
+	bio: string;
+	city: string;
+	state: string;
+	country: string;
 	userId: number;
 	name: string;
 	email: string;
 	image: string | null;
-	prefix: string | null;
+	linkName: string | null;
+	timeZone: string | null;
+	categories: AdvisorCategory[];
+}
+
+export interface NewAdvisor {
+	userId: number;
 	title: string;
 	bio: string;
-	city: string | null;
-	state: string | null;
+	city: string;
+	state: string;
 	country: string;
-	categories: AdvisorCategory[];
 }
 
 export interface AdvisorPlan {
@@ -44,21 +54,9 @@ export interface NewPlanPricing {
 	frequency: string;
 }
 
-export interface NewAdvisor {
-	userId: number;
-	prefix?: string;
-	title: string;
-	bio: string;
-	city: string;
-	state: string;
-	country: string;
-	postalCode: string;
-}
-
 export interface DaySchedule {
 	advisorId: number;
 	active: boolean;
-	timezone: string;
 	weekDay: string;
 	startTime: number;
 	endTime: number;
