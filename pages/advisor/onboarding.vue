@@ -55,7 +55,7 @@ async function onSubmit() {
 			color: "success",
 		});
 
-		return await router.push("/advisor/available");
+		return await router.push("/dashboard");
 	}
 	catch (err: any) {
 		console.error("Onboarding Error", err);

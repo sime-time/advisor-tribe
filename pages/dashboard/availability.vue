@@ -5,7 +5,5 @@ definePageMeta({
 </script>
 
 <template>
-	<main class="w-full flex justify-center items-center p-4 bg-white min-h-[754px]">
-		<AdvisorSetAvailability />
-	</main>
+	<h1>My Availability</h1>
 </template>
