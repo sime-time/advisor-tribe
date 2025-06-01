@@ -11,13 +11,7 @@ const currentYear = new Date().getFullYear();
 						to="/"
 						class="flex gap-2 items-center mb-4 cursor-pointer"
 					>
-						<div
-							class="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer bg-[linear-gradient(to_right,rgb(105,65,198),rgb(59,130,246))]"
-						>
-							<span
-								class="font-bold text-white cursor-pointer outline-white decoration-white"
-							>AT</span>
-						</div>
+						<img src="/logo.webp" alt="logo" height="50" width="50">
 						<span class="text-xl font-bold leading-7 cursor-pointer">Advisor Tribe</span>
 					</NuxtLink>
 					<p

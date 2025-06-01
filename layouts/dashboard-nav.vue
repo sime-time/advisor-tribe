@@ -1,64 +1,28 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from "@nuxt/ui";
-import { useAuthStore } from "~/stores/auth-store";
-
-const authStore = useAuthStore();
-const route = useRoute();
-
-const items = computed<NavigationMenuItem[]>(() => [
-	{
-		label: "My Tribe",
-		icon: "i-lucide-users-round",
-		to: "/dashboard",
-		active: route.path === "/dashboard",
-	},
-	{
-		label: "Meetings",
-		icon: "i-lucide-calendar",
-		to: "/dashboard/meetings",
-		active: route.path === "/dashboard/meetings",
-	},
-	{
-		label: "Availability",
-		icon: "i-lucide-calendar",
-		to: "/dashboard/availability",
-		active: route.path === "/dashboard/availability",
-	},
-	{
-		label: "Subscriptions",
-		icon: "i-lucide-briefcase-business",
-		to: "/dashboard/subscriptions",
-		active: route.path === "/dashboard/subscriptions",
-	},
-	{
-		label: "Settings",
-		icon: "i-lucide-settings",
-		to: "/dashboard/settings",
-		active: route.path === "/dashboard/settings",
-	},
-]);
+import Logo from "~/public/logo.webp";
 </script>
 
 <template>
 	<div class="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-		<div class="hidden md:block border-r bg-neutral-400/40">
+		<div class="hidden md:block border-r border-neutral-300 bg-neutral-100/80">
 			<div class="flex h-full max-h-screen flex-col gap-2">
-				<div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-					<NuxtLink to="/" />
+				<div class="flex h-14 items-center border-b border-neutral-300 px-4 lg:h-[60px] lg:px-6">
+					<NuxtLink to="/" class="flex items-center gap-2">
+						<img :src="Logo" alt="logo" class="size-10" height="100" width="100">
+						<p class="text-xl font-bold">
+							Advisor Tribe
+						</p>
+					</NuxtLink>
+				</div>
+
+				<div class="flex-1">
+					<nav class="grid items-start px-2 lg:px-4">
+						<DashboardLinks />
+					</nav>
 				</div>
 			</div>
-			<UButton
-				icon="i-lucide-log-out"
-				class="w-full justify-center"
-				variant="outline"
-				color="error"
-				:loading="authStore.loading"
-				:disabled="authStore.loading"
-				@click="authStore.signOut"
-			>
-				Log out
-			</UButton>
 		</div>
+
 		<slot />
 	</div>
 </template>

@@ -11,14 +11,13 @@ export default defineEventHandler(async (event) => {
 	}
 
 	if (event.path.startsWith("/advisor/onboarding")
-		|| event.path.startsWith("/advisor/onboarding")
 		|| event.path.startsWith("/advisor/available")
 	) {
 		const session = await auth.api.getSession({
 			headers: event.headers,
 		});
 		if (!session) {
-			await sendRedirect(event, "/sign-up", 302);
+			await sendRedirect(event, "/", 302);
 		}
 	}
 });
