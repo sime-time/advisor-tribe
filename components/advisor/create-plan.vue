@@ -88,19 +88,23 @@ async function onSubmit() {
 
 <template>
 	<UCard>
+		<template #header>
+			<h1 class="text-3xl font-bold">
+				Create New Plan
+			</h1>
+		</template>
 		<UForm :state="planState" :schema="PlanSchema" class="space-y-3" @submit.prevent="onSubmit">
 			<UFormField label="Plan Name">
-				<UInput v-model="planState.title" placeholder="Name of your offer" class="w-full" />
+				<UInput v-model="planState.title" placeholder="Name of your offer" />
 			</UFormField>
 			<UFormField label="Description">
-				<UTextarea v-model="planState.description" :rows="3" class="w-full" placeholder="Enter a description of what you're offering" />
+				<UTextarea v-model="planState.description" placeholder="Enter a description of what you're offering" />
 			</UFormField>
 			<UFormField label="Offer list">
-				<div class="flex flex-col gap-2">
+				<div class="space-y-2">
 					<div v-for="(_, index) in planState.features" :key="index">
 						<UInput
 							v-model="planState.features[index]"
-							class="w-full"
 							placeholder="Example: 2 calls per month"
 						/>
 					</div>
@@ -110,7 +114,7 @@ async function onSubmit() {
 					</UButton>
 				</div>
 			</UFormField>
-			<UFormField label="Monthly Price" help="The amount a client will pay you per month">
+			<UFormField label="Monthly Price">
 				<UInputNumber
 					v-model="planState.pricing[0].amount"
 					:step="1"
@@ -123,7 +127,7 @@ async function onSubmit() {
 				/>
 			</UFormField>
 
-			<UFormField label="Yearly Price" help="The amount a client will pay you per year">
+			<UFormField label="Yearly Price">
 				<UInputNumber
 					v-model="planState.pricing[1].amount"
 					:step="1"
@@ -135,7 +139,7 @@ async function onSubmit() {
 					}"
 				/>
 			</UFormField>
-			<UButton type="submit" size="lg" class="w-full justify-center">
+			<UButton type="submit" size="lg">
 				Create New Plan
 			</UButton>
 		</UForm>

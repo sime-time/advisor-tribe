@@ -5,29 +5,22 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1748798043071,
-      "tag": "0000_tan_doctor_doom",
+      "when": 1748880469377,
+      "tag": "0000_common_punisher",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1748798057888,
+      "when": 1748880550299,
       "tag": "0001_seed_categories",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "7",
-      "when": 1748798067171,
+      "when": 1748880558570,
       "tag": "0002_seed_advisors",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1748806143702,
-      "tag": "0003_soft_frog_thor",
       "breakpoints": true
     }
   ]

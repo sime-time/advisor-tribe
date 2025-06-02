@@ -76,3 +76,13 @@ export interface UserUpdate {
 	createdAt?: Date;
 	updatedAt?: Date;
 }
+
+export enum Day {
+	Sunday,
+	Monday,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday,
+}

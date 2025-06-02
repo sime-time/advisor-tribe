@@ -1,5 +1,5 @@
 {
-  "id": "e2ba5bcc-49d8-427b-90c6-f6e3bd5f7d60",
+  "id": "08b7e23a-9f32-476b-98e5-8e4497a6517d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -439,6 +439,18 @@
           "primaryKey": false,
           "notNull": false
         },
+        "grant_id": {
+          "name": "grant_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "grant_email": {
+          "name": "grant_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -698,15 +710,15 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
+        "week_day": {
+          "name": "week_day",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "week_day": {
-          "name": "week_day",
-          "type": "text",
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -721,6 +733,13 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
         },
         "created_at": {
           "name": "created_at",
@@ -764,6 +783,10 @@
         "end_check": {
           "name": "end_check",
           "value": "\"availability\".\"end_time\" >= 0 AND \"availability\".\"end_time\" <= 2400"
+        },
+        "day_check": {
+          "name": "day_check",
+          "value": "\"availability\".\"week_day\" >= 0 AND \"availability\".\"week_day\" <= 6"
         }
       },
       "isRLSEnabled": false

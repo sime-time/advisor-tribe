@@ -62,6 +62,8 @@ CREATE TABLE "user" (
 	"role" text,
 	"link_name" text,
 	"time_zone" text,
+	"grant_id" text,
+	"grant_email" text,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "user_email_unique" UNIQUE("email"),
@@ -98,14 +100,16 @@ CREATE TABLE "group_member" (
 --> statement-breakpoint
 CREATE TABLE "availability" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"week_day" integer NOT NULL,
 	"user_id" integer NOT NULL,
-	"week_day" text NOT NULL,
 	"start_time" integer NOT NULL,
 	"end_time" integer NOT NULL,
+	"is_active" boolean DEFAULT true NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "start_check" CHECK ("availability"."start_time" >= 0 AND "availability"."start_time" <= 2400),
-	CONSTRAINT "end_check" CHECK ("availability"."end_time" >= 0 AND "availability"."end_time" <= 2400)
+	CONSTRAINT "end_check" CHECK ("availability"."end_time" >= 0 AND "availability"."end_time" <= 2400),
+	CONSTRAINT "day_check" CHECK ("availability"."week_day" >= 0 AND "availability"."week_day" <= 6)
 );
 --> statement-breakpoint
 CREATE TABLE "plan" (

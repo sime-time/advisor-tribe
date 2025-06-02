@@ -39,8 +39,15 @@ const links = computed<DashboardNavItem[]>(() => [
 		href: "/dashboard/subscriptions",
 		active: route.path === "/dashboard/subscriptions",
 	},
+	// {
+	// 	id: 4,
+	// 	label: "Plans",
+	// 	icon: "i-lucide-briefcase",
+	// 	href: "/dashboard/plans",
+	// 	active: route.path === "/dashboard/plans",
+	// },
 	{
-		id: 4,
+		id: 5,
 		label: "Settings",
 		icon: "i-lucide-settings",
 		href: "/dashboard/settings",

@@ -43,17 +43,17 @@ async function onSubmit() {
 		formData.append("linkName", validForm.linkName);
 
 		// send FormData payload to api endpoint
-		await $fetch("/api/onboard-user", {
+		await $fetch("/api/user/onboard", {
 			method: "POST",
 			body: formData,
 		});
 
 		toast.add({
-			title: "Onboarding complete!",
+			title: "Account created!",
 			color: "success",
 		});
 
-		return await router.push("/dashboard");
+		return await router.push("/onboarding/grant-id");
 	}
 	catch (err: any) {
 		console.error("Onboarding Error", err);
