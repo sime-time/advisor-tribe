@@ -25,6 +25,16 @@ export const hourStrings = [
 	"11:00 PM",
 ];
 
+export enum Day {
+	Sunday,
+	Monday,
+	Tuesday,
+	Wednesday,
+	Thursday,
+	Friday,
+	Saturday,
+}
+
 // store military time as integers in the database
 export const hourStringToNumber: Map<string, number> = new Map([
 	[hourStrings[0], 0],
