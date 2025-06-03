@@ -3,6 +3,7 @@ import { hourStrings, timeZones } from "~/lib/time"; // Assuming these exist in 
 
 // Define the initial state for the weekly schedule
 const timezone = ref(timeZones[0]); // Default to the first timezone
+
 const weekSchedule = reactive(
 	[
 		"Monday",

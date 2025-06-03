@@ -1,109 +1,83 @@
 <script setup lang="ts">
-import { z } from "zod"; // Import zod
-import { hourStrings, timeZones } from "~/lib/time"; // Assuming these exist in your lib/time.ts
-import { useAuthStore } from "~/stores/auth-store"; // Import auth store
+import { z, ZodError } from "zod/v4";
+import { useAuthStore } from "~/stores/auth-store";
 
-const authStore = useAuthStore(); // Use auth store
-const toast = useToast(); // Use toast composable
+const authStore = useAuthStore();
 
-// Define Zod schemas for validation
-const DaySchema = z.object({
-	name: z.string(),
-	active: z.boolean(),
-	start: z.string(),
-	end: z.string(),
+const SettingsSchema = z.object({
+	name: z.string().min(2, "Name must have at least 2 characters").optional(),
+	email: z.email({ error: "Must submit a valid email" }).optional(),
+	linkName: z
+		.string()
+		.min(3, "Link name must have at least 3 characters")
+		.regex(/^[a-z0-9-]+$/i, "Link name can only contain letters, numbers, and - (dash)")
+		.optional(),
+});
+type SettingsSchema = z.infer<typeof SettingsSchema>;
+
+const formState = reactive({
+	name: "",
+	email: "",
+	linkName: "",
 });
 
-const WeekScheduleSchema = z.array(DaySchema);
-type WeekSchedule = z.infer<typeof WeekScheduleSchema>;
+const allFieldsEmpty = computed(() => {
+	if (!formState.name && !formState.email && !formState.linkName) {
+		return true;
+	}
+	return false;
+});
 
-// Define the initial state for the weekly schedule
-const timezone = ref(timeZones[0]); // Default to the first timezone
-const weekSchedule = reactive(
-	[
-		"Monday",
-		"Tuesday",
-		"Wednesday",
-		"Thursday",
-		"Friday",
-		"Saturday",
-		"Sunday",
-	].map(day => ({
-		name: day,
-		active: true, // Default to active
-		start: hourStrings[9], // Default start time (e.g., 9:00 AM)
-		end: hourStrings[17], // Default end time (e.g., 5:00 PM)
-	})),
-);
+const isLoading = ref(false);
+const toast = useToast();
 
-const isSaving = ref(false); // Loading state for saving
-
-// Handle form submission
-async function handleSubmit() {
-	isSaving.value = true; // Set loading state
-
+async function onSubmit() {
+	isLoading.value = true;
 	try {
-		// Get the current user ID
-		const userId = authStore.user?.id;
-		if (!userId) {
-			throw new Error("User not authenticated.");
+		if (allFieldsEmpty.value) {
+			throw new Error("All fields are empty. Nothing to update.");
 		}
 
-		// Validate the week schedule data
-		const validatedSchedule = WeekScheduleSchema.parse(weekSchedule);
+		// filter out empty values before validation
+		const filledFields = Object.fromEntries(
+			Object.entries(formState).filter(([_, value]) => value !== ""),
+		);
 
-		// Prepare the data to send to the API
-		const dataToSend = {
-			userId,
-			timezone: timezone.value, // Include timezone
-			schedule: validatedSchedule.map(day => ({
-				...day,
-				// Convert time strings to numbers if your backend expects that
-				// This depends on your backend API requirements
-				// start: hourStringToNumber.get(day.start),
-				// end: hourStringToNumber.get(day.end),
-			})),
+		// validate only the non-empty inputs
+		const validForm = SettingsSchema.parse(filledFields);
+
+		// this json body will be sent to the api
+		const body = {
+			...validForm,
+			id: authStore.user?.id,
 		};
 
-		// Send the validated data to the API endpoint
-		await $fetch("/api/advisors/set-availability", {
+		// send FormData payload to api endpoint
+		await $fetch("/api/user/update", {
 			method: "POST",
-			body: dataToSend,
+			body,
 		});
 
-		// Show success toast
 		toast.add({
-			title: "Availability saved!",
-			description: "Your weekly schedule has been updated.",
-			icon: "i-lucide-check-circle",
+			title: "Settings saved!",
 			color: "success",
 		});
 	}
-	catch (error: any) {
-		console.error("Failed to save availability:", error);
+	catch (err: any) {
+		console.error("Settings Form Error", err);
+		const formError = err instanceof ZodError
+			? z.prettifyError(err) || "Invalid input"
+			: err.message || "An error occurred";
 
-		// Determine error message
-		let errorMessage = "An unexpected error occurred.";
-		if (error instanceof z.ZodError) {
-			errorMessage = error.errors[0]?.message || "Invalid form data.";
-		}
-		else if (error.data?.message) {
-			errorMessage = error.data.message; // Assuming API returns error message in data.message
-		}
-		else if (error.message) {
-			errorMessage = error.message;
-		}
-
-		// Show error toast
-		toast.add({
-			title: "Failed to save availability",
-			description: errorMessage,
+		return toast.add({
+			title: "Failed to update settings",
+			description: formError,
 			icon: "i-lucide-triangle-alert",
 			color: "error",
 		});
 	}
 	finally {
-		isSaving.value = false; // Reset loading state
+		isLoading.value = false;
 	}
 }
 </script>
@@ -111,54 +85,32 @@ async function handleSubmit() {
 <template>
 	<UCard>
 		<template #header>
-			<header class="flex flex-col">
-				<h1 class="text-3xl font-bold ">
-					Set your availability
-				</h1>
-				<p class="mt-1 text-base text-neutral-500">
-					Set what time and day users are able to book meetings with you.
-				</p>
-			</header>
+			<h1 class="text-3xl font-bold">
+				Settings
+			</h1>
+			<p class="text-neutral-500 text-base">
+				Manage your account settings
+			</p>
 		</template>
-
-		<UForm :state="{ timezone, weekSchedule }" class="space-y-6" @submit.prevent="handleSubmit">
-			<!-- Timezone -->
-			<UFormField label="Timezone">
-				<USelectMenu v-model="timezone" :items="timeZones" placeholder="Select a timezone" />
+		<form class="space-y-4" @submit.prevent="onSubmit">
+			<UFormField label="Name" name="name">
+				<UInput v-model="formState.name" size="lg" :placeholder="authStore.user?.name" />
+			</UFormField>
+			<UFormField label="Email" name="email">
+				<UInput v-model="formState.email" size="lg" :placeholder="authStore.user?.email" />
+			</UFormField>
+			<UFormField label="Share link" name="linkName">
+				<UButtonGroup size="lg" class="flex">
+					<UButton color="neutral" variant="subtle" as="label" class="cursor-default w-fit text-neutral-500 text-nowrap">
+						https://advisor-tribe.com/
+					</UButton>
+					<UInput v-model="formState.linkName" :placeholder="authStore.user?.linkName" />
+				</UButtonGroup>
 			</UFormField>
 
-			<!-- Weekly schedule -->
-			<div class="space-y-4">
-				<div v-for="(day) in weekSchedule" :key="day.name" class="grid grid-cols-2 md:grid-cols-3 gap-4 items-center min-h-9">
-					<div class="col-span-2 md:col-span-1">
-						<USwitch v-model="day.active" :label="day.name" class="flex items-center" />
-					</div>
-
-					<template v-if="day.active">
-						<USelect
-							v-model="day.start"
-							:items="hourStrings"
-							placeholder="Start time"
-							class=""
-						/>
-						<USelect
-							v-model="day.end"
-							:items="hourStrings"
-							placeholder="End time"
-						/>
-					</template>
-				</div>
-			</div>
-
-			<UButton
-				type="submit"
-				size="lg"
-				class="w-full justify-center"
-				:loading="isSaving"
-				:disabled="isSaving"
-			>
-				Save Availability
+			<UButton type="submit" size="xl" class="mt-1" :loading="isLoading" :disabled="allFieldsEmpty">
+				Save Changes
 			</UButton>
-		</UForm>
+		</form>
 	</UCard>
 </template>

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { createAvailability } from "~/db/queries/create-availability";
 import { updateUser } from "~/db/queries/update-user";
 
 const UserSchema = z.object({
@@ -24,6 +25,10 @@ export default defineEventHandler(async (event) => {
 
 		// Update user with valid onboarding data
 		const data = await updateUser(validUser);
+
+		// Also add default availability to this user
+		await createAvailability(validUser.id);
+
 		return data;
 	}
 	catch (error) {

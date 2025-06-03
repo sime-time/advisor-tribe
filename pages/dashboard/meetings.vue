@@ -5,5 +5,5 @@ definePageMeta({
 </script>
 
 <template>
-	<h1>My Meetings</h1>
+	<DashboardMeetingForm />
 </template>

@@ -5,5 +5,5 @@ definePageMeta({
 </script>
 
 <template>
-	<DashboardAvailability />
+	<DashboardAvailabilityForm />
 </template>
