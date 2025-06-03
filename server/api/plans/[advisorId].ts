@@ -1,5 +1,5 @@
 import type { AdvisorPlan } from "~/db/queries/types";
-import { getAdvisorPlans } from "~/db/queries/get-plans";
+import { getAdvisorPlans } from "~/db/queries/read/get-plans";
 
 export default defineEventHandler(async (event) => {
 	try {

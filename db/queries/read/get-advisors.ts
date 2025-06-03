@@ -1,7 +1,7 @@
-import type { AdvisorCategory, AdvisorUser } from "./types";
+import type { AdvisorCategory, AdvisorUser } from "../types";
 import { eq } from "drizzle-orm";
-import db from "../index";
-import { advisor, advisorCategory, category, user } from "../schema/index";
+import db from "../../index";
+import { advisor, advisorCategory, category, user } from "../../schema/index";
 
 // return advisor data with user details
 export async function getAllAdvisors() {

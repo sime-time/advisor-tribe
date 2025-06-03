@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { updateUser } from "~/db/queries/update-user";
+import { updateUser } from "~/db/queries/update/update-user";
 
 const UserSchema = z.object({
 	id: z.number(),

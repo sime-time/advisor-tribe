@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { DayAvailability } from "~/db/queries/types";
-import { z, ZodError } from "zod";
+import { ZodError } from "zod/v4";
 import { getDayName, times, timeZones } from "~/lib/time";
 import { useAuthStore } from "~/stores/auth-store";
+import { ScheduleSchema } from "~/validation/schedule-schema";
 
 const authStore = useAuthStore();
 const timeZone = ref("");
@@ -16,22 +17,8 @@ const { data: schedule, pending } = await useFetch<DayAvailability[]>(() => `/ap
 	watch: [() => authStore.user?.id],
 });
 
+console.log("schedule:", schedule.value);
 const weekSchedule = reactive(schedule);
-
-// form validation schema
-const DaySchema = z.object({
-	id: z.number(),
-	weekDay: z.number().min(0).max(6),
-	userId: z.number(),
-	startTime: z.number().min(0).max(2400),
-	endTime: z.number().min(0).max(2400),
-	isActive: z.boolean(),
-});
-const ScheduleSchema = z.object({
-	timeZone: z.string().min(1, "Must select a time zone"),
-	weekSchedule: z.array(DaySchema),
-});
-type ScheduleSchema = z.infer<typeof ScheduleSchema>;
 
 // handle submission
 const isLoading = ref(false);
@@ -54,13 +41,14 @@ async function onSubmit() {
 
 		toast.add({
 			title: "Availability saved!",
+			description: "It might take a few minutes to show changes.",
 			color: "success",
 		});
 	}
 	catch (err: any) {
 		console.error("Availability Form Error", err);
 		const formError = err instanceof ZodError
-			? err.errors[0]?.message || "Invalid input"
+			? err.issues[0].message || "Invalid input"
 			: err.message || "An error occurred";
 
 		return toast.add({
@@ -104,10 +92,10 @@ async function onSubmit() {
 				<div
 					v-for="day in weekSchedule"
 					:key="day.weekDay"
-					class="grid grid-cols-2 md:grid-cols-3 items-center gap-x-4 gap-y-2 min-h-8"
+					class="grid grid-cols-2 md:grid-cols-3 items-center gap-x-4 gap-y-2 min-h-10"
 				>
 					<div class="col-span-2 md:col-span-1">
-						<USwitch v-model="day.isActive" :label="getDayName(day.weekDay)" />
+						<USwitch v-model="day.isActive" :label="getDayName(day.weekDay)" size="xl" />
 					</div>
 
 					<template v-if="day.isActive">
@@ -115,11 +103,13 @@ async function onSubmit() {
 							v-model="day.startTime"
 							:items="times"
 							placeholder="From Time"
+							size="xl"
 						/>
 						<USelect
 							v-model="day.endTime"
 							:items="times"
 							placeholder="End Time"
+							size="xl"
 						/>
 					</template>
 				</div>

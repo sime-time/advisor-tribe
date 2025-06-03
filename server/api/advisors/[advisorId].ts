@@ -1,5 +1,5 @@
 import type { AdvisorUser } from "~/db/queries/types";
-import { getFullAdvisorData } from "~/db/queries/get-advisors";
+import { getFullAdvisorData } from "~/db/queries/read/get-advisors";
 
 export default defineEventHandler(async (event) => {
 	try {

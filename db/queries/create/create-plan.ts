@@ -1,6 +1,6 @@
-import type { NewPlan } from "./types";
-import db from "../index";
-import { plan, planFeature, planPricing } from "../schema/index";
+import type { NewPlan } from "../types";
+import db from "../../index";
+import { plan, planFeature, planPricing } from "../../schema/index";
 
 export async function createPlan(newPlan: NewPlan) {
 	try {

@@ -1,5 +1,5 @@
 import type { DayAvailability } from "~/db/queries/types";
-import { getAvailability } from "~/db/queries/get-availability";
+import { getAvailability } from "~/db/queries/read/get-availability";
 
 export default defineEventHandler(async (event) => {
 	const userId = Number.parseInt(event.context.params?.userId ?? "");

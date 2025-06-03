@@ -1,7 +1,7 @@
-import type { AdvisorPlan } from "./types";
+import type { AdvisorPlan } from "../types";
 import { eq } from "drizzle-orm";
-import db from "../index";
-import { plan, planFeature, planPricing } from "../schema/index";
+import db from "../../index";
+import { plan, planFeature, planPricing } from "../../schema/index";
 
 // helper function to convert integer prices (lowest monetary unit) into readable strings
 function formatPrice(amount: number) {

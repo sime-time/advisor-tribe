@@ -1,4 +1,4 @@
-import { getAdvisorIdFromUserId } from "~/db/queries/get-advisors";
+import { getAdvisorIdFromUserId } from "~/db/queries/read/get-advisors";
 
 export default defineEventHandler(async (event) => {
 	try {

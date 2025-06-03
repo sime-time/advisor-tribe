@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import db from "../index";
-import { availability } from "../schema/index";
+import db from "../../index";
+import { availability } from "../../schema/index";
 
 export async function getAvailability(userId: number) {
 	const schedule = await db

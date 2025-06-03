@@ -1,6 +1,7 @@
+import { eq } from "drizzle-orm";
 import db from "~/db/index";
-import { availability } from "~/db/schema/index";
-import { Day } from "~/lib/time";
+import { availability, user } from "~/db/schema/index";
+import { Day, timeZones } from "~/lib/time";
 
 export async function createAvailability(userId: number) {
 	// insert all 7 days of the week
@@ -14,6 +15,11 @@ export async function createAvailability(userId: number) {
 			endTime: 1700, // Default end time (5:00 PM)
 			isActive: true, // Default to active
 		}));
+
+	// insert a default timezone for the user
+	await db.update(user).set({
+		timeZone: timeZones[0], // UTC
+	}).where(eq(user.id, userId));
 
 	return await db.insert(availability).values(week);
 }

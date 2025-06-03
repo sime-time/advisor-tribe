@@ -1,4 +1,4 @@
-import type { UserUpdate } from "./types";
+import type { UserUpdate } from "../types";
 import { eq } from "drizzle-orm";
 import db from "~/db/index";
 import { user } from "~/db/schema/index";
@@ -9,5 +9,6 @@ export async function updateUser(userData: UserUpdate) {
 		linkName: userData.linkName,
 		grantId: userData.grantId,
 		grantEmail: userData.grantEmail,
+		timeZone: userData.timeZone,
 	}).where(eq(user.id, userData.id));
 }

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { createAvailability } from "~/db/queries/create-availability";
-import { updateUser } from "~/db/queries/update-user";
+import { createAvailability } from "~/db/queries/create/create-availability";
+import { updateUser } from "~/db/queries/update/update-user";
 
 const UserSchema = z.object({
 	id: z.number(),

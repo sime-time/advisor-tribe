@@ -1,4 +1,4 @@
-import { updateUser } from "~/db/queries/update-user";
+import { updateUser } from "~/db/queries/update/update-user";
 import { auth } from "~/lib/auth";
 import { nylas, nylasConfig } from "~/lib/nylas";
 

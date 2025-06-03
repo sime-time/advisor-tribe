@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createPlan } from "~/db/queries/create-plan";
+import { createPlan } from "~/db/queries/create/create-plan";
 
 const PlanSchema = z.object({
 	advisorId: z.number(),

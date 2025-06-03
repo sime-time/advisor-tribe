@@ -1,7 +1,7 @@
-import type { DaySchedule, NewAdvisor } from "./types";
+import type { DaySchedule, NewAdvisor } from "../types";
 import { eq } from "drizzle-orm";
-import db from "../index";
-import { advisor, availability, user } from "../schema/index";
+import db from "../../index";
+import { advisor, availability, user } from "../../schema/index";
 
 export async function createAdvisor(newAdvisor: NewAdvisor) {
 	// flag user as advisor
