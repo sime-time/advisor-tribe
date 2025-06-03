@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DayAvailability } from "~/db/queries/types";
+import { z, ZodError } from "zod";
 import { getDayName, times, timeZones } from "~/lib/time";
 import { useAuthStore } from "~/stores/auth-store";
 
@@ -16,6 +17,63 @@ const { data: schedule, pending } = await useFetch<DayAvailability[]>(() => `/ap
 });
 
 const weekSchedule = reactive(schedule);
+
+// form validation schema
+const DaySchema = z.object({
+	id: z.number(),
+	weekDay: z.number().min(0).max(6),
+	userId: z.number(),
+	startTime: z.number().min(0).max(2400),
+	endTime: z.number().min(0).max(2400),
+	isActive: z.boolean(),
+});
+const ScheduleSchema = z.object({
+	timeZone: z.string().min(1, "Must select a time zone"),
+	weekSchedule: z.array(DaySchema),
+});
+type ScheduleSchema = z.infer<typeof ScheduleSchema>;
+
+// handle submission
+const isLoading = ref(false);
+const toast = useToast();
+
+async function onSubmit() {
+	isLoading.value = true;
+	try {
+		// this json will be sent to the api
+		const validSchedule = ScheduleSchema.parse({
+			timeZone: timeZone.value,
+			weekSchedule: weekSchedule.value,
+		});
+
+		// send payload to api endpoint
+		await $fetch("/api/availability/update", {
+			method: "POST",
+			body: validSchedule,
+		});
+
+		toast.add({
+			title: "Availability saved!",
+			color: "success",
+		});
+	}
+	catch (err: any) {
+		console.error("Availability Form Error", err);
+		const formError = err instanceof ZodError
+			? err.errors[0]?.message || "Invalid input"
+			: err.message || "An error occurred";
+
+		return toast.add({
+			title: "Failed to update availability",
+			description: formError,
+			icon: "i-lucide-triangle-alert",
+			color: "error",
+		});
+	}
+	finally {
+		isLoading.value = false;
+	}
+}
 </script>
 
 <template>
@@ -36,7 +94,7 @@ const weekSchedule = reactive(schedule);
 		</div>
 
 		<div v-else>
-			<UForm :state="{ timeZone, weekSchedule }" class="flex flex-col gap-y-6">
+			<UForm :state="{ timeZone, weekSchedule }" class="flex flex-col gap-y-6" @submit.prevent="onSubmit">
 				<!-- Timezone -->
 				<UFormField label="Time zone">
 					<USelectMenu v-model="timeZone" size="lg" :items="timeZones" placeholder="Select a time zone" />
@@ -65,7 +123,7 @@ const weekSchedule = reactive(schedule);
 						/>
 					</template>
 				</div>
-				<UButton type="submit" size="xl" block>
+				<UButton type="submit" size="xl" block :loading="isLoading">
 					Save Changes
 				</UButton>
 			</UForm>

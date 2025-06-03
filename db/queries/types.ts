@@ -78,7 +78,7 @@ export interface UserUpdate {
 }
 
 export interface DayAvailability {
-	id?: number;
+	id: number;
 	weekDay: number;
 	userId: number;
 	startTime: number;

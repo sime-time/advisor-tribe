@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { z, ZodError } from "zod/v4";
+import { z, ZodError } from "zod";
 import { useAuthStore } from "~/stores/auth-store";
 
 const authStore = useAuthStore();
 
 const SettingsSchema = z.object({
 	name: z.string().min(2, "Name must have at least 2 characters").optional(),
-	email: z.email({ error: "Must submit a valid email" }).optional(),
+	email: z.string().email({ message: "Must submit a valid email" }).optional(),
 	linkName: z
 		.string()
 		.min(3, "Link name must have at least 3 characters")
@@ -52,7 +52,7 @@ async function onSubmit() {
 			id: authStore.user?.id,
 		};
 
-		// send FormData payload to api endpoint
+		// send payload to api endpoint
 		await $fetch("/api/user/update", {
 			method: "POST",
 			body,
@@ -66,7 +66,7 @@ async function onSubmit() {
 	catch (err: any) {
 		console.error("Settings Form Error", err);
 		const formError = err instanceof ZodError
-			? z.prettifyError(err) || "Invalid input"
+			? err.errors[0]?.message || "Invalid input"
 			: err.message || "An error occurred";
 
 		return toast.add({
