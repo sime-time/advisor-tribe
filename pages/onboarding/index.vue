@@ -6,7 +6,7 @@ const authStore = useAuthStore(); // for user's id
 
 const OnboardSchema = z.object({
 	firstName: z.string().min(2, "Your first name is required"),
-	lastName: z.string().min(2, "Your last name is required"),
+	lastName: z.string().min(1, "Your last name is required"),
 	linkName: z
 		.string()
 		.min(3, "Link name must have at least 3 characters")

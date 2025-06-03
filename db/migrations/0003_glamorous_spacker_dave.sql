@@ -1,0 +1,1 @@
+ALTER TABLE "availability" ADD CONSTRAINT "user_week_day_unique" UNIQUE("user_id","week_day");

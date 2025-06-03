@@ -9,7 +9,7 @@ const { data: advisors } = await useFetch("/api/advisors", {
 	<main class="min-h-screen flex flex-col">
 		<section class="flex-grow">
 			<div class="py-8">
-				<div class="container mx-auto px-4">
+				<div class="container mx-auto pmx-">
 					<h1 class="text-3xl font-bold mb-2">
 						Browse Advisors
 					</h1>

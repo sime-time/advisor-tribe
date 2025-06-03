@@ -26,7 +26,8 @@ export default defineEventHandler(async (event) => {
 		// Update user with valid onboarding data
 		const data = await updateUser(validUser);
 
-		// Also add default availability to this user
+		// Add default availability to this user
+		// Check fails if user already has default availability created
 		await createAvailability(validUser.id);
 
 		return data;
