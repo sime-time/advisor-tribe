@@ -1,3 +1,4 @@
+import type { DayAvailability } from "~/db/queries/types";
 import { getAvailability } from "~/db/queries/get-availability";
 
 export default defineEventHandler(async (event) => {
@@ -14,7 +15,7 @@ export default defineEventHandler(async (event) => {
 			return createError({ status: 404, message: "Availability Not Found" });
 		}
 
-		return data;
+		return data as DayAvailability[];
 	}
 	catch (error) {
 		console.error("Get Availability Error:", error);

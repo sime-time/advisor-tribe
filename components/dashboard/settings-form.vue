@@ -88,7 +88,7 @@ async function onSubmit() {
 			<h1 class="text-3xl font-bold">
 				Settings
 			</h1>
-			<p class="text-neutral-500 text-base">
+			<p class="text-neutral-500 text-base mt-1">
 				Manage your account settings
 			</p>
 		</template>

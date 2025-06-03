@@ -76,3 +76,14 @@ export interface UserUpdate {
 	createdAt?: Date;
 	updatedAt?: Date;
 }
+
+export interface DayAvailability {
+	id?: number;
+	weekDay: number;
+	userId: number;
+	startTime: number;
+	endTime: number;
+	isActive: boolean;
+	createdAt?: Date;
+	updatedAt?: Date;
+}
