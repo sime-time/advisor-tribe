@@ -4,7 +4,9 @@ import { getAvailability } from "~/db/queries/get-availability";
 export default defineEventHandler(async (event) => {
 	const userId = Number.parseInt(event.context.params?.userId ?? "");
 	if (!userId) {
-		return createError({ status: 400, message: "Invalid or missing user id" });
+		const err = "Invalid or missing user id";
+		console.error(err);
+		return createError({ status: 400, message: err });
 	}
 
 	try {
@@ -12,7 +14,9 @@ export default defineEventHandler(async (event) => {
 		const data = await getAvailability(userId);
 
 		if (data.length === 0) {
-			return createError({ status: 404, message: "Availability Not Found" });
+			const err = "Availability Not Found";
+			console.error(err);
+			return createError({ status: 404, message: err });
 		}
 
 		return data as DayAvailability[];
