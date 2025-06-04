@@ -1,9 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-	layout: "dashboard-layout",
+  layout: "dashboard-layout",
 });
 </script>
 
 <template>
-	<DashboardMeetingForm />
+  <DashboardMeetingForm />
 </template>

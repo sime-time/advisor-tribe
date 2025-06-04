@@ -4,11 +4,11 @@ import env from "../lib/env";
 import * as schema from "./schema";
 
 const pool = new Pool({
-	connectionString: env.DATABASE_URL,
+  connectionString: env.DATABASE_URL,
 });
 const db = drizzle({
-	client: pool,
-	schema,
+  client: pool,
+  schema,
 });
 
 export default db;

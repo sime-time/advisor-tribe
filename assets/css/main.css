@@ -1,5 +1,5 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 body {
-	@apply bg-white text-black;
+  @apply bg-white text-black;
 }
