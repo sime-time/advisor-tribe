@@ -2,6 +2,7 @@
 import { z, ZodError } from "zod/v4";
 import { useAuthStore } from "~/stores/auth-store";
 
+const config = useRuntimeConfig();
 const authStore = useAuthStore();
 
 const SettingsSchema = z.object({
@@ -63,9 +64,11 @@ async function onSubmit() {
       description: "It might take a few minutes to show changes.",
       color: "success",
     });
+
+    // refresh the authStore cache
   }
   catch (err: any) {
-    console.error("Settings Form Error", err);
+    console.log("Settings Form Error", err);
     const formError = err instanceof ZodError
       ? err.issues[0].message || "Invalid input"
       : err.message || "An error occurred";
@@ -84,7 +87,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <UCard>
+  <UCard class="w-fit">
     <template #header>
       <h1 class="text-3xl font-bold">
         Settings
@@ -95,15 +98,15 @@ async function onSubmit() {
     </template>
     <form class="space-y-4" @submit.prevent="onSubmit">
       <UFormField label="Name" name="name">
-        <UInput v-model="formState.name" size="lg" :placeholder="authStore.user?.name" />
+        <UInput v-model="formState.name" size="lg" :placeholder="authStore.user?.name" class="flex" />
       </UFormField>
       <UFormField label="Email" name="email">
-        <UInput v-model="formState.email" size="lg" :placeholder="authStore.user?.email" />
+        <UInput v-model="formState.email" size="lg" :placeholder="authStore.user?.email" class="flex" />
       </UFormField>
       <UFormField label="Share link" name="linkName">
         <UButtonGroup size="lg" class="flex">
           <UButton color="neutral" variant="subtle" as="label" class="cursor-default w-fit text-neutral-500 text-nowrap">
-            https://advisor-tribe.com/
+            {{ `${config.public.baseURL}/` }}
           </UButton>
           <UInput v-model="formState.linkName" :placeholder="authStore.user?.linkName" />
         </UButtonGroup>

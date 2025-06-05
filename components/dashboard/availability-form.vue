@@ -19,8 +19,6 @@ const { data: schedule, pending } = await useFetch<DayAvailability[]>(
     watch: [() => authStore.user?.id],
   },
 );
-
-console.log("schedule:", schedule.value);
 const weekSchedule = reactive(schedule);
 
 // handle submission
@@ -44,7 +42,6 @@ async function onSubmit() {
 
     toast.add({
       title: "Availability saved!",
-      description: "It might take a few minutes to show changes.",
       color: "success",
     });
 

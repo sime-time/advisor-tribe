@@ -1,0 +1,1 @@
+ALTER TABLE "event_type" RENAME COLUMN "url" TO "slug";

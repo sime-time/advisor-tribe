@@ -2,6 +2,7 @@
 import { z } from "zod";
 import { useAuthStore } from "~/stores/auth-store";
 
+const config = useRuntimeConfig();
 const authStore = useAuthStore(); // for user's id
 
 const OnboardSchema = z.object({
@@ -100,7 +101,7 @@ async function onSubmit() {
         <UFormField label="Share link" name="linkName">
           <UButtonGroup size="lg" class="flex">
             <UButton color="neutral" variant="subtle" as="label" class="cursor-default w-fit text-neutral-500 text-nowrap">
-              https://advisor-tribe.com/
+              {{ `${config.public.baseURL}/` }}
             </UButton>
             <UInput v-model="formState.linkName" class="flex-grow" :placeholder="`${formState.firstName}-${formState.lastName}`" />
           </UButtonGroup>

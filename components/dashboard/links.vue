@@ -13,7 +13,7 @@ const route = useRoute();
 const links = computed<DashboardNavItem[]>(() => [
   {
     id: 0,
-    label: "My Tribe",
+    label: "Advisors",
     icon: "i-lucide-users-round",
     href: "/dashboard",
     active: route.path === "/dashboard",
@@ -27,27 +27,27 @@ const links = computed<DashboardNavItem[]>(() => [
   },
   {
     id: 2,
+    label: "Event Types",
+    icon: "i-lucide-calendar-cog",
+    href: "/dashboard/event-types",
+    active: route.path === "/dashboard/event-types",
+  },
+  {
+    id: 3,
     label: "Availability",
     icon: "i-lucide-calendar-clock",
     href: "/dashboard/availability",
     active: route.path === "/dashboard/availability",
   },
-  {
-    id: 3,
-    label: "Subscriptions",
-    icon: "i-lucide-calendar-sync",
-    href: "/dashboard/subscriptions",
-    active: route.path === "/dashboard/subscriptions",
-  },
   // {
-  // id: 4,
+  // id: 3,
   // label: "Plans",
   // icon: "i-lucide-briefcase",
   // href: "/dashboard/plans",
   // active: route.path === "/dashboard/plans",
   // },
   {
-    id: 5,
+    id: 4,
     label: "Settings",
     icon: "i-lucide-settings",
     href: "/dashboard/settings",

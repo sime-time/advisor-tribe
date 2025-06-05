@@ -12,6 +12,7 @@ const EnvSchema = z.object({
   NYLAS_API_KEY: z.string(),
   NYLAS_API_URI: z.string(),
   NYLAS_CLIENT_ID: z.string(),
+  NUXT_PUBLIC_BASE_URL: z.string(),
 });
 
 export type EnvSchema = z.infer<typeof EnvSchema>;

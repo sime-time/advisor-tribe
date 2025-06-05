@@ -33,12 +33,12 @@ export default defineEventHandler(async (event) => {
     console.error("Update user error:", error);
     // Return any validation error
     if (error instanceof z.ZodError) {
-      throw createError({
+      return createError({
         statusCode: 400,
         message: error.message,
       });
     }
-    throw createError({
+    return createError({
       statusCode: 500,
       message: "Failed to update user",
     });

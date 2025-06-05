@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { check, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, check, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { advisor } from "./index";
 
 export const plan = pgTable("plan", {
@@ -7,6 +7,7 @@ export const plan = pgTable("plan", {
   advisorId: integer("advisor_id").notNull().references(() => advisor.id),
   title: text("title").notNull(),
   description: text("description"),
+  isActive: boolean(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

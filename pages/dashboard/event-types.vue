@@ -5,5 +5,5 @@ definePageMeta({
 </script>
 
 <template>
-  <h1>My Subscriptions</h1>
+  <DashboardEventTypeList />
 </template>
