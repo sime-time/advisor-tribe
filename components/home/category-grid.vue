@@ -78,7 +78,7 @@ const categories = ref<Category[]>([
 
 <template>
   <section class="py-16">
-    <div lass="px-4 mx-auto w-full max-w-[1400px] max-md:max-w-none">
+    <div class="px-4 mx-auto w-full max-w-[1400px]">
       <div class="mb-12 text-center">
         <h2 class="mb-2 text-3xl font-bold leading-9 text-center">
           Browse by Category
