@@ -24,6 +24,7 @@ const eventTypes = reactive(data);
   <template v-else-if="!eventTypes">
     <EmptyState
       title="You have no Event Types"
+      icon="i-lucide-ban"
       description="Create your first event type by clicking the button below."
       button-text="Add event type"
       href="/dashboard/add-event-type"
