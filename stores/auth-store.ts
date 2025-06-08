@@ -31,19 +31,6 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     loading.value = false;
   }
 
-  async function googleRequestScopes() {
-    loading.value = true;
-    await authClient.linkSocial({
-      provider: "google",
-      scopes: [
-        "https://www.googleapis.com/auth/calendar",
-        "https://www.googleapis.com/auth/calendar.readonly",
-        "https://www.googleapis.com/auth/calendar.events",
-      ],
-    });
-    loading.value = false;
-  }
-
   async function microsoftSignIn() {
     loading.value = true;
     await authClient.signIn.social({
@@ -125,6 +112,5 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     signOut,
     googleSignIn,
     microsoftSignIn,
-    googleRequestScopes,
   };
 });
