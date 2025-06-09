@@ -87,3 +87,17 @@ export interface DayAvailability {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface BookingData {
+  id: number;
+  title: string;
+  duration: number;
+  slug: string;
+  description: string;
+  isActive: boolean | null;
+  videoCallSoftware: string | null;
+  userId: number | null;
+  userName: string | null;
+  userImage: string | null;
+  userTimeZone: string | null;
+}

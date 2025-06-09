@@ -7,19 +7,9 @@ export const useAuthStore = defineStore("useAuthStore", () => {
   const loading = ref(false);
   const session = authClient.useSession();
 
-  const authenticated = computed(() => {
-    if (session.value.data) {
-      return true;
-    }
-    return false;
-  });
+  const authenticated = computed(() => !!session.value.data);
 
-  const user = computed(() => {
-    if (session.value.data) {
-      return session.value.data.user;
-    }
-    return null;
-  });
+  const user = computed(() => session.value.data?.user ?? null);
 
   async function googleSignIn() {
     loading.value = true;
