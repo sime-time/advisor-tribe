@@ -73,7 +73,7 @@ const { data: eventTypes, pending } = await useFetch(
               Create and manage your appointment types
             </p>
           </div>
-          <UButton to="/dashboard/add-event-type" size="xl">
+          <UButton to="/dashboard/add-event-type" size="xl" class="hidden lg:flex">
             Create New Event
           </UButton>
         </div>
@@ -118,6 +118,11 @@ const { data: eventTypes, pending } = await useFetch(
           </div>
         </div>
       </div>
+      <template #footer>
+        <UButton to="/dashboard/add-event-type" size="xl" block class="flex lg:hidden">
+          Create New Event
+        </UButton>
+      </template>
     </UCard>
   </div>
 </template>

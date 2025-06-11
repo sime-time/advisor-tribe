@@ -37,7 +37,7 @@ const menuOpen = ref(false);
             to="/dashboard"
             class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
           >
-            My Tribe
+            Dashboard
           </NuxtLink>
           <UButton size="lg" variant="outline" :loading="authStore.loading" :disabled="authStore.loading" @click="authStore.signOut">
             Sign Out
@@ -95,7 +95,7 @@ const menuOpen = ref(false);
               class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
               @click="() => (menuOpen = false)"
             >
-              My Tribe
+              Dashboard
             </NuxtLink>
             <UButton
               size="lg"

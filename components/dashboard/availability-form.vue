@@ -129,7 +129,7 @@ async function onSubmit() {
             />
           </template>
         </div>
-        <UButton type="submit" size="xl" block :loading="isLoading">
+        <UButton type="submit" size="xl" class="flex justify-center lg:w-1/4" :loading="isLoading">
           Save Changes
         </UButton>
       </UForm>

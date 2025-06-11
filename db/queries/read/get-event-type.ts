@@ -27,6 +27,8 @@ export async function getEventTypeFromSlug(slug: string, userLink: string) {
       userName: user.name,
       userImage: user.image,
       userTimeZone: user.timeZone,
+      grantId: user.grantId,
+      grantEmail: user.grantEmail,
     })
     .from(eventType)
     .leftJoin(user, eq(eventType.userId, user.id)) // join with the user table

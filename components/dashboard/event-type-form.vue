@@ -125,7 +125,7 @@ async function onSubmit() {
       </UFormField>
 
       <div class="flex justify-between gap-4 mt-6">
-        <UButton to="/dashboard" type="button" size="xl" color="error" variant="soft" :loading="isLoading" block>
+        <UButton to="/dashboard/event-types" type="button" size="xl" color="primary" variant="soft" :loading="isLoading" block>
           Cancel
         </UButton>
         <UButton type="submit" size="xl" :loading="isLoading" block>

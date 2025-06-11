@@ -112,7 +112,7 @@ async function onSubmit() {
         </UButtonGroup>
       </UFormField>
 
-      <UButton type="submit" size="xl" class="mt-1" :loading="isLoading" :disabled="allFieldsEmpty">
+      <UButton type="submit" size="xl" class="mt-1" block :loading="isLoading" :disabled="allFieldsEmpty">
         Save Changes
       </UButton>
     </form>
