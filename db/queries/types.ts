@@ -100,4 +100,5 @@ export interface BookingData {
   userName: string | null;
   userImage: string | null;
   userTimeZone: string | null;
+  availability?: DayAvailability[];
 }

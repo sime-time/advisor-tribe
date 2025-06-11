@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       ...result[0], // 1 obj
-      ...availability, // array of 7 obj
+      availability, // array of 7 obj
     };
   }
   catch (err: any) {
