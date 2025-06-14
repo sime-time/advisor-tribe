@@ -1,3 +1,4 @@
+import type { FreeBusyTimeSlot } from "nylas";
 import { ZodError } from "zod/v4";
 import { nylas } from "~/lib/nylas";
 import { GrantSchema } from "~/validation/grant-schema";
@@ -34,7 +35,7 @@ export default defineEventHandler(async (event) => {
     // returns an array of Date strings
     const busyTimes = nylasCalendarData.data[0].timeSlots;
 
-    return busyTimes;
+    return busyTimes as FreeBusyTimeSlot[];
   }
   catch (err) {
     console.error("Error getting busy times:", err);

@@ -4,6 +4,10 @@ import type { BookingData } from "~/db/queries/types";
 import { getLocalTimeZone, parseDate, toCalendarDate, today } from "@internationalized/date";
 import BookingCalendar from "~/components/booking/calendar.vue";
 
+definePageMeta({
+  layout: false,
+});
+
 const route = useRoute();
 const router = useRouter();
 
@@ -25,6 +29,7 @@ const date = computed(() => {
     // return today's date
     return toCalendarDate(today(getLocalTimeZone()));
   }
+  // if the date is not available, select the closest available date to current date
 });
 
 const formattedDate = computed(() => {
@@ -36,17 +41,25 @@ const formattedDate = computed(() => {
   }).format(computedDate);
 });
 
-// function in the parent to handle the date selected from BookingCalendar
+// parent function to handle the date selected from BookingCalendar child
 async function handleDateSelected(selectedDate: DateValue) {
   // update the url query when date changes
-  // so that the computed date variable will be up to date
   await router.replace({ path: route.path, query: { ...route.query, date: selectedDate.toString() } });
 }
+
+// show the form when date and time are selected
+const showForm = computed(() => !!route.query.date && !!route.query.time);
 </script>
 
 <template>
-  <div class="min-h-screen w-screen flex items-center justify-center">
-    <UCard class="max-w-screen md:max-w-[1000px] mx-auto">
+  <main class="min-h-screen w-screen flex items-center justify-center">
+    <UCard v-if="showForm" class="md:max-w-[600px] mx-auto">
+      <div class="md:grid md:grid-cols-[1fr_auto_1fr] gap-4">
+        <p>Show form</p>
+        <!-- 10:35:00 -->
+      </div>
+    </UCard>
+    <UCard v-else class="max-w-screen md:max-w-[1000px] mx-auto">
       <div v-if="pending || !data">
         <LoadingSpinner />
       </div>
@@ -94,6 +107,7 @@ async function handleDateSelected(selectedDate: DateValue) {
         <div v-if="data.availability && data.grantId && data.grantEmail">
           <BookingTimeTable
             :availability="data.availability"
+            :duration="data.duration"
             :grant-id="data.grantId"
             :grant-email="data.grantEmail"
             :selected-date="date.toDate(getLocalTimeZone())"
@@ -101,5 +115,5 @@ async function handleDateSelected(selectedDate: DateValue) {
         </div>
       </div>
     </UCard>
-  </div>
+  </main>
 </template>

@@ -1,3 +1,7 @@
+import type { FreeBusyTimeSlot } from "nylas";
+import type { DayAvailability } from "~/db/queries/types";
+import { addMinutes, format, fromUnixTime, isAfter, isBefore, parse } from "date-fns";
+
 export enum Day {
   Sunday = 0,
   Monday = 1,
@@ -11,6 +15,80 @@ export enum Day {
 // helper function to get the readable day name from the numeric enum value
 export function getDayName(weekDay: number): string {
   return Day[weekDay];
+}
+
+// format a time number to time string
+// i.e. 1700 to 17:00
+export function formatTime(timeNumber: number): string {
+  const timeString = timeNumber.toString().padStart(4, "0");
+  const hours = timeString.substring(0, 2);
+  const minutes = timeString.substring(2, 4);
+  return `${hours}:${minutes}`;
+}
+
+export function militaryToStandardTime(militaryTime: string): string {
+  const [hourStr, minuteStr] = militaryTime.split(":");
+  let hour = Number.parseInt(hourStr);
+  const minute = minuteStr.padStart(2, "0");
+  const ampm = hour >= 12 ? "PM" : "AM";
+  hour = hour % 12 || 12;
+  return `${hour}:${minute} ${ampm}`;
+}
+
+export function calculateAvailableTimeSlots(
+  date: Date,
+  dayAvailability: DayAvailability,
+  busyTimeSlots: FreeBusyTimeSlot[],
+  duration: number,
+) {
+  // convert date to string
+  const dateString = format(date, "yyyy-MM-dd");
+
+  // convert availability times to a javascript Date object
+  const availableStart = parse(
+    `${dateString} ${formatTime(dayAvailability.startTime)}`,
+    "yyyy-MM-dd HH:mm",
+    new Date(),
+  );
+
+  const availableEnd = parse(
+    `${dateString} ${formatTime(dayAvailability.endTime)}`,
+    "yyyy-MM-dd HH:mm",
+    new Date(),
+  );
+
+  // convert unix time slots to javascript Dates
+  const busySlots = busyTimeSlots.map(slot => ({
+    start: fromUnixTime(slot.startTime),
+    end: fromUnixTime(slot.endTime),
+  }));
+
+  // create all the time slots
+  const allSlots = [];
+  let currentSlot = availableStart;
+
+  // the time between each slot is the same as the meeting duration
+  while (isBefore(currentSlot, availableEnd)) {
+    allSlots.push(currentSlot);
+    currentSlot = addMinutes(currentSlot, duration);
+  }
+
+  const now = new Date();
+
+  const freeSlots = allSlots.filter((slot) => {
+    const slotEnd = addMinutes(slot, duration);
+    return (
+      isAfter(slot, now) // only pick slots available after the current time
+      && !busySlots.some( // make sure the slot does not overlap any busy period from nylas
+        (busy: { start: any; end: any }) =>
+          (!isBefore(slot, busy.start) && isBefore(slot, busy.end)) // if slot starts during busy period
+          || (isAfter(slotEnd, busy.start) && !isAfter(slotEnd, busy.end)) // if slot ends during busy period
+          || (isBefore(slot, busy.start) && isAfter(slotEnd, busy.end)), // if slot is during a busy period
+      ) // else the slot is free and return it
+    );
+  });
+
+  return freeSlots.map(slot => format(slot, "HH:mm"));
 }
 
 export const times = [

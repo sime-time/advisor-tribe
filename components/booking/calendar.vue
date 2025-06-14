@@ -59,20 +59,18 @@ function selectDate(date: DateValue | undefined) {
     :locale="locale"
     :min-value="todayDate"
     :is-date-unavailable="isDateUnavailable"
-    class="inline-block w-fit py-8 md:py-4"
+    class="inline-block w-full py-8 md:py-4"
     @update:model-value="selectDate"
   >
     <!-- Header section -->
     <CalendarHeader class="flex justify-between mb-4">
+      <CalendarPrev class="cursor-pointer border border-accented rounded-md flex items-center justify-center p-1.25 hover:bg-accented">
+        <UIcon name="i-lucide-chevron-left" color="neutral" class="size-5" />
+      </CalendarPrev>
       <CalendarHeading class="font-semibold text-lg" />
-      <div class="flex gap-2">
-        <CalendarPrev class="cursor-pointer border border-accented rounded-md flex items-center justify-center p-1.25 hover:bg-accented">
-          <UIcon name="i-lucide-chevron-left" color="neutral" class="size-5" />
-        </CalendarPrev>
-        <CalendarNext class="cursor-pointer border border-accented rounded-md flex items-center justify-center p-1.25 hover:bg-accented">
-          <UIcon name="i-lucide-chevron-right" color="neutral" class="size-5" />
-        </CalendarNext>
-      </div>
+      <CalendarNext class="cursor-pointer border border-accented rounded-md flex items-center justify-center p-1.25 hover:bg-accented">
+        <UIcon name="i-lucide-chevron-right" color="neutral" class="size-5" />
+      </CalendarNext>
     </CalendarHeader>
 
     <!-- Loop through each month provided by CalendarRoot's grid -->
