@@ -24,8 +24,10 @@
     <div class="flex flex-col">
       <header class="flex h-14 items-center gap-4 border-b border-accented bg-elevated/60 px-4 lg:h-[60px] lg:px-6">
         <UDrawer direction="left">
-          <UButton color="neutral" variant="outline" trailing-icon="i-lucide-menu" size="lg"
-            class="md:hidden shrink-0" />
+          <UButton
+            color="neutral" variant="outline" trailing-icon="i-lucide-menu" size="lg"
+            class="md:hidden shrink-0"
+          />
           <template #body>
             <div class="flex flex-col">
               <nav class="grid gap-2">

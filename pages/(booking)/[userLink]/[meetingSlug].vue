@@ -94,30 +94,36 @@ const showForm = computed(() => !!route.query.date && !!route.query.time);
         </div>
 
         <template v-if="showForm">
-          <form class="flex flex-col gap-y-4">
-            <UFormField label="Name">
-              <UInput placeholder="Enter your name" />
-            </UFormField>
-            <UFormField label="Email">
-              <UInput placeholder="johnsmith@example.com" />
-            </UFormField>
-            <UButton type="submit" size="lg" class="mt-1" block>
-              Book Meeting
-            </UButton>
-          </form>
+          <BookingForm
+            :title="data.title"
+            :description="data.description"
+            :date="route.query.date?.toString()!"
+            :time="route.query.time?.toString()!"
+            :duration="data.duration"
+            :grant-id="data.grantId"
+            :grant-email="data.grantEmail"
+            :video-call-software="data.videoCallSoftware || ''"
+          />
         </template>
 
         <template v-else>
-          <div v-if="data?.availability">
-            <BookingCalendar :date="date" :availability="data.availability" @date-selected="handleDateSelected" />
+          <div v-if="data.availability">
+            <BookingCalendar
+              :date="date"
+              :availability="data.availability"
+              @date-selected="handleDateSelected"
+            />
           </div>
           <div>
             <USeparator orientation="vertical" class="h-full" />
           </div>
-          <div v-if="data.availability && data.grantId && data.grantEmail">
+          <div v-if="data.availability">
             <BookingTimeTable
-              :availability="data.availability" :duration="data.duration" :grant-id="data.grantId"
-              :grant-email="data.grantEmail" :selected-date="date.toDate(getLocalTimeZone())"
+              :availability="data.availability"
+              :duration="data.duration"
+              :grant-id="data.grantId"
+              :grant-email="data.grantEmail"
+              :selected-date="date.toDate(getLocalTimeZone())"
             />
           </div>
         </template>

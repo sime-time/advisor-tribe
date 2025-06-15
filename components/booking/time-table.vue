@@ -31,7 +31,7 @@ async function getAvailableTimeSlots(date: Date) {
       grantId: props.grantId,
       grantEmail: props.grantEmail,
     },
-  }) satisfies FreeBusyTimeSlot[];
+  });
 
   // get today's availablility, using today's weekday index
   const weekdayIndex = props.selectedDate.getDay();

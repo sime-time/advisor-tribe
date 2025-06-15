@@ -67,10 +67,10 @@ const { data: meetingTypes, pending } = await useFetch(
         <div class="flex justify-between items-center">
           <div>
             <h1 class="text-3xl font-bold">
-              Meeting Type
+              Meeting Types
             </h1>
             <p class="text-neutral-500 text-base mt-1">
-              Create and manage your appointment types
+              Create and manage your types of meetings
             </p>
           </div>
           <UButton to="/dashboard/add-meeting-type" size="xl" class="hidden lg:flex">
@@ -111,7 +111,7 @@ const { data: meetingTypes, pending } = await useFetch(
             </div>
           </NuxtLink>
           <div class="bg-elevated/60 flex px-4 py-3 justify-between items-center">
-            <USwitch />
+            <USwitch :default-value="meet.isActive" />
             <UButton size="lg">
               Edit
             </UButton>
