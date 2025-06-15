@@ -27,10 +27,10 @@ const links = computed<DashboardNavItem[]>(() => [
   },
   {
     id: 2,
-    label: "Event Types",
+    label: "Meeting Types",
     icon: "i-lucide-calendar-cog",
-    href: "/dashboard/event-types",
-    active: route.path === "/dashboard/event-types",
+    href: "/dashboard/meeting-types",
+    active: route.path === "/dashboard/meeting-types",
   },
   {
     id: 3,

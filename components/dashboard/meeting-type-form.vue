@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { RadioGroupItem } from "@nuxt/ui";
 import { ZodError } from "zod/v4";
-import { EventTypeSchema } from "~/validation/new-event-schema";
+import { MeetingTypeSchema } from "~/validation/new-meeting-schema";
 
 const config = useRuntimeConfig();
 const authStore = useAuthStore();
@@ -44,32 +44,32 @@ async function onSubmit() {
   isLoading.value = true;
   try {
     // this json will be sent to the api
-    const validEventType = EventTypeSchema.parse({
+    const validMeetingType = MeetingTypeSchema.parse({
       ...formState,
       userId: authStore.user?.id,
     });
 
     // send payload to api endpoint
-    await $fetch("/api/event-type/create", {
+    await $fetch("/api/meeting-type/create", {
       method: "POST",
-      body: validEventType,
+      body: validMeetingType,
     });
 
     toast.add({
-      title: "New Event Type created!",
+      title: "New Type of Meeting created!",
       color: "success",
     });
 
-    navigateTo("/dashboard/event-types");
+    navigateTo("/dashboard/meeting-types");
   }
   catch (err: any) {
-    console.error("Event Type Form Error", err);
+    console.error("Meeting Type Form Error", err);
     const formError = err instanceof ZodError
       ? err.issues[0].message || "Invalid input"
       : err.message || "An error occurred";
 
     return toast.add({
-      title: "Failed to create new event type",
+      title: "Failed to create new meeting type",
       description: formError,
       icon: "i-lucide-triangle-alert",
       color: "error",
@@ -86,10 +86,10 @@ async function onSubmit() {
     <template #header>
       <header class="flex flex-col">
         <h1 class="text-3xl font-bold">
-          Add new event type
+          Add new meeting type
         </h1>
         <p class="mt-1 text-base text-neutral-500">
-          Create an event type that allows clients to meet with you.
+          Create a type of meeting for clients to book.
         </p>
       </header>
     </template>
@@ -125,7 +125,7 @@ async function onSubmit() {
       </UFormField>
 
       <div class="flex justify-between gap-4 mt-6">
-        <UButton to="/dashboard/event-types" type="button" size="xl" color="primary" variant="soft" :loading="isLoading" block>
+        <UButton to="/dashboard/meeting-types" type="button" size="xl" color="primary" variant="soft" :loading="isLoading" block>
           Cancel
         </UButton>
         <UButton type="submit" size="xl" :loading="isLoading" block>

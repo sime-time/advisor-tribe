@@ -1,7 +1,7 @@
 import { boolean, integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { user } from "./index";
 
-export const eventType = pgTable("event_type", {
+export const meetingType = pgTable("meeting_type", {
   id: serial("id").primaryKey(),
   userId: integer("user_id").notNull().references(() => user.id),
   title: text("title").notNull(),

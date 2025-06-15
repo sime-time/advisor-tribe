@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const EventTypeSchema = z.object({
+export const MeetingTypeSchema = z.object({
   userId: z.coerce.number(),
   title: z.string().min(1, "Title is required").max(150),
   description: z.string().min(3, "Description is required").max(300, "Description must be under 300 characters long"),
@@ -11,4 +11,4 @@ export const EventTypeSchema = z.object({
     .min(3, "Slug name must have at least 3 characters")
     .regex(/^[a-z0-9-]+$/i, "Slug name can only contain letters, numbers, and - (dash)"),
 });
-export type EventTypeSchema = z.infer<typeof EventTypeSchema>;
+export type MeetingTypeSchema = z.infer<typeof MeetingTypeSchema>;

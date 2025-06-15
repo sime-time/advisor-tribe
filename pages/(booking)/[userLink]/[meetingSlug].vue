@@ -11,11 +11,11 @@ definePageMeta({
 const route = useRoute();
 const router = useRouter();
 
-const { data, pending } = await useFetch<BookingData>("/api/event-type/booking-data", {
+const { data, pending } = await useFetch<BookingData>("/api/meeting-type/booking-data", {
   method: "POST",
   body: {
     userLink: route.params.userLink,
-    eventSlug: route.params.eventSlug,
+    meetingSlug: route.params.meetingSlug,
   },
 });
 
@@ -53,23 +53,16 @@ const showForm = computed(() => !!route.query.date && !!route.query.time);
 
 <template>
   <main class="min-h-screen w-screen flex items-center justify-center">
-    <UCard v-if="showForm" class="md:max-w-[600px] mx-auto">
-      <div class="md:grid md:grid-cols-[1fr_auto_1fr] gap-4">
-        <p>Show form</p>
-        <!-- 10:35:00 -->
-      </div>
-    </UCard>
-    <UCard v-else class="max-w-screen md:max-w-[1000px] mx-auto">
+    <UCard class="mx-auto" :class="showForm ? 'md:max-w-[600px]' : 'md:max-w-[1000px]'">
       <div v-if="pending || !data">
         <LoadingSpinner />
       </div>
-      <div v-else class="md:grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-5 max max-w-[95vw]">
+      <div
+        v-else class="md:grid gap-5 max-w-[95vw]"
+        :class="showForm ? 'md:grid-cols-[1fr_auto_1fr]' : 'md:grid-cols-[1fr_auto_1fr_auto_1fr]'"
+      >
         <div>
-          <NuxtImg
-            :src="data.userImage || ''"
-            alt="user profile image"
-            class="size-10 rounded-full"
-          />
+          <NuxtImg :src="data.userImage || ''" alt="user profile image" class="size-10 rounded-full" />
           <p class="text-sm font-medium text-neutral-500 mt-1">
             {{ data.userName }}
           </p>
@@ -95,24 +88,39 @@ const showForm = computed(() => !!route.query.date && !!route.query.time);
             </p>
           </div>
         </div>
+
         <div>
           <USeparator orientation="vertical" class="h-full" />
         </div>
-        <div v-if="data?.availability">
-          <BookingCalendar :date="date" :availability="data.availability" @date-selected="handleDateSelected" />
-        </div>
-        <div>
-          <USeparator orientation="vertical" class="h-full" />
-        </div>
-        <div v-if="data.availability && data.grantId && data.grantEmail">
-          <BookingTimeTable
-            :availability="data.availability"
-            :duration="data.duration"
-            :grant-id="data.grantId"
-            :grant-email="data.grantEmail"
-            :selected-date="date.toDate(getLocalTimeZone())"
-          />
-        </div>
+
+        <template v-if="showForm">
+          <form class="flex flex-col gap-y-4">
+            <UFormField label="Name">
+              <UInput placeholder="Enter your name" />
+            </UFormField>
+            <UFormField label="Email">
+              <UInput placeholder="johnsmith@example.com" />
+            </UFormField>
+            <UButton type="submit" size="lg" class="mt-1" block>
+              Book Meeting
+            </UButton>
+          </form>
+        </template>
+
+        <template v-else>
+          <div v-if="data?.availability">
+            <BookingCalendar :date="date" :availability="data.availability" @date-selected="handleDateSelected" />
+          </div>
+          <div>
+            <USeparator orientation="vertical" class="h-full" />
+          </div>
+          <div v-if="data.availability && data.grantId && data.grantEmail">
+            <BookingTimeTable
+              :availability="data.availability" :duration="data.duration" :grant-id="data.grantId"
+              :grant-email="data.grantEmail" :selected-date="date.toDate(getLocalTimeZone())"
+            />
+          </div>
+        </template>
       </div>
     </UCard>
   </main>

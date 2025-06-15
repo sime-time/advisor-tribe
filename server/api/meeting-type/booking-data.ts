@@ -1,22 +1,22 @@
 import { ZodError } from "zod/v4";
 import { getAvailability } from "~/db/queries/read/get-availability";
-import { getEventTypeFromSlug } from "~/db/queries/read/get-event-type";
-import { EventSlugSchema } from "~/validation/event-slug-schema";
+import { getMeetingTypeFromSlug } from "~/db/queries/read/get-meeting-type";
+import { MeetingSlugSchema } from "~/validation/meeting-slug-schema";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    // body should contain { userLink, eventSlug }
-    const validData = EventSlugSchema.parse({
+    // body should contain { userLink, meetingSlug }
+    const validData = MeetingSlugSchema.parse({
       userLink: body.userLink,
-      eventSlug: body.eventSlug,
+      meetingSlug: body.meetingSlug,
     });
 
     // result is an array of 0 or 1 items
-    const result = await getEventTypeFromSlug(validData.eventSlug, validData.userLink);
+    const result = await getMeetingTypeFromSlug(validData.meetingSlug, validData.userLink);
     if (result.length === 0) {
-      throw new Error("No event type found");
+      throw new Error("No meeting type found");
     }
     else if (!result[0].userId) {
       throw new Error("No user id found for this event");

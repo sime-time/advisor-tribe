@@ -1,4 +1,4 @@
-import { getEventType } from "~/db/queries/read/get-event-type";
+import { getMeetingType } from "~/db/queries/read/get-meeting-type";
 
 export default defineEventHandler(async (event) => {
   const userId = Number.parseInt(event.context.params?.userId ?? "");
@@ -9,15 +9,15 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    // fetch the user's event types
-    const data = await getEventType(userId);
+    // fetch the user's meeting types
+    const data = await getMeetingType(userId);
 
-    // return even if there are zero event types,
-    // client will handle what to display when there are no event types
+    // return even if there are zero meeting types,
+    // client will handle what to display when there are no meeting types
     return data;
   }
   catch (error) {
-    console.error("Get Event Type Error:", error);
+    console.error("Get Meeting Type Error:", error);
     return createError({ status: 500, message: "Internal Server Error" });
   }
 });
