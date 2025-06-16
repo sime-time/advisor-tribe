@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/image", "@pinia/nuxt", "motion-v/nuxt"],
+  plugins: ["~/plugins/vue-query.ts"],
   runtimeConfig: {
     public: {
       baseURL: env.NUXT_PUBLIC_BASE_URL || "http://localhost:3000",

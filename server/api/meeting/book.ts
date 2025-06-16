@@ -8,8 +8,6 @@ export default defineEventHandler(async (event) => {
   try {
     const validBody = BookMeetingSchema.parse(body);
 
-    console.log("valid-body", validBody);
-
     // convert date and time strings into a DateTime object
     const startDateTime = new Date(`${validBody.date}T${validBody.time}:00`);
 

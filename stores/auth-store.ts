@@ -1,6 +1,10 @@
+import type { auth } from "~/lib/auth";
+import { inferAdditionalFields } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/vue";
 
-const authClient = createAuthClient();
+const authClient = createAuthClient({
+  plugins: [inferAdditionalFields<typeof auth>()],
+});
 
 export const useAuthStore = defineStore("useAuthStore", () => {
   const toast = useToast();
@@ -53,7 +57,7 @@ export const useAuthStore = defineStore("useAuthStore", () => {
         });
         navigateTo("/dashboard");
       },
-      onError: (context) => {
+      onError: (context: any) => {
         toast.add({
           title: "Sign In Error",
           description: `${context.error.message}`,
@@ -81,7 +85,7 @@ export const useAuthStore = defineStore("useAuthStore", () => {
         });
         navigateTo("/onboarding");
       },
-      onError: (context) => {
+      onError: (context: any) => {
         toast.add({
           title: "Sign Up Error",
           description: `${context.error.message}`,

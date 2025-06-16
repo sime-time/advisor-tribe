@@ -32,22 +32,27 @@ export const auth = betterAuth({
       role: {
         type: "string",
         required: false,
+        input: true,
       },
       linkName: {
         type: "string",
         required: false,
+        input: true,
       },
       timeZone: {
         type: "string",
         required: false,
+        input: true,
       },
       grantId: {
         type: "string",
         required: false,
+        input: true,
       },
       grantEmail: {
         type: "string",
         required: false,
+        input: true,
       },
     },
   },

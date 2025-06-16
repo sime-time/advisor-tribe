@@ -24,14 +24,14 @@ const formattedDate = computed(() => {
 
 async function getAvailableTimeSlots(date: Date) {
   // send payload to api endpoint
-  const busyTimes: FreeBusyTimeSlot[] = await $fetch("/api/availability/busy-times", {
+  const busyTimes = await $fetch("/api/availability/busy-times", {
     method: "POST",
     body: {
       selectedDate: date,
       grantId: props.grantId,
       grantEmail: props.grantEmail,
     },
-  });
+  }) satisfies FreeBusyTimeSlot[];
 
   // get today's availablility, using today's weekday index
   const weekdayIndex = props.selectedDate.getDay();
