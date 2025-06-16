@@ -107,9 +107,4 @@ export const useAuthStore = defineStore("useAuthStore", () => {
     googleSignIn,
     microsoftSignIn,
   };
-}, {
-  persist: {
-    storage: piniaPluginPersistedstate.localStorage(),
-    debug: true,
-  },
 });
