@@ -29,7 +29,7 @@ function createDropdownItems(slugName: string) {
     { type: "separator" },
     {
       label: "Delete",
-      icon: "i-lucide-trash-2",
+      icon: "lucide:trash-2",
       color: "error",
     },
   ];
@@ -125,11 +125,9 @@ const { data: meetingTypes, pending } = await useFetch<MeetingType[]>(
           </div>
         </div>
       </div>
-      <template #footer>
-        <UButton to="/dashboard/add-meeting-type" size="xl" block class="flex lg:hidden">
-          Create New Meeting
-        </UButton>
-      </template>
+      <UButton to="/dashboard/add-meeting-type" size="xl" block class="flex lg:hidden mt-5">
+        Create New Meeting
+      </UButton>
     </UCard>
   </div>
 </template>

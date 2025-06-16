@@ -37,45 +37,51 @@ const meetings = await nylas.events.list({
               Meetings
             </h1>
             <p class="mt-1 text-base text-neutral-500">
-              See your upcoming booked meetings
+              See your upcoming booked meetings.
             </p>
           </div>
         </template>
-        <div v-for="(meet, index) in meetings.data" :key="index">
-          <form>
-            <div class="grid grid-cols-3 justify-between items-center">
-              <div class="space-y-1">
-                <p class="text-neutral-500 text-sm">
-                  {{ format(fromUnixTime(meet.when.startTime), "EEE, dd MMM") }}
+        <div class="flex flex-col gap-5">
+          <div
+            v-for="(meet, index) in meetings.data"
+            :key="index"
+            class="p-5 border border-accented/60 shadow-xs rounded-lg"
+          >
+            <form class="grid grid-cols-1 lg:grid-cols-3 gap-2 justify-between items-center">
+              <div class="flex flex-col items-start gap-1">
+                <h3 class="text-lg font-semibold">
+                  {{ meet.title }}
+                </h3>
+
+                <p class="flex items-center gap-2 text-neutral-500 text-sm">
+                  <UIcon name="i-lucide-user-round" />
+                  <span>with {{ meet.participants[0].name }}</span>
                 </p>
-                <p class="text-neutral-500 text-xs">
+              </div>
+
+              <div class="flex flex-col items-start text-neutral-500 text-sm gap-2">
+                <p class="flex items-center gap-2">
+                  <UIcon name="i-lucide-calendar" />
+                  <span>{{ format(fromUnixTime(meet.when.startTime), "EEEE, MMM dd") }}</span>
+                </p>
+                <p class="flex items-center gap-2">
+                  <UIcon name="i-lucide-clock" />
                   {{ format(fromUnixTime(meet.when.startTime), "hh:mm a") }} - {{ format(fromUnixTime(meet.when.endTime), "hh:mm a") }}
                 </p>
-                <div class="flex items-center gap-2">
-                  <UIcon name="lucide:video" class="size-4 text-primary" />
-                  <NuxtLink :href="meet.conferencing.details?.url" target="_blank" class="text-xs text-primary underline underline-offset-4">
+              </div>
+
+              <div class="flex justify-start lg:justify-end mt-1 lg:mt-0">
+                <div class="flex flex-row lg:flex-col gap-2 justify-between items-end w-full">
+                  <UButton type="button" icon="i-lucide-video" :href="meet.conferencing.details?.url" target="_blank" variant="subtle" class="w-1/2 justify-center">
                     Join Meeting
-                  </NuxtLink>
+                  </UButton>
+                  <UButton type="submit" icon="i-lucide-trash-2" variant="outline" color="error" class="w-1/2 justify-center">
+                    Delete
+                  </UButton>
                 </div>
               </div>
-
-              <div class="flex flex-col items-start">
-                <h2 class="text-sm font-medium">
-                  {{ meet.title }}
-                </h2>
-                <p class="text-sm text-neutral-500">
-                  You and {{ meet.participants[0].name }}
-                </p>
-              </div>
-
-              <div class="flex justify-end">
-                <UButton type="submit" color="error" size="lg">
-                  Cancel Event
-                </UButton>
-              </div>
-            </div>
-            <USeparator class="my-4" />
-          </form>
+            </form>
+          </div>
         </div>
       </UCard>
     </div>
