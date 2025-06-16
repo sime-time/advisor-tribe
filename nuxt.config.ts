@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/image", "@pinia/nuxt", "motion-v/nuxt"],
+  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxt/image", "@pinia/nuxt", "pinia-plugin-persistedstate/nuxt", "motion-v/nuxt"],
   runtimeConfig: {
     public: {
       baseURL: env.NUXT_PUBLIC_BASE_URL || "http://localhost:3000",
