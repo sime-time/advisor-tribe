@@ -8,7 +8,7 @@ definePageMeta({
 
 const authStore = useAuthStore();
 
-const { data: meetings, pending } = await useFetch<Event[]>("/api/meeting/list", {
+const { data: meetings, pending, error } = useFetch<Event[]>("/api/meeting/list", {
   method: "POST",
   body: {
     grantId: authStore.user?.grantId,
@@ -26,8 +26,17 @@ const { data: meetings, pending } = await useFetch<Event[]>("/api/meeting/list",
 </script>
 
 <template>
-  <div v-if="pending || !meetings">
+  <div v-if="pending ">
     <LoadingSpinner />
+  </div>
+  <div v-else-if="error || !meetings">
+    <EmptyState
+      title="Error"
+      description="Internal server error"
+      icon="i-lucide-triangle-alert"
+      button-text="Try again"
+      href="/dashboard/meetings"
+    />
   </div>
   <div v-else-if="meetings.length < 1" class="h-full">
     <EmptyState
