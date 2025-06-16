@@ -35,8 +35,15 @@ function createDropdownItems(slugName: string) {
   ];
 }
 
+interface MeetingType {
+  slug: string;
+  duration: number;
+  title: string;
+  isActive: boolean;
+}
+
 // make useFetch reactive to authStore.user.id by making it a return function
-const { data: meetingTypes, pending } = await useFetch(
+const { data: meetingTypes, pending } = await useFetch<MeetingType[]>(
   () => `/api/meeting-type/${authStore.user?.id}`,
   {
     lazy: true,
