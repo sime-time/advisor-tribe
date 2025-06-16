@@ -6,7 +6,7 @@ import { MeetingTypeSchema } from "~/validation/new-meeting-schema";
 const config = useRuntimeConfig();
 const authStore = useAuthStore();
 
-const videoCallProviders = ref<RadioGroupItem[]>(["Google Meet", "Microsoft Teams", "Zoom Meeting"]);
+const videoCallProviders = ref<RadioGroupItem[]>(["Google Meet", "Microsoft Teams"]);
 
 const durations = ref([
   {
@@ -84,14 +84,14 @@ async function onSubmit() {
 <template>
   <UCard class="w-fit">
     <template #header>
-      <header class="flex flex-col">
+      <div class="flex flex-col">
         <h1 class="text-3xl font-bold">
           Add new meeting type
         </h1>
         <p class="mt-1 text-base text-neutral-500">
           Create a type of meeting for clients to book.
         </p>
-      </header>
+      </div>
     </template>
 
     <UForm :state="formState" class="space-y-4" @submit.prevent="onSubmit">
@@ -101,7 +101,7 @@ async function onSubmit() {
       <UFormField label="URL Slug" name="slug">
         <UButtonGroup size="lg" class="flex">
           <UButton color="neutral" variant="subtle" as="label" class="cursor-default w-fit text-neutral-500 text-nowrap">
-            {{ `${config.public.baseURL}/` }}
+            {{ `${config.public.baseURL}/${authStore.user?.linkName}/` }}
           </UButton>
           <UInput v-model="formState.slug" placeholder="my-meeting" class="flex-grow" />
         </UButtonGroup>
