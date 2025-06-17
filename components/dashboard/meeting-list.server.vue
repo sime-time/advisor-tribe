@@ -75,7 +75,7 @@ const meetings = await nylas.events.list({
                   <UButton type="button" icon="i-lucide-video" :href="meet.conferencing.details?.url" target="_blank" variant="subtle" class="w-1/2 justify-center">
                     Join Meeting
                   </UButton>
-                  <UButton type="submit" icon="i-lucide-trash-2" variant="outline" color="error" class="w-1/2 justify-center">
+                  <UButton to="" type="submit" icon="i-lucide-trash-2" variant="outline" color="error" class="w-1/2 justify-center">
                     Delete
                   </UButton>
                 </div>
