@@ -129,7 +129,7 @@ async function onSubmit() {
           Cancel
         </UButton>
         <UButton type="submit" size="xl" :loading="isLoading" block>
-          Add Event
+          Create
         </UButton>
       </div>
     </UForm>

@@ -2,24 +2,12 @@
 import type { DayAvailability } from "~/db/queries/types";
 import { ZodError } from "zod/v4";
 import { getDayName, times, timeZones } from "~/lib/time";
-import { useAuthStore } from "~/stores/auth-store";
 import { ScheduleSchema } from "~/validation/schedule-schema";
 
-const authStore = useAuthStore();
-const timeZone = ref("");
+const { data: schedule, pending, refresh } = await useFetch<{ timeZone: string; week: DayAvailability[] }>("/api/availability/list");
 
-// make useFetch reactive to authStore.user.id by making it a return function
-const { data: schedule, pending } = await useFetch<DayAvailability[]>(
-  () => `/api/availability/${authStore.user?.id}`,
-  {
-    lazy: true,
-    // only fetch when user.id is available
-    immediate: !!authStore.user?.id,
-    // retrigger the fetch when the user.id changes
-    watch: [() => authStore.user?.id],
-  },
-);
-const weekSchedule = reactive(schedule);
+const weekSchedule = reactive(schedule.value.week);
+const timeZone = ref(schedule.value.timeZone);
 
 // handle submission
 const isLoading = ref(false);
@@ -31,7 +19,7 @@ async function onSubmit() {
     // this json will be sent to the api
     const validSchedule = ScheduleSchema.parse({
       timeZone: timeZone.value,
-      weekSchedule: weekSchedule.value,
+      weekSchedule,
     });
 
     // send payload to api endpoint
@@ -41,11 +29,11 @@ async function onSubmit() {
     });
 
     toast.add({
-      title: "Availability saved!",
+      title: "Availability updated!",
       color: "success",
     });
 
-    await refreshNuxtData();
+    await refresh();
   }
   catch (err: any) {
     console.error("Availability Form Error", err);
@@ -80,7 +68,7 @@ async function onSubmit() {
       </header>
     </template>
 
-    <div v-if="pending || !schedule || !authStore.user">
+    <div v-if="pending || !schedule">
       <LoadingSpinner />
     </div>
 

@@ -56,7 +56,7 @@ async function handleDeleteMeeting(eventId: string, grantId: string, calendarId:
 </script>
 
 <template>
-  <main class="w-full h-full">
+  <section class="w-full h-full">
     <div v-if="pending">
       <LoadingSpinner />
     </div>
@@ -66,7 +66,7 @@ async function handleDeleteMeeting(eventId: string, grantId: string, calendarId:
         description="You don't have any bookings yet."
         icon="lucide:calendar-x"
         button-text="Create a new meeting type"
-        href="/dashboard/add-meeting-type"
+        href="/dashboard/meeting-types/create"
       />
     </div>
     <div v-else>
@@ -125,5 +125,5 @@ async function handleDeleteMeeting(eventId: string, grantId: string, calendarId:
         </div>
       </UCard>
     </div>
-  </main>
+  </section>
 </template>

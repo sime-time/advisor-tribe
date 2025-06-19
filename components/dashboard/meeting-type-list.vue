@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { useAuthStore } from "~/stores/auth-store";
 
-const authStore = useAuthStore();
+const authStore = useAuthStore(); // used to create links
+
+const toast = useToast();
 
 // function needed to build the dropdown item list
 // while inside the meetingType for loop
 // to access the unique slug name
 function createDropdownItems(slugName: string) {
+  const link = `/${authStore.user?.linkName}/${slugName}`;
   return [
     {
       label: "Options",
@@ -16,15 +19,26 @@ function createDropdownItems(slugName: string) {
     {
       label: "Preview",
       icon: "i-lucide-external-link",
-      to: `/${authStore.user?.linkName}/${slugName}`,
+      to: link,
     },
     {
-      label: "Copy",
-      icon: "i-lucide-copy",
+      label: "Copy Link",
+      icon: "i-lucide-link",
+      class: "cursor-pointer",
+      onSelect: () => {
+        // copy meeting link to clipboard
+        navigator.clipboard.writeText(window.location.origin + link);
+        toast.add({
+          title: "Copied Link to Meeting",
+          color: "success",
+          icon: "i-lucide-copy",
+        });
+      },
     },
     {
       label: "Edit",
       icon: "i-lucide-pen",
+      to: `/dashboard/meeting-types/edit`,
     },
     { type: "separator" },
     {
@@ -41,18 +55,7 @@ interface MeetingType {
   title: string;
   isActive: boolean;
 }
-
-// make useFetch reactive to authStore.user.id by making it a return function
-const { data: meetingTypes, pending } = await useFetch<MeetingType[]>(
-  () => `/api/meeting-type/${authStore.user?.id}`,
-  {
-    lazy: true,
-    // only fetch when user.id is available
-    immediate: !!authStore.user?.id,
-    // retrigger the fetch when the user.id changes
-    watch: [() => authStore.user?.id],
-  },
-);
+const { data: meetingTypes, pending } = await useFetch<MeetingType[]>("/api/meeting-type/list");
 </script>
 
 <template>
@@ -65,7 +68,7 @@ const { data: meetingTypes, pending } = await useFetch<MeetingType[]>(
       icon="i-lucide-ban"
       description="Create your first meeting type by clicking the button below."
       button-text="Add meeting type"
-      href="/dashboard/add-meeting-type"
+      href="/dashboard/meeting-types/create"
     />
   </template>
   <div v-else>
@@ -80,7 +83,7 @@ const { data: meetingTypes, pending } = await useFetch<MeetingType[]>(
               Create and manage your types of meetings
             </p>
           </div>
-          <UButton to="/dashboard/add-meeting-type" size="xl" class="hidden lg:flex">
+          <UButton to="/dashboard/meeting-types/create" size="xl" class="hidden lg:flex">
             Create New Meeting
           </UButton>
         </div>
@@ -99,7 +102,7 @@ const { data: meetingTypes, pending } = await useFetch<MeetingType[]>(
               :items="createDropdownItems(meet.slug)"
               :content="{ align: 'end' }"
             >
-              <UButton icon="i-lucide-settings" variant="soft" size="sm" />
+              <UButton icon="i-lucide-settings" variant="soft" size="md" />
             </LazyUDropdownMenu>
           </div>
           <NuxtLink :to="`/${authStore.user?.linkName}/${meet.slug}`" class="flex items-center p-5 ">
@@ -125,7 +128,7 @@ const { data: meetingTypes, pending } = await useFetch<MeetingType[]>(
           </div>
         </div>
       </div>
-      <UButton to="/dashboard/add-meeting-type" size="xl" block class="flex lg:hidden mt-5">
+      <UButton to="/dashboard/meeting-types/create" size="xl" block class="flex lg:hidden mt-5">
         Create New Meeting
       </UButton>
     </UCard>
