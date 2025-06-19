@@ -19,7 +19,7 @@ definePageMeta({
         </p>
       </div>
       <template #footer>
-        <UButton to="/" size="xl" block>
+        <UButton to="/dashboard" size="xl" block>
           Close this page
         </UButton>
       </template>

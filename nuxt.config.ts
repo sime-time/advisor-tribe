@@ -38,8 +38,6 @@ export default defineNuxtConfig({
     colorMode: false,
   },
   experimental: {
-    componentIslands: {
-      selectiveClient: true,
-    },
+    componentIslands: true,
   },
 });

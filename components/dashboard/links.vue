@@ -28,7 +28,7 @@ const links = computed<DashboardNavItem[]>(() => [
   {
     id: 2,
     label: "Meeting Types",
-    icon: "i-lucide-calendar-cog",
+    icon: "i-lucide-calendar-fold",
     href: "/dashboard/meeting-types",
     active: route.path === "/dashboard/meeting-types",
   },

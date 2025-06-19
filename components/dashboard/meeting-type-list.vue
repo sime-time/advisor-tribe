@@ -9,7 +9,7 @@ const authStore = useAuthStore();
 function createDropdownItems(slugName: string) {
   return [
     {
-      label: "Meeting",
+      label: "Options",
       type: "label",
     },
     { type: "separator" },
