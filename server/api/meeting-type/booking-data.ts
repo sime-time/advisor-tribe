@@ -1,6 +1,6 @@
 import { ZodError } from "zod/v4";
 import { getAvailability } from "~/db/queries/read/get-availability";
-import { getMeetingTypeFromSlug } from "~/db/queries/read/get-meeting-type";
+import { getMeetingTypeFromUrl } from "~/db/queries/read/get-meeting-type";
 import { MeetingSlugSchema } from "~/validation/meeting-slug-schema";
 
 export default defineEventHandler(async (event) => {
@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     });
 
     // result is an array of 0 or 1 items
-    const result = await getMeetingTypeFromSlug(validData.meetingSlug, validData.userLink);
+    const result = await getMeetingTypeFromUrl(validData.meetingSlug, validData.userLink);
     if (result.length === 0) {
       throw new Error("No meeting type found");
     }

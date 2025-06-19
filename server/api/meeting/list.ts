@@ -1,3 +1,4 @@
+import type { Event } from "nylas";
 import { auth } from "~/lib/auth";
 import { nylas } from "~/lib/nylas";
 
@@ -20,5 +21,5 @@ export default defineEventHandler(async (event) => {
     },
   });
 
-  return meetings.data;
+  return meetings.data as Event[];
 });

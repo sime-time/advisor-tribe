@@ -2,7 +2,17 @@ import { and, eq } from "drizzle-orm";
 import db from "~/db/index";
 import { meetingType, user } from "~/db/schema/index";
 
-export async function getMeetingType(userId: number) {
+export async function getMeetingType(meetingTypeId: number) {
+  const result = await db
+    .select()
+    .from(meetingType)
+    .where(eq(meetingType.id, meetingTypeId))
+    .limit(1);
+
+  return result[0];
+}
+
+export async function getMeetingTypeList(userId: number) {
   const meetingTypes = await db
     .select()
     .from(meetingType)
@@ -11,7 +21,7 @@ export async function getMeetingType(userId: number) {
   return meetingTypes;
 }
 
-export async function getMeetingTypeFromSlug(slug: string, userLink: string) {
+export async function getMeetingTypeFromUrl(slug: string, userLink: string) {
   const result = await db
     .select({
       // select fields from meetingType

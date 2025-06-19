@@ -1,4 +1,4 @@
-import { getMeetingType } from "~/db/queries/read/get-meeting-type";
+import { getMeetingTypeList } from "~/db/queries/read/get-meeting-type";
 import { auth } from "~/lib/auth";
 
 export default defineEventHandler(async (event) => {
@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
     const userId = Number.parseInt(session?.user.id);
 
     // fetch the user's meeting types
-    const data = await getMeetingType(userId);
+    const data = await getMeetingTypeList(userId);
 
     // return even if there are zero meeting types,
     // client will handle what to display when there are no meeting types

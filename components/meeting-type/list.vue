@@ -8,7 +8,7 @@ const toast = useToast();
 // function needed to build the dropdown item list
 // while inside the meetingType for loop
 // to access the unique slug name
-function createDropdownItems(slugName: string) {
+function createDropdownItems(slugName: string, meetingTypeId: string) {
   const link = `/${authStore.user?.linkName}/${slugName}`;
   return [
     {
@@ -38,7 +38,7 @@ function createDropdownItems(slugName: string) {
     {
       label: "Edit",
       icon: "i-lucide-pen",
-      to: `/dashboard/meeting-types/edit`,
+      to: `/dashboard/meeting-types/edit/${meetingTypeId}`,
     },
     { type: "separator" },
     {
@@ -49,7 +49,8 @@ function createDropdownItems(slugName: string) {
   ];
 }
 
-interface MeetingType {
+export interface MeetingType {
+  id: number;
   slug: string;
   duration: number;
   title: string;
@@ -99,7 +100,7 @@ const { data: meetingTypes, pending } = await useFetch<MeetingType[]>("/api/meet
             <!-- Lazy load to make sure the user.id is up to date in :items function call -->
             <LazyUDropdownMenu
               hydrate-on-interaction="mouseover"
-              :items="createDropdownItems(meet.slug)"
+              :items="createDropdownItems(meet.slug, meet.id)"
               :content="{ align: 'end' }"
             >
               <UButton icon="i-lucide-settings" variant="soft" size="md" />
@@ -112,7 +113,7 @@ const { data: meetingTypes, pending } = await useFetch<MeetingType[]>("/api/meet
             <div class="ml-5 w-0 flex-1">
               <dl>
                 <dt class="text-sm font-medium text-neutral-400">
-                  {{ meet.duration }} Minute Meeting
+                  {{ meet.duration }} Minutes
                 </dt>
                 <dd class="text-lg font-medium">
                   {{ meet.title }}
