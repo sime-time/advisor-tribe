@@ -13,13 +13,23 @@ export default defineEventHandler(async (event) => {
     return [];
   }
 
-  // get all the meetings from nylas api
-  const meetings = await nylas.events.list({
-    identifier: session?.user.grantId as string,
-    queryParams: {
-      calendarId: session?.user.grantEmail as string,
-    },
-  });
+  try {
+    // get all the meetings from nylas api
+    const meetings = await nylas.events.list({
+      identifier: session?.user.grantId as string,
+      queryParams: {
+        calendarId: session?.user.grantEmail as string,
+      },
+    });
 
-  return meetings.data as Event[];
+    return meetings.data as Event[];
+  }
+  catch (err: any) {
+    console.error("Get Meeting List Error:", err);
+
+    return createError({
+      statusCode: 500,
+      message: err.message || "An error occurred",
+    });
+  }
 });

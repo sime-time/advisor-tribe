@@ -26,7 +26,7 @@ const formState = reactive({
   slug: meetingType.value?.slug,
   description: meetingType.value?.description,
   duration: meetingType.value?.duration,
-  videoCallSoftware: videoCallProviders.value[0],
+  videoCallSoftware: meetingType.value?.videoCallSoftware,
 });
 
 const isLoading = ref(false);
@@ -45,7 +45,10 @@ const isLoading = ref(false);
       </div>
     </template>
 
-    <UForm :state="formState" class="space-y-4">
+    <div v-if="pending || !meetingType">
+      <LoadingSpinner />
+    </div>
+    <UForm v-show="meetingType" :state="formState" class="space-y-4">
       <UFormField label="Title" name="title">
         <UInput v-model="formState.title" size="lg" placeholder="My Meeting" class="flex" />
       </UFormField>

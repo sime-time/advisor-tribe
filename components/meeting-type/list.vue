@@ -57,13 +57,14 @@ export interface MeetingType {
   isActive: boolean;
 }
 const { data: meetingTypes, pending } = await useFetch<MeetingType[]>("/api/meeting-type/list");
+console.log("meetingTypes", meetingTypes);
 </script>
 
 <template>
-  <div v-if="pending || !authStore.user">
+  <div v-if="pending || !authStore.user || !meetingTypes">
     <LoadingSpinner />
   </div>
-  <template v-else-if="!meetingTypes">
+  <template v-else-if="meetingTypes?.length === 0">
     <EmptyState
       title="You have no meeting types"
       icon="i-lucide-ban"
