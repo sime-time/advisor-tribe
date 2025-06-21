@@ -5,35 +5,27 @@ import { ref } from "vue";
 const steps = ref<ProcessStepType[]>([
   {
     step: 1,
-    title: "Discover advisors",
+    title: "Create your unique link",
     description:
-      "Browse through our curated list of mentors, experts, and advisors across different fields.",
-    icon: "search",
-    iconColor: "text-blue-600",
+      "Connect Stripe & your calendars.",
+    icon: "link",
+    iconColor: "text-blue-400",
   },
   {
     step: 2,
-    title: "Build your tribe",
+    title: "Add sessions & pricing",
     description:
-      "Add advisors to your personal board based on your needs, goals, and challenges.",
-    icon: "puzzle",
-    iconColor: "text-red-400",
+      "1-on-1, groups, and package plans. Simply drag-and-drop.",
+    icon: "mouse-pointer-click",
+    iconColor: "text-amber-500",
   },
   {
     step: 3,
-    title: "Connect & grow",
+    title: "Share & monetize",
     description:
-      "Schedule sessions, ask questions, and get personalized guidance from your tribe.",
-    icon: "sprout",
-    iconColor: "text-green-600",
-  },
-  {
-    step: 4,
-    title: "Achieve your goals",
-    description:
-      "Leverage collective wisdom to overcome obstacles and reach your full potential.",
-    icon: "trophy",
-    iconColor: "text-yellow-500",
+      "Post your link anywhere. Clients book, pay & get calendar invites automatically.",
+    icon: "circle-dollar-sign",
+    iconColor: "text-green-500",
     isLast: true,
   },
 ]);
@@ -46,17 +38,16 @@ const steps = ref<ProcessStepType[]>([
   >
     <div class="px-4 mx-auto w-full max-w-[1400px] max-md:max-w-none">
       <div class="mx-auto mb-16 max-w-screen-md text-center">
-        <h2 class="mb-3 text-3xl font-bold leading-9 text-center">
+        <h2 class="mb-3 text-3xl md:text-4xl font-bold leading-9 text-center">
           How It Works
         </h2>
         <p
-          class="text-lg leading-7 text-center decoration-slate-500 outline-slate-500 text-slate-500"
+          class="mx-auto mb-8 md:max-w-2xl text-lg md:text-xl leading-7 text-center text-neutral-600  "
         >
-          Your journey to building a powerful personal board of advisors is
-          simple
+          Your journey to financial freedom is simple
         </p>
       </div>
-      <div class="grid gap-8 mb-12 md:grid-cols-4">
+      <div class="grid gap-8 mb-12 md:grid-cols-3">
         <HomeProcessStep v-for="step in steps" :key="step.step" :step="step" />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import type { UserUpdate } from "../types";
+import type { UserUpdate } from "../../../shared/types";
 import { eq } from "drizzle-orm";
 import db from "~/db/index";
 import { user } from "~/db/schema/index";

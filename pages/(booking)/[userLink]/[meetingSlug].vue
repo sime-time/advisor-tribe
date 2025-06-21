@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DateValue } from "@internationalized/date";
-import type { BookingData } from "~/db/queries/types";
+import type { BookingData } from "~/shared/types";
 import { getLocalTimeZone, parseDate, toCalendarDate, today } from "@internationalized/date";
 import BookingCalendar from "~/components/booking/calendar.vue";
 

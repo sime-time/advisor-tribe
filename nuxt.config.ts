@@ -14,12 +14,12 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: "Advisor Tribe",
+      title: "Linq Coach",
       htmlAttrs: {
         lang: "en",
       },
       meta: [
-        { name: "description", content: "Get expert business advice from a personal board of advisors." },
+        { name: "description", content: "Link-in-bio management tool for online coaching businesses" },
       ],
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },

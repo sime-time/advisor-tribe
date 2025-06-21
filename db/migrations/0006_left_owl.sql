@@ -1,1 +1,0 @@
-ALTER TABLE "event_type" DROP CONSTRAINT "event_type_user_id_unique";

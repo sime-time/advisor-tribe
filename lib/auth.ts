@@ -7,6 +7,7 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
+  baseURL: env.NUXT_PUBLIC_BASE_URL,
   advanced: {
     database: {
       // because we are using serial int primary keys:
@@ -29,11 +30,6 @@ export const auth = betterAuth({
   },
   user: {
     additionalFields: {
-      role: {
-        type: "string",
-        required: false,
-        input: true,
-      },
       linkName: {
         type: "string",
         required: false,

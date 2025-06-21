@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { DateValue } from "@internationalized/date";
-import type { DayAvailability } from "~/db/queries/types";
+import type { DayAvailability } from "~/shared/types";
 import { getLocalTimeZone, toCalendarDate, today } from "@internationalized/date";
 import {
   CalendarCell,

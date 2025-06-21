@@ -1,5 +1,5 @@
 import type { FreeBusyTimeSlot } from "nylas";
-import type { DayAvailability } from "~/db/queries/types";
+import type { DayAvailability } from "~/shared/types";
 import { addMinutes, format, fromUnixTime, isAfter, isBefore, parse } from "date-fns";
 
 export enum Day {

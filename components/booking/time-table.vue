@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FreeBusyTimeSlot } from "nylas";
-import type { DayAvailability } from "~/db/queries/types";
+import type { DayAvailability } from "~/shared/types";
 import { format } from "date-fns";
 import { calculateAvailableTimeSlots, militaryToStandardTime } from "~/lib/time";
 

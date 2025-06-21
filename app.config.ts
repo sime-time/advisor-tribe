@@ -1,7 +1,8 @@
 export default defineAppConfig({
   ui: {
     colors: {
-      primary: "violet",
+      primary: "emerald",
+      secondary: "teal",
       neutral: "slate",
     },
     toaster: {
@@ -62,7 +63,7 @@ export default defineAppConfig({
         {
           color: "primary",
           variant: "outline",
-          class: "outline outline-primary-700 text-primary-700",
+          class: "text-primary-700 outline outline-primary-700 ring-1",
         },
       ],
     },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DayAvailability } from "~/db/queries/types";
+import type { DayAvailability } from "~/shared/types";
 import { ZodError } from "zod/v4";
 import { getDayName, times, timeZones } from "~/lib/time";
 import { ScheduleSchema } from "~/validation/schedule-schema";

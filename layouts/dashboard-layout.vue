@@ -6,8 +6,8 @@
         <div class="flex h-14 items-center border-b border-accented px-4 lg:h-[60px] lg:px-6">
           <NuxtLink to="/" class="flex items-center gap-2">
             <img src="/logo.webp" alt="logo" class="size-10" height="100" width="100">
-            <p class="text-xl font-bold">
-              Advisor<span class="text-primary-600">Tribe</span>
+            <p class="text-xl font-bold text-primary-600">
+              Linq<span class="text-secondary">Coach</span>
             </p>
           </NuxtLink>
         </div>

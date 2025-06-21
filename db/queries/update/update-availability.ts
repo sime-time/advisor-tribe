@@ -1,4 +1,4 @@
-import type { DayAvailability } from "../types";
+import type { DayAvailability } from "../../../shared/types";
 import { eq } from "drizzle-orm";
 import db from "~/db/index";
 import { availability } from "~/db/schema/index";

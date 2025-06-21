@@ -3,8 +3,21 @@ import { motion } from "motion-v";
 import { useAuthStore } from "~/stores/auth-store";
 
 const authStore = useAuthStore();
-
 const menuOpen = ref(false);
+
+const navLinks = [
+  {
+    id: 1,
+    label: "Pricing",
+    href: "/#pricing",
+  },
+  {
+    id: 2,
+    label: "FAQ",
+    href: "/#faq",
+  },
+
+];
 </script>
 
 <template>
@@ -15,16 +28,18 @@ const menuOpen = ref(false);
         class="flex gap-2 items-center cursor-pointer"
       >
         <img src="/logo.webp" alt="logo" height="50" width="50">
-        <span class="text-xl font-bold leading-7">Advisor<span class="text-primary-600">Tribe</span></span>
+        <span class="text-xl font-bold leading-7 text-primary-600">Linq<span class="text-secondary">Coach</span></span>
       </NuxtLink>
 
       <div class="flex gap-6 items-center max-sm:hidden">
-        <NuxtLink
-          to="/browse"
-          class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
-        >
-          Browse
-        </NuxtLink>
+        <template v-for="link in navLinks" :key="link.id">
+          <NuxtLink
+            :to="link.href"
+            class="transition-colors ease-in-out cursor-pointer decoration-slate-950 decoration-opacity-80 duration-[0.15s] outline-slate-950 outline-opacity-80 text-slate-950 text-opacity-80"
+          >
+            {{ link.label }}
+          </NuxtLink>
+        </template>
         <div v-if="!authStore.authenticated" class="flex gap-3 items-center">
           <AuthSignInModal>
             <UButton size="lg">
@@ -66,21 +81,15 @@ const menuOpen = ref(false);
     >
       <div class="overflow-hidden md:hidden p-4 mb-4 transform-gpu">
         <div class="flex flex-col gap-4 font-medium text-lg">
-          <NuxtLink
-            to="/"
-            class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
-            @click="() => (menuOpen = false)"
-          >
-            Home
-          </NuxtLink>
-          <NuxtLink
-            to="/browse"
-            class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
-            @click="() => (menuOpen = false)"
-          >
-            Browse Advisors
-          </NuxtLink>
-
+          <template v-for="link in navLinks" :key="link.id">
+            <NuxtLink
+              :to="link.href"
+              class="px-2 py-2 text-foreground/80 hover:text-primary transition-colors"
+              @click="() => (menuOpen = false)"
+            >
+              {{ link.label }}
+            </NuxtLink>
+          </template>
           <div v-if="!authStore.authenticated" class="flex flex-col gap-4 font-medium text-lg">
             <AuthSignInModal>
               <UButton size="xl" class="justify-center">

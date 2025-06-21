@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import type { ProcessStep } from "./types";
+interface ProcessStep {
+  step: number;
+  title: string;
+  description: string;
+  icon: string;
+  iconColor: string;
+  isLast?: boolean;
+}
 
 defineProps<{
   step: ProcessStep;
@@ -37,7 +44,7 @@ defineProps<{
         />
       </div>
       <div
-        class="px-3 py-1 mb-3 text-sm font-medium leading-5 text-center text-violet-700 bg-violet-100 rounded-full decoration-violet-700 outline-violet-700"
+        class="px-3 py-1 mb-3 text-sm font-medium leading-5 text-center text-primary-700 bg-primary-100 rounded-full"
       >
         Step {{ step.step }}
       </div>

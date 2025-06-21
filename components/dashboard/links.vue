@@ -35,7 +35,7 @@ const links = computed<DashboardNavItem[]>(() => [
   {
     id: 3,
     label: "Availability",
-    icon: "i-lucide-calendar-clock",
+    icon: "i-lucide-clock",
     href: "/dashboard/availability",
     active: route.path === "/dashboard/availability",
   },

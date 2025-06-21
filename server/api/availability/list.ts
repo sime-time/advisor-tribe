@@ -1,4 +1,4 @@
-import type { DayAvailability } from "~/db/queries/types";
+import type { DayAvailability } from "~/shared/types";
 import { getAvailability } from "~/db/queries/read/get-availability";
 import { auth } from "~/lib/auth";
 

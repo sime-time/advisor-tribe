@@ -7,10 +7,10 @@ import { motion } from "motion-v";
     <!-- Background elements -->
     <div class="absolute inset-0 z-10 overflow-hidden pointer-events-none">
       <div
-        class="absolute top-20 left-[10%] h-72 w-72 rounded-full bg-purple-400 opacity-10 blur-3xl"
+        class="absolute top-20 left-[10%] h-72 w-72 rounded-full bg-secondary-500 opacity-10 blur-3xl"
       />
       <div
-        class="absolute bottom-20 right-[10%] h-96 w-96 rounded-full bg-blue-500 opacity-10 blur-3xl"
+        class="absolute bottom-20 right-[10%] h-96 w-96 rounded-full bg-primary-500 opacity-10 blur-3xl"
       />
     </div>
 
@@ -24,16 +24,15 @@ import { motion } from "motion-v";
         class="mx-auto max-w-screen-md text-center"
       >
         <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-violet-600 to-blue-500 bg-clip-text text-transparent"
+          class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
         >
-          Build Your Personal Board of Advisors
+          All-in-one Coaching Tool for Creators
         </h1>
         <p
-          class="mx-auto mb-8 max-w-2xl text-xl leading-7 text-center text-gray-600 decoration-gray-600 outline-gray-600 max-sm:text-lg"
+          class="mx-auto mb-8 md:max-w-2xl text-lg md:text-xl leading-7 text-center text-gray-600 decoration-gray-600 outline-gray-600  "
         >
-          Connect with mentors, experts, and coaches across various fields to
-          create your personal council of trusted advisors who can help guide
-          your decisions.
+          Stop juggling different business tools.<br>
+          Start booking, billing, and coaching from a <span class="italic">single link-in-bio.</span>
         </p>
         <div class="flex gap-4 justify-center text-center">
           <AuthSignInModal>
@@ -41,8 +40,8 @@ import { motion } from "motion-v";
               Get Started
             </UButton>
           </AuthSignInModal>
-          <UButton size="xl" variant="outline" to="/browse">
-            Find Advisors
+          <UButton size="xl" variant="outline" to="/">
+            See Pricing
           </UButton>
         </div>
       </motion.div>
