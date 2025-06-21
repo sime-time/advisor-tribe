@@ -69,8 +69,9 @@ async function handleDeleteMeeting(eventId: string, grantId: string, calendarId:
         title="No meetings found"
         description="You don't have any bookings yet."
         icon="lucide:calendar-x"
-        button-text="Create a new meeting type"
-        href="/dashboard/meeting-types/create"
+        button-text="Manage meeting types"
+        button-icon="lucide:square-menu"
+        href="/dashboard/meeting-types"
       />
     </div>
     <div v-else>

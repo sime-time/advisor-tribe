@@ -7,9 +7,10 @@ definePageMeta({
 <template>
   <EmptyState
     icon="i-lucide-user-round-x"
-    title="Your tribe is empty"
-    description="Start building your personal board by adding advisors who can help you achieve your goals."
-    button-text="Discover Advisors"
-    href="/browse"
+    title="You have no clients"
+    description="Build your client list with booked meetings."
+    button-text="Manage meeting types"
+    button-icon="lucide:square-menu"
+    href="/dashboard/meeting-types"
   />
 </template>

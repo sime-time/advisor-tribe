@@ -13,7 +13,7 @@ const route = useRoute();
 const links = computed<DashboardNavItem[]>(() => [
   {
     id: 0,
-    label: "Advisors",
+    label: "Clients",
     icon: "i-lucide-users-round",
     href: "/dashboard",
     active: route.path === "/dashboard",
