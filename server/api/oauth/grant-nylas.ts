@@ -6,7 +6,6 @@ export default defineEventHandler((event) => {
       clientId: nylasConfig.clientId,
       redirectUri: nylasConfig.redirectUri,
     });
-    console.log("authUrl", authUrl);
 
     // Redirect to Nylas OAuth URL
     return sendRedirect(event, authUrl, 302);

@@ -34,7 +34,7 @@ async function onSubmit() {
     });
 
     // send payload to api endpoint
-    await $fetch("/api/meeting/book", {
+    await $fetch("/api/meeting/create", {
       method: "POST",
       body: validBooking,
     });

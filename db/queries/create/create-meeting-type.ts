@@ -1,4 +1,4 @@
-import type { MeetingTypeSchema } from "~/validation/new-meeting-schema";
+import type { MeetingTypeSchema } from "~/validation/new-meeting-type-schema";
 import db from "~/db/index";
 import { meetingType } from "~/db/schema/index";
 

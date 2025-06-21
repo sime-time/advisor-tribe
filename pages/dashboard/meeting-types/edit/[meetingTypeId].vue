@@ -3,7 +3,7 @@ import type { RadioGroupItem } from "@nuxt/ui";
 import type { MeetingType } from "~/shared/types";
 import { ZodError } from "zod/v4";
 import { durations } from "~/lib/time";
-import { MeetingTypeSchema } from "~/validation/new-meeting-schema";
+import { UpdateMeetingTypeSchema } from "~/validation/update-meeting-type-schema";
 
 definePageMeta({
   layout: "dashboard-layout",
@@ -30,6 +30,47 @@ const formState = reactive({
 });
 
 const isLoading = ref(false);
+const toast = useToast();
+
+async function onSubmit() {
+  isLoading.value = true;
+  try {
+    // this json will be sent to the api
+    const validMeetingType = UpdateMeetingTypeSchema.parse({
+      ...formState,
+      id: meetingType.value?.id,
+    });
+
+    // send payload to api endpoint
+    await $fetch("/api/meeting-type/update", {
+      method: "POST",
+      body: validMeetingType,
+    });
+
+    toast.add({
+      title: "Meeting type updated!",
+      color: "success",
+    });
+
+    navigateTo("/dashboard/meeting-types");
+  }
+  catch (err: any) {
+    console.error("Meeting Type Form Error", err);
+    const formError = err instanceof ZodError
+      ? err.issues[0].message || "Invalid input"
+      : err.message || "An error occurred";
+
+    return toast.add({
+      title: "Failed to update meeting type",
+      description: formError,
+      icon: "i-lucide-triangle-alert",
+      color: "error",
+    });
+  }
+  finally {
+    isLoading.value = false;
+  }
+}
 </script>
 
 <template>
@@ -48,7 +89,7 @@ const isLoading = ref(false);
     <div v-if="pending || !meetingType">
       <LoadingSpinner />
     </div>
-    <UForm v-show="meetingType" :state="formState" class="space-y-4">
+    <UForm v-show="meetingType" :state="formState" class="space-y-4" @submit.prevent="onSubmit">
       <UFormField label="Title" name="title">
         <UInput v-model="formState.title" size="lg" placeholder="My Meeting" class="flex" />
       </UFormField>
@@ -83,7 +124,7 @@ const isLoading = ref(false);
           Cancel
         </UButton>
         <UButton type="submit" size="xl" :loading="isLoading" block>
-          Create
+          Save
         </UButton>
       </div>
     </UForm>

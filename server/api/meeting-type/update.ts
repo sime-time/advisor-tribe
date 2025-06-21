@@ -1,18 +1,18 @@
 import { ZodError } from "zod/v4";
-import { createMeetingType } from "~/db/queries/create/create-meeting-type";
-import { MeetingTypeSchema } from "~/validation/new-meeting-type-schema";
+import { updateMeetingType } from "~/db/queries/update/update-meeting-type";
+import { UpdateMeetingTypeSchema } from "~/validation/update-meeting-type-schema";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
     // validate body data
-    const validData = MeetingTypeSchema.parse(body);
+    const validData = UpdateMeetingTypeSchema.parse(body);
 
-    return await createMeetingType(validData);
+    return await updateMeetingType(validData);
   }
   catch (err: any) {
-    console.error("Create Meeting Type Error:", err);
+    console.error("Update Meeting Type Error:", err);
 
     // return any validation error first
     if (err instanceof ZodError) {

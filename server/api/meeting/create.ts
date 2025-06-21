@@ -16,32 +16,6 @@ export default defineEventHandler(async (event) => {
 
     // endTime = startTime + meeting duration
     const endDateTime = new Date(startDateTime.getTime() + meetingDuration);
-    console.log("nylas req data", {
-      identifier: validBody.grantId,
-      requestBody: {
-        title: validBody.title,
-        description: validBody.description,
-        when: {
-          startTime: Math.floor(startDateTime.getTime() / 1000), // convert to unix time
-          endTime: Math.floor(endDateTime.getTime() / 1000),
-        },
-        conferencing: {
-          autocreate: {},
-          provider: validBody.videoCallSoftware as any,
-        },
-        participants: [
-          {
-            name: validBody.name,
-            email: validBody.email,
-            status: "yes",
-          },
-        ],
-      },
-      queryParams: {
-        calendarId: validBody.grantEmail,
-        notifyParticipants: true, // via email
-      },
-    });
 
     await nylas.events.create({
       identifier: validBody.grantId,
