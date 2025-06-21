@@ -46,7 +46,6 @@ export async function getMeetingTypeFromUrl(slug: string, userLink: string) {
       and(
         eq(meetingType.slug, slug),
         eq(user.linkName, userLink),
-        eq(meetingType.isActive, true),
       ),
     )
     .limit(1); // ensure only 1 record is returned

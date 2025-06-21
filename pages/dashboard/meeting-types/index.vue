@@ -166,7 +166,11 @@ function createDropdownItems(slugName: string, meetingTypeId: number) {
               </div>
             </NuxtLink>
             <div class="bg-elevated/60 flex px-4 py-3 justify-between items-center">
-              <USwitch :default-value="meet.isActive" />
+              <IsActiveSwitch
+                :initial-checked="meet.isActive"
+                :meeting-type-id="meet.id"
+                :refresh-meeting-types="refresh"
+              />
               <UButton size="lg" :to="`/dashboard/meeting-types/edit/${meet.id}`">
                 Edit
               </UButton>

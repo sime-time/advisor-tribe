@@ -18,7 +18,7 @@ const route = useRoute();
 const meetingTypeId = route.params.meetingTypeId as string;
 
 // fetch the meeting type data
-const { data: meetingType, pending } = await useFetch<MeetingType>(`/api/meeting-type/${meetingTypeId}`);
+const { data: meetingType, pending } = await useFetch<MeetingType>(`/api/meeting-type/get/${meetingTypeId}`);
 
 // populate the form with current meeting type data
 const formState = reactive({

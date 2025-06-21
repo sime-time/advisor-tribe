@@ -4,6 +4,7 @@ defineProps<{
   icon: string;
   description: string;
   buttonText: string;
+  buttonIcon?: string;
   href: string;
 }>();
 </script>
@@ -20,7 +21,7 @@ defineProps<{
     <p class="mb-6 mt-2 text-sm text-neutral-500 max-w-sm mx-auto">
       {{ description }}
     </p>
-    <UButton :to="href" icon="i-lucide-plus-circle" size="lg">
+    <UButton :to="href" :icon="buttonIcon ?? 'i-lucide-plus-circle' " size="lg">
       {{ buttonText }}
     </UButton>
   </div>

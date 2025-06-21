@@ -18,6 +18,7 @@ const { data, pending } = await useFetch<BookingData>("/api/meeting-type/booking
     meetingSlug: route.params.meetingSlug,
   },
 });
+console.log("dataisactive", data?.value?.isActive);
 
 // get the date from the query params
 const date = computed(() => {
@@ -56,6 +57,16 @@ const showForm = computed(() => !!route.query.date && !!route.query.time);
     <UCard class="mx-auto" :class="showForm ? 'md:max-w-[600px]' : 'md:max-w-[1000px]'">
       <div v-if="pending || !data">
         <LoadingSpinner />
+      </div>
+      <div v-else-if="data.isActive === false">
+        <EmptyState
+          title="This Meeting Type is Disabled"
+          icon="i-lucide-ban"
+          description="The owner has disabled this type of appointment"
+          button-text="Go Back"
+          button-icon="i-lucide-arrow-left"
+          href="/dashboard"
+        />
       </div>
       <div
         v-else class="md:grid gap-5 max-w-[95vw]"
